@@ -21,6 +21,10 @@
 	<bean id="ckBoardService" class="com.room.service.CKBoardServiceImpl">
 		<property name="cookBoardMapper" ref="cookBoardMapper" />
 	</bean>
+	<bean id="petBoardService" class="com.room.service.PetBoardServiceImpl">
+		<property name="petBoardMapper" ref="petBoardMapper" />
+	</bean>
+	
 
 </beans>
 
