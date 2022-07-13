@@ -31,5 +31,16 @@
 		WHERE category ='roommate' ORDER by board_no DESC LIMIT 3
 	</select>
 	
-
+	<update id="update" parameterType="com.room.dto.MateBoard">
+		UPDATE Board
+		SET title = #{title}, content = #{content}
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		update Board
+		set deleted = true
+		where board_no = #{boardNo}
+	</delete>
+	
 </mapper>

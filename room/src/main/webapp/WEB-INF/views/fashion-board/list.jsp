@@ -1,3 +1,5 @@
+<%@page import="com.room.dto.FBoard"%>
+<%@page import="java.util.List"%>
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -36,7 +38,7 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-
+								[&nbsp;<a href ="write">글 작성</a>&nbsp;]
 								<table class="table">
 									<thead>
 										<tr>
@@ -52,18 +54,25 @@
 												<td>${board.boardNo }</td>
 												<td><c:choose>
 														<c:when test="${board.deleted}">
-															<span style="color: lightgray">${board.title}</span>
+															<span style="color: lightgray">${board.title} [삭제된 글]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${pageNo}'>
+															${board.title}
+															</a>
 														</c:otherwise>
-													</c:choose></td>
+													</c:choose>
+												</td>
 												<td>${board.writer}</td>
 												<td>${board.regDate}</td>
 											</tr>
 										</tbody>
 									</c:forEach>
 								</table>
+									
+									<br><br>
+									
+									${ pager }
 
 
 							</div>
@@ -93,9 +102,7 @@
         <script src="/room/resources/assets/scripts.js"></script>
         <script src="/room/resources/assets/DT_bootstrap.js"></script>
         <script>
-        $(function() {
-            
-        });
+      
         </script>
     </body>
 

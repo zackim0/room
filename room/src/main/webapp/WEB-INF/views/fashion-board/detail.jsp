@@ -1,3 +1,6 @@
+<%@page import="com.room.dto.FBoardAttach"%>
+<%@page import="com.room.dto.Member"%>
+<%@page import="com.room.dto.FBoard"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -66,6 +69,17 @@
 		                  " />
 		                  ${ fn:replace(board.content, enter , '<br>') }
 		                </td>
+		            </tr>
+		             <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            	<c:forEach var="file" items="${board.files}">
+		            	<a href="download?attachNo=${file.attachNo}">
+		            	${file.userFileName}
+		            	</a>
+		            	<br>
+		            	</c:forEach>
+		            	</td>
 		            </tr>
 		            <tr>
 		            	<th>작성일</th>

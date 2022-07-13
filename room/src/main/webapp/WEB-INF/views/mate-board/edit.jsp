@@ -1,3 +1,4 @@
+<%@ page import = "com.room.dto.MateBoard" %>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -47,10 +48,11 @@
 		                            </div>
 		                        </div> -->
 		                        <table class="span12">
-		            <tr>
 		            	<form id="editform"
 		            	action="edit"
 		            	method="post">
+		            	<input type="hidden" name="boardNo" value="${board.boardNo}">
+		            <tr>
 		                <th>제목</th>
 		                <td>
 		                    <input type="text" name="title" class="span12" value="${ board.title }" />
@@ -59,20 +61,23 @@
 		            <tr>
 		                <th>작성자</th>
 						<td>
-							<input type="text" name="writer" value="${ loginuser.memberId }" readonly>
+							<input type="text" name="writer" value="${ board.writer }" readonly>
 						</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea 
-		                    		  name="content" cols="76" rows="15"></textarea>
-		                </td>
+		                    <textarea name="content" cols="76" rows="15">
+		                    ${ board.content }
+                  			</textarea>
+		            	</td>
 		            </tr>
 		            	<div class="buttons">
-			    	[<a id="write" href="javascript:">글쓰기</a>]
+			    	[<a id="edit-btn" href="javascript:">수정완료</a>]
 			    	&nbsp;&nbsp;
-			    	[<a href="/room/mate-board/list">목록보기(절대경로)</a>]
+			    	[<a href="/room/mate-board/list">목록보기</a>]
+			    	&nbsp;&nbsp;
+			    	[<a href='detail?boardNo=${board.boardNo}'>취소하기</a>]
 			    	</div>  
 			    	</form>   
 		                        <!-- /block -->
@@ -148,11 +153,11 @@
 		});
 		
 		$(function(){
-			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
+			$('#edit-btn').on('click',function(event) {
 				event.preventDefault();
-				$('#writeform').submit();
-			})
-		})
+				$('#editform').submit();
+			});
+		});
 
         </script>
     </body>

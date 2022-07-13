@@ -18,5 +18,7 @@ public interface MateBoardMapper {
 	List<MateBoard> select3();
 
 	void delete(int boardNo);
+
+	void update(MateBoard board);
 	
 }

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
-
+import com.room.dto.FBoard;
 import com.room.dto.MateBoard;
 import com.room.service.MateBoardService;
 import com.room.service.MateBoardServiceImpl;
@@ -35,7 +35,7 @@ public class MateBoardController {
 	@GetMapping(path = { "/","/list" })
 	public String list(Model model) {
 		
-		 List<MateBoard> mateBoardList = mateBoardService.findAll();
+		List<MateBoard> mateBoardList = mateBoardService.findAll();
 		model.addAttribute("mateBoardList", mateBoardList);
 		
 		return "mate-board/list";  // --> /WEB-INF/views/ + board/list + .jsp
@@ -60,7 +60,7 @@ public class MateBoardController {
 	public String detail(@RequestParam(name="boardNo" , defaultValue = "-1")int boardNo,
 						Model model) {
 		if(boardNo == -1) {
-			return "/list";
+			return "redirect:list";
 		}
 		
 		MateBoard board = mateBoardService.findByBoardNo(boardNo);
@@ -82,5 +82,40 @@ public class MateBoardController {
 		}
 		return "redirect:list";
 	}
+	
+	@GetMapping(path = {"/edit"})
+	public String showEditForm(
+			@RequestParam(name="boardNo", defaultValue = "-1")int boardNo,
+			Model model){
+			
+			if(boardNo < 1) {
+				return "redirect:list";
+			}
+			
+			MateBoard board = mateBoardService.findByBoardNo(boardNo);
+			if(board == null) { // 해당 번호의 게시글이 없는 경우
+				 return "redirect:list";
+			}
+			
+			model.addAttribute("board",board);
+			
+			return "mate-board/edit";
+				
+			}
+	
+	
+	@PostMapping(path = {"/edit"})
+	public String edit(MateBoard board) {
+		
+		mateBoardService.update(board);
+		
+		return String.format("redirect:detail?boardNo=%d", board.getBoardNo());
+		
+	}
 
 }
+
+
+
+
+

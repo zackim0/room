@@ -3,24 +3,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-              <!-- package..class로 가정하고 사용 -->				 
-<mapper namespace="com.room.mapper.FashionBoardMapper">
-<insert id="insertBoard" parameterType="com.room.dto.FBoard">
-	<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
-		SELECT LAST_INSERT_ID()
-	</selectKey>
-	INSERT INTO Board (title,member_id,content, category)
-	VALUES (#{title},#{writer},#{content}, #{category})
-</insert>
-<select id="selectAll" resultType="com.room.dto.FBoard">
+              <!-- package..class로 가정하고 사용 -->		
+              		 
+	<mapper namespace="com.room.mapper.FashionBoardMapper">
+	
+	<insert id="insertBoard" parameterType="com.room.dto.FBoard">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO Board (title,member_id,content, category)
+		VALUES (#{title},#{writer},#{content}, #{category})
+	</insert>
+	
+	<insert id="insertBoardAttach" parameterType="com.room.dto.FBoardAttach">
+		INSERT BoardAttach (board_no,userfilename,savedfilename)
+		VALUES (#{boardNo},#{userFileName},#{savedFileName})
+	</insert>
+
+	<select id="selectAll" resultType="com.room.dto.FBoard">
 		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
-		FROM Board
+		FROM Board WHERE category = 'fashion'
 		ORDER BY board_no DESC
 	</select>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.FBoard">
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'fashion'
+		ORDER BY board_no DESC
+		LIMIT #{from},#{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*) FROM Board
+	</select>
+	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.FBoard">
 		SELECT board_no boardNo,title,member_id writer,content,readcount,regdate
-		FROM Board
+		FROM Board 
 		where board_no = #{boardNo} and deleted = false
+	</select>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="com.room.dto.FBoardAttach">
+	 	SELECT attach_no,board_no,userfilename,savedfilename,downloadcount
+	 	FROM BoardAttach
+	 	where board_no = #{boardNo}
 	</select>
 	
 	<delete id="delete" parameterType="int">

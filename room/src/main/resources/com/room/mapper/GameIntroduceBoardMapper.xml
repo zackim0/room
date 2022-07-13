@@ -6,27 +6,33 @@
               <!-- package..class로 가정하고 사용 -->				 
 <mapper namespace="com.room.mapper.GameIntroduceBoardMapper">
 <insert id="insertBoard" parameterType="com.room.dto.GIBoard">
-	<selectKey keyProperty="board_no" resultType="int" order="AFTER">
+	<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
 		SELECT LAST_INSERT_ID()
 	</selectKey>
-	INSERT INTO Board (title,member_id,content)
-	VALUES (#{title},#{writer},#{content})
+	INSERT INTO Board (title,member_id,content, category)
+	VALUES (#{title},#{writer},#{content},#{category})
 </insert>
-<select id="selectAll" resultType="com.room.dto.GIBoard">
-		SELECT board_no, title,member_id,readcount,regdate,deleted
-		FROM Board
+	<select id="selectAll" resultType="com.room.dto.GIBoard">
+		SELECT board_no boardNo, title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'gameintro'
 		ORDER BY board_no DESC
 	</select>
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.GIBoard">
-		SELECT board_no, title, member_id,content,readcount,regdate
+		SELECT board_no boardNo, title, member_id writer,content,readcount, regdate,deleted
 		FROM Board
-		where board_no = #{board_no} and deleted = false
+		where board_no = #{boardNo} and deleted = false
 	</select>
 	
 	<delete id="delete" parameterType="int">
 		update Board
 		set deleted = true
-		where board_no = #{board_no}
+		where board_no = #{boardNo}
 	</delete>
+	
+	<update id="update" parameterType="com.room.dto.GIBoard">
+		UPDATE Board
+		SET title = #{title}, content = #{content}
+		WHERE board_no = #{boardNo}
+	</update>
 
 </mapper>

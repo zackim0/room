@@ -50,7 +50,7 @@
 		            <tr>
 			           <form id="writeform" 
 			        	 action="write" 
-			        	 method="post">
+			        	 method="post" enctype="multipart/form-data">
 			        	 <input type="hidden" name="category" value="fashion">
 		                <th>제목</th>
 		                <td>
@@ -71,6 +71,12 @@
 		                    <textarea 
 		                    		  name="content" cols="76" rows="15"></textarea>
 		                </td>
+		            </tr>
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            		<input type="file" name="attach">
+		            	</td>
 		            </tr>
 		            	<div class="buttons">
 			    	[<a id="write" href="javascript:">글쓰기</a>]

@@ -21,6 +21,10 @@ public interface FBoardService {
 
 	void update(FBoard board);
 
+	List<FBoard> findByPage(int pageNo, int pageSize);
+
+	int findBoardCount();
+
 }
 
 

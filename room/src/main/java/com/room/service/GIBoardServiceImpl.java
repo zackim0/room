@@ -33,8 +33,8 @@ public class GIBoardServiceImpl implements GIBoardService {
 		
 	}
 
-	@Override
-	public List<GIBoard> findByPage(int pageNo, int pageSize) {
+//	@Override
+//	public List<GIBoard> findByPage(int pageNo, int pageSize) {
 //		int from = (pageNo - 1) * pageSize;
 //		int count = pageSize;
 //		
@@ -46,32 +46,37 @@ public class GIBoardServiceImpl implements GIBoardService {
 //		List<GIBoard> boardList = GIboardMapper.selectByRange(params);
 //		
 //		return boardList;
-		
-		return null;
-	}
+//		
+//		return null;
+//	}
 
 	@Override
 	public GIBoard findByBoardNo(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		GIBoard board= gIboardMapper.selectByBoardNo(boardNo);
+		
+		return board;
+		
 	}
 
 	@Override
 	public void delete(int boardNo) {
-		// TODO Auto-generated method stub
+
+		gIboardMapper.delete(boardNo);
 		
 	}
 
 	@Override
 	public void update(GIBoard board) {
-		// TODO Auto-generated method stub
+
+		gIboardMapper.update(board);
 		
 	}
 
-	@Override
-	public int findBoardCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int findBoardCount() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 	
 }
