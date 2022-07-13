@@ -49,7 +49,7 @@
                                         <a href="/room/mate-board/list">룸메이트 구하기</a>
                                     </li>
                                     <li>
-                                        <a href="#">산책메이트 구하기</a>
+                                        <a href="/room/petboard/list">산책메이트 구하기</a>
                                     </li>
                                     <li class="divider"></li>
                                 </ul>
