@@ -77,7 +77,7 @@
 			    	&nbsp;&nbsp;
 			    	[<a href='edit?boardNo=${board.boardNo}'>수정하기</a>]
 			    	&nbsp;&nbsp;
-			    	[<a href='delete?boardNo=${board.boardNo}'>삭제</a>]
+			    	[<a id='delete-btn' href='javascript'>삭제하기</a>]
 			    	</c:if>
 			    	</div>
 			    	
@@ -127,7 +127,7 @@
             
             $('#delete-btn').click(function(event) {
               	 event.preventDefault();
-               	 var ok = confirm('삭제할까요?');
+               	 var ok = confirm('정말로 삭제하시겠습니까?');
                	 if(ok){
                		 location.href = 'delete?boardNo=${board.boardNo}';
                	 }
