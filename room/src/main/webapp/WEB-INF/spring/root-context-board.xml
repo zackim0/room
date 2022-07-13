@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+
+	
+	<bean id="gIboardService" class="com.room.service.GIBoardServiceImpl">
+		<property name="gIboardMapper" ref="gameIntroduceBoardMapper" />
+	</bean>
+	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
+		<property name="fBoardMapper" ref="fashionBoardMapper" />
+	</bean>
+	<bean id="mateBoardService" class="com.room.service.MateBoardServiceImpl">
+		<property name="mateBoardMapper" ref="mateBoardMapper" />
+	</bean> 
+	<bean id="ckBoardService" class="com.room.service.CKBoardServiceImpl">
+		<property name="cookBoardMapper" ref="cookBoardMapper" />
+	</bean>
+
+</beans>
+
+
+
+
+
+
+
+

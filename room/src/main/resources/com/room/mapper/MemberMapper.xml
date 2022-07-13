@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- package...class 가정하고 사용 -->
+<!-- 클래스로 가정하고 사용 --> 				 
+<mapper namespace="com.room.mapper.MemberMapper">
+
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO Member (member_id, nickname, passwd, email, region, pet)
+		VALUES(#{memberId}, #{nickname}, #{passwd}, #{email}, #{region}, #{pet})
+	</insert>
+	
+	<select id="selectMemberByIdAndPasswd" parameterType="Member"
+										   resultType="com.room.dto.Member">
+		SELECT member_id memberId, nickname, email, usertype, active, regdate 
+		FROM Member
+		WHERE member_id = #{memberId} and passwd = #{passwd} and active = false		
+	</select>
+	
+	<delete id="delete" parameterType="Member">
+		UPDATE Member set active = true 
+		WHERE member_id = #{memberId}
+	</delete>
+	
+	<update id="update" parameterType="Member">
+		UPDATE Member set passwd = #{passwd}, email = #{email}, region = #{region}, pet = #{pet}
+		WHERE member_id = #{memberId}
+	</update>
+
+</mapper>

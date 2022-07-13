@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+	<mapper namespace="com.room.mapper.MateBoardMapper">
+
+	<insert id="insertBoard" parameterType="com.room.dto.MateBoard">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO Board (title,member_id,content, category)
+		VALUES (#{title},#{writer},#{content}, #{category})
+	</insert>
+
+	<select id="selectAll" resultType="com.room.dto.MateBoard">
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'roommate'
+		ORDER BY board_no DESC
+	</select>
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.MateBoard">
+		SELECT board_no boardNo,title,member_id writer,content,readcount,regdate
+		FROM Board
+		where board_no = #{boardNo} and deleted = false
+	</select>
+	
+	<select id="select3" resultType="com.room.dto.MateBoard">
+		SELECT title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='roommate' ORDER by board_no DESC LIMIT 3
+	</select>
+	
+
+</mapper>

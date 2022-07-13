@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+<mapper namespace="com.room.mapper.CookBoardMapper">
+
+	<insert id="insertBoard" parameterType="com.room.dto.CKBoard">
+	<selectKey keyProperty="board_no" resultType="int" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+	INSERT INTO Board (title, member_id, content)
+	VALUES (#{title}, #{member_id}, #{content})
+	</insert>
+	
+	<select id="selectAll" resultType="com.room.dto.CKBoard">
+		SELECT board_no, title, member_id, readcount, regdate, deleted
+		FROM Board
+		ORDER BY board_no DESC
+	</select>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoard">
+		SELECT board_no, title, member_id, content, readcount, regdate
+		FROM Board
+		where board_no = #{board_no} and deleted = false
+	</select>
+	
+</mapper>
