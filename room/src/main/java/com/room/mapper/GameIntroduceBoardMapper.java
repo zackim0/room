@@ -17,4 +17,6 @@ public interface GameIntroduceBoardMapper {
 	
 	void delete(int boardNo);
 	
+	void update(GIBoard board);
+	
 }

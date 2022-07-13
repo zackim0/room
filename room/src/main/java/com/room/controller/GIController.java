@@ -84,4 +84,61 @@ public class GIController {
 		return "redirect:list"; // 
 	}
 	
+	@GetMapping(path = {"/detail"})
+	public String detail(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
+						Model model) {
+		if(boardNo == -1) {
+			return "redirect:list";
+		}
+		
+		GIBoard board = gIboardService.findByBoardNo(boardNo);
+		if(board == null) {
+			System.out.println(boardNo);
+			return "redirect:list";
+		}
+		
+		model.addAttribute("board",board);
+		
+		return "/playground/gameintroduce/detail";
+		
+	}
+	
+	@GetMapping(path = {"/delete"})
+	public String delete(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo
+						/* @RequestParam(defaultValue = "-1") int pageNo */) {
+		
+		if(boardNo > 0 /* && pageNo > 0 */) {
+			gIboardService.delete(boardNo);
+//			return "redirect:list?pageNo=" + pageNo;
+		}
+		
+		return "redirect:list";
+	}
+	
+	@GetMapping(path = {"/edit"})
+	public String showEditForm(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
+			Model model) {
+		
+		if(boardNo < 1) {
+			return "redirect:list";
+		}
+		
+		GIBoard board = gIboardService.findByBoardNo(boardNo);
+		if(board == null) {
+			return "redirect:list";
+		}
+		
+		model.addAttribute("board",board);
+		
+		return "/playground/gameintroduce/edit";
+	}
+	
+	@PostMapping(path = {"/edit"})
+	public String edit(GIBoard board, @RequestParam(defaultValue = "-1") int pageNo) {
+		
+		gIboardService.update(board);
+		
+		return String.format("redirect:detail?boardNo=%d",board.getBoardNo());
+	}
 }
+

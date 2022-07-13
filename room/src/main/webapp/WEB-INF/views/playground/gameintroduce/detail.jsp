@@ -2,12 +2,15 @@
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
     	 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    	 
 <!DOCTYPE html>
 <html>
     
     <head>
     	<meta charset="utf-8"/>
-        <title>글쓰기 - 운영진 추천 게임 게시판</title>
+        <title>${ board.title } - 운영진 추천 게임 게시판</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -31,9 +34,11 @@
                 <div class="span12">
                 	<div class="row-fluid">
 
+
 		                <div class="span12" id="content">
 		                    <div class="row-fluid">
 		                        <!-- block -->
+		                        
 		                        <!-- <div class="block">
 		                            <div class="navbar navbar-inner block-header">
 		                                <div class="muted pull-left"></div>
@@ -44,35 +49,40 @@
 		                        </div> -->
 		                        <table>
 		            <tr>
-			           <form id="writeform" action="write" method="post">
-		            	<input type="hidden" name="category" value="gameintro">
 		                <th>제목</th>
-		                <td>
-		                    <input type="text" name="title" style="width:550px" />
-		                </td>
+		                <td>${ board.title }</td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-						<td>
-							<input type="text" name="writer" value="${loginuser.memberId}" readonly> 
-						</td>
+		                <td>${ requestScope.board.writer}</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea 
-		                    		  name="content" cols="76" rows="15"></textarea>
+		                  <% String enter2 = "r\n"; %> 
+		                  <c:set var = "enter" value="
+		                  " />
+		                  ${ fn:replace(board.content, enter , '<br>') }
 		                </td>
 		            </tr>
+		            <tr>
+		            	<th>작성일</th>
+		            	<td>${board.regDate}</td>
+		            </tr>
 		            	<div class="buttons">
-			    	[<a id="write" href="javascript:">글쓰기</a>]
-			    	&nbsp;&nbsp;
-			    	[<a href="list">목록보기(절대경로)</a>]
-			    	</div>  
-			    	</form>   
+			    			[<a href="/room/playground/gameintroduce/list">목록보기</a>]		    	
+			    		</div> 
+			    		<div class="buttons">
+			    		<c:if test="${loginuser.memberId eq board.writer }">
+		               	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
+		               	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
+		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
+		               	</c:if>	
+			    		</div> 
 		                        <!-- /block -->
 		                    </div>
 		                </div>
+		               	
 
 		                
 
@@ -100,7 +110,19 @@
 
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
+     
+        
         $(function() {
+        	
+        	//$('delete-btn').on('click',function(event)){
+            $('#delete-btn').click(function(event) {
+           	 event.preventDefault();
+            	 var ok = confirm('삭제할까요?');
+            	 if(ok){
+            		 location.href = 'delete?boardNo=${board.boardNo}';
+            	 }
+   			});
+            
             // Bootstrap
             $('#bootstrap-editor').wysihtml5();
 
@@ -142,12 +164,7 @@
 		    ]
 		});
 		
-		$(function(){
-			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
-				event.preventDefault();
-				$('#writeform').submit();
-			})
-		})
+		
 
         </script>
     </body>
