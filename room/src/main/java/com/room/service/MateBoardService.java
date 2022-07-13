@@ -18,6 +18,9 @@ public interface MateBoardService {
 	List<MateBoard> find3();
 
 	void delete(int boardNo);
+
+	void update(MateBoard board);
+
 		
 }
 

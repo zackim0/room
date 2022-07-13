@@ -73,8 +73,12 @@
 		            </tr>
 		            	<div class="buttons">
 			    	[<a href="/room/mate-board/list">목록보기</a>]
-			    	[<a href="/room/mate-board/edit">수정하기</a>]
-			    	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
+		            <c:if test="${loginuser.memberId eq board.writer }">
+			    	&nbsp;&nbsp;
+			    	[<a href='edit?boardNo=${board.boardNo}'>수정하기</a>]
+			    	&nbsp;&nbsp;
+			    	[<a href='delete?boardNo=${board.boardNo}'>삭제</a>]
+			    	</c:if>
 			    	</div>
 			    	
 			    	
@@ -120,6 +124,15 @@
 				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
 			]});
             $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
+            
+            $('#delete-btn').click(function(event) {
+              	 event.preventDefault();
+               	 var ok = confirm('삭제할까요?');
+               	 if(ok){
+               		 location.href = 'delete?boardNo=${board.boardNo}';
+               	 }
+   			});
+            
         });
 
         // Tiny MCE
@@ -151,13 +164,6 @@
 		    ]
 		});
 		
-		$(function(){
-			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
-				event.preventDefault();
-				$('#writeform').submit();
-			})
-		})
-
         </script>
     </body>
 

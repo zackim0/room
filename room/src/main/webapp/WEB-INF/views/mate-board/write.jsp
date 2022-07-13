@@ -71,9 +71,9 @@
 		                </td>
 		            </tr>
 		            	<div class="buttons">
-			    	[<a id="write" href="javascript:">글쓰기</a>]
+			    	[<a id="write" href="javascript:">작성하기</a>]
 			    	&nbsp;&nbsp;
-			    	[<a href="/room/mate-board/list">목록보기(절대경로)</a>]
+			    	[<a href="/room/mate-board/list">목록보기</a>]
 			    	</div>  
 			    	</form>   
 		                        <!-- /block -->
