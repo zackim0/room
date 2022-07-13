@@ -1,10 +1,12 @@
 package com.room.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.room.dto.FBoard;
+import com.room.dto.FBoardAttach;
 
 @Mapper
 public interface FashionBoardMapper {
@@ -20,5 +22,13 @@ public interface FashionBoardMapper {
 	List<FBoard> select3();
 
 	void update(FBoard board);
+
+	List<FBoard> selectByRange(HashMap<String, Object> params);
+
+	int selectBoardCount();
+
+	List<FBoardAttach> selectBoardAttachByBoardNo(int boardNo);
+
+	void insertBoardAttach(FBoardAttach file);
 	
 }
