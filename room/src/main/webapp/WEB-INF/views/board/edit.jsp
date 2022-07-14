@@ -39,8 +39,9 @@
             <div class="row-fluid">
                 
                 <!--/span-->
-                <form id="writeform" action="write" method="post" enctype="multipart/form-data">
+                <form id="editform" action="edit" method="post">
                 	  <input type="hidden" name="category" value="recipe">
+                	  <input type="hidden" name="pageNo" value="${ pageNo }">
                 <div class="span12">
                 	<div class="row-fluid">
 
@@ -49,13 +50,23 @@
 		                        <!-- block -->
 		                        <div class="block" style="height:800px">
 		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left">게시글 쓰기</div>
+		                                <div class="muted pull-left">게시글 수정</div>
 		                            </div>
 		                             <table>
+		                             <tr>
+		                            	<th>글번호</th>
+		                            		<td>
+		                            		
+		                            		<input type="hidden" name="boardNo" value="${ board.boardNo }">
+		                            	
+		                            		</td>
+		                            	</tr>
+		                             
 		                            	<tr>
 		                            	<th>제목</th>
 		                            	<td>
-		                            		<input type="text" name="title" style="width:550px">
+		                            		<input type="text" name="title" style="width:550px"
+		                            				value="${ board.title }">
 		                            	</td>
 		                            	</tr>
 		                            	<tr>
@@ -66,15 +77,9 @@
 		                            		</td>
 		                            	</tr>
 		                            	<tr>
-		                            		<th>첨부파일</th>
-		                            		<td>
-		                            		<input type="file" name="attach">
-		                            		</td>
-		                            	</tr>
-		                            	<tr>
 		                            		<th>내용</th>
 		                            		<td>
-		                            		 <textarea  name="content" cols="300" rows="30"></textarea>
+		                            		 <textarea  name="content" cols="300" rows="30">${ board.content }</textarea>
 		                               		</td>
 		                               	</tr>
 		                            </table>
@@ -92,10 +97,13 @@
 		                    </div>
 		                    
 		                </div>
-		                <a href="javascript:" id="write">작성</a>
+		                <div class="buttons">
+		                <a href="javascript:" id="edit-btn">수정</a>
 							 &nbsp;
-				            <a href="/room/board/cooklist">목록보기</a>
+				           <a href='detail?boardno=${ board.boardNo }&pageNo=${ pageNo }'>취소</a>
+						</div>
 </form>
+
                 	</div>
                 </div>
 
@@ -120,38 +128,11 @@
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
         $(function() {
-            // Bootstrap
-            $('#bootstrap-editor').wysihtml5();
-
-            // Ckeditor standard
-            $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-			]});
-            $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
-        });
-
-        // Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_basic",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview anchor",
-		        "searchreplace visualblocks code fullscreen",
-		        "insertdatetime media table contextmenu paste"
-		    ],
-		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | "
-		});
-        
-        $(function(){
-        	$('#write').on('click', function(event){
+        	$('#edit-btn').on('click', function(event){
         		event.preventDefault();
-        	
-        		$('#writeform').submit();
+        		$('#editform').submit();
         	});
-        	
         });
-
-		
-
         </script>
     </body>
 
