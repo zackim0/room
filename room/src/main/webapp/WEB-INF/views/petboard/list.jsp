@@ -53,10 +53,10 @@
 												<td>${board.boardNo }</td>
 												<td><c:choose>
 														<c:when test="${board.deleted}">
-															<span style="color: lightgray">[작성자의 요청으로 삭제된 글입니다.]</span>
+															<span style="color: lightgray">[삭제된 글입니다]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${ pageNo }'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td>${board.writer}</td>
@@ -65,7 +65,7 @@
 										</tbody>
 									</c:forEach>
 								</table>
-
+							${ pager }
 
 							</div>
                             </div>

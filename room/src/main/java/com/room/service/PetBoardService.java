@@ -17,4 +17,8 @@ public interface PetBoardService {
 
 	void update(PetBoard board);
 
+	List<PetBoard> findByPage(int pageNo, int pageSize);
+
+	int findBoardCount(String string);
+
 }

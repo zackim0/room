@@ -1,5 +1,6 @@
 package com.room.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +19,11 @@ public interface PetBoardMapper {
 	void delete(int boardNo);
 	
 	void update(PetBoard board);
+
+	void updateBoardReadCount(int boardNo);
+
+	List<PetBoard> selectByRange(HashMap<String, Object> params);
+
+	int selectBoardCount(String category);
 
 }

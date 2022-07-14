@@ -56,7 +56,7 @@
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${ requestScope.board.writer}</td>
+		                <td>${ requestScope.board.writer }</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
@@ -72,13 +72,14 @@
 		            	<td>${board.regDate}</td>
 		            </tr>
 		            	<div class="buttons">
+		            	<%-- ${loginuser.memberId } / ${board.writer } / ${loginuser.memberId eq board.writer } / ${ fn:length(loginuser.memberId) } / ${ fn:length(board.writer) } --%>
 			    	[<a href="/room/petboard/list">목록보기</a>]
-	<%-- 	            <c:if test="${loginuser.memberId eq board.writer }"> --%>
+					<c:if test="${loginuser.memberId eq board.writer }">
 			    	&nbsp;&nbsp;
 			    	[<a href='edit?boardNo=${board.boardNo}'>수정하기</a>]
 			    	&nbsp;&nbsp;
 			    	[<a id='delete-btn' href='javascript'>삭제하기</a>]
-			<%--     	</c:if> --%>
+					</c:if>
 			    	</div>
 			    	
 			    	
