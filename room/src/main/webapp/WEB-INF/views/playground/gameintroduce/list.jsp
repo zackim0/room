@@ -53,18 +53,18 @@
                                         <c:forEach var="board" items="${requestScope.gIboardList}">
 										<tbody>
 											<tr>
-												<td>${board.board_no}</td>
+												<td>${board.boardNo}</td>
 												<td><c:choose>
 														<c:when test="${board.deleted}">
 															<span style="color: lightgray">[삭제된 글]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.board_no}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
-												<td>${board.member_id}</td>
-												<td>${board.regdate}</td>
-												<td>${board.readcount}</td>
+												<td>${board.writer}</td>
+												<td>${board.regDate}</td>
+												<td>${board.regDate}</td>
 											</tr>
 										</tbody>
 									</c:forEach>

@@ -27,6 +27,7 @@ public class MateBoardServiceImpl implements MateBoardService {
 	public List<MateBoard> findAll(){
 		
 		List<MateBoard> mateBoardList = mateBoardMapper.selectAll();
+		
 		return mateBoardList;
 	}
 	
@@ -36,13 +37,12 @@ public class MateBoardServiceImpl implements MateBoardService {
 		MateBoard board = mateBoardMapper.selectByBoardNo(boardNo); // 게시물 데이터 조회
 		
 		return board;
-
 		
 	}
-	
 
 	@Override
 	public void delete(int boardNo) {
+		
 		mateBoardMapper.delete(boardNo);
 	}
 
@@ -51,6 +51,13 @@ public class MateBoardServiceImpl implements MateBoardService {
 		
 		List<MateBoard> mateBoardRecentList = mateBoardMapper.select3();
 		return mateBoardRecentList;
+	}
+
+	@Override
+	public void update(MateBoard board) {
+
+		mateBoardMapper.update(board);
+		
 	}
 
 	

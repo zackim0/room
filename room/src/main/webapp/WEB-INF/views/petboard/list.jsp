@@ -32,7 +32,8 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">룸메이트 구하기</div>
+                                <div class="muted pull-left">반려견 게시판</div>
+                                <div class="muted pull-right"><button class="btn btn-normal btn-primary" id="write" type="submit">글쓰기</button></div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -46,7 +47,7 @@
 											<th>작성일</th>
 										</tr>
 									</thead>
-									<c:forEach var="board" items="${requestScope.mateBoardList}">
+									<c:forEach var="board" items="${requestScope.petBoardList}">
 										<tbody>
 											<tr>
 												<td>${board.boardNo }</td>
@@ -88,13 +89,15 @@
         <script src="/room/resources/vendors/jquery-1.9.1.js"></script>
         <script src="/room/resources/bootstrap/js/bootstrap.min.js"></script>
         <script src="/room/resources/vendors/datatables/js/jquery.dataTables.min.js"></script>
-
-
         <script src="/room/resources/assets/scripts.js"></script>
         <script src="/room/resources/assets/DT_bootstrap.js"></script>
-        <script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script type="text/javascript">
         $(function() {
-            
+        	$('#write').on('click',function(event) {
+        		event.preventDefault();
+        		location.href = 'write';
+        	});
         });
         </script>
     </body>
