@@ -26,9 +26,10 @@
 	</select>
 	
 	<select id="select3" resultType="com.room.dto.MateBoard">
-		SELECT title, member_id writer, regdate, readcount
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
 		FROM Board
-		WHERE category ='roommate' ORDER by board_no DESC LIMIT 3
+		WHERE category ='roommate' and deleted = false
+		ORDER by board_no DESC LIMIT 3
 	</select>
 	
 	<update id="update" parameterType="com.room.dto.MateBoard">
