@@ -37,6 +37,12 @@
 		SELECT COUNT(*) FROM Board WHERE category = #{ category }
 	</select>
 	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{boardNo}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		update Board
 		set deleted = true
