@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.room.dto.MateBoard;
 import com.room.service.MateBoardService;
-import com.room.ui.JinPager;
+import com.room.ui.ThePager;
 
 @Controller
 @RequestMapping(path= {"/mate-board"})
@@ -36,7 +36,7 @@ public class MateBoardController {
 		List<MateBoard> mateBoardList = mateBoardService.findByPage(pageNo, pageSize);
 		count = mateBoardService.findBoardCount("roommate");
 		
-		JinPager pager = new JinPager(count, pageNo, pageSize, pagerSize, "list");
+		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
 		
 		model.addAttribute("mateBoardList", mateBoardList);
 		model.addAttribute("pager", pager);
@@ -125,7 +125,8 @@ public class MateBoardController {
 		
 		mateBoardService.update(board);
 		
-		return String.format("redirect:detail?boardNo=%d", board.getBoardNo(), pageNo);
+		return String.format("redirect:detail?boardno=%d&pageNo=%d",
+				board.getBoardNo(), pageNo);
 		
 	}
 

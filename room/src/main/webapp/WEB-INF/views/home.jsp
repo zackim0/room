@@ -107,7 +107,7 @@
 	                                                </td>
 	                                                <td>${board.writer}</td>
 	                                                <td>${board.regDate}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                            </tr>
 	                                        </tbody>
                                         </c:forEach>

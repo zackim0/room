@@ -41,7 +41,7 @@
 	<delete id="delete" parameterType="int">
 		update Board
 		set deleted = true
-		where board_no = #{boardNo}
+		where board_no = #{ boardNo }
 	</delete>
 	
 	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.MateBoard">
@@ -54,5 +54,11 @@
 	<select id="selectBoardCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM Board WHERE category = #{ category }
 	</select>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{ boardNo }
+	</update>
 	
 </mapper>

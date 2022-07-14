@@ -36,8 +36,8 @@ public class MateBoardServiceImpl implements MateBoardService {
 		
 		MateBoard board = mateBoardMapper.selectByBoardNo(boardNo); // 게시물 데이터 조회
 		
-//		mateBoardMapper.updateBoardReadCount(boardNo);
-//		board.setReadCount(board.getReadCount() + 1);
+		mateBoardMapper.updateBoardReadCount(boardNo);
+		board.setReadCount(board.getReadCount() + 1);
 		
 		return board;
 		
