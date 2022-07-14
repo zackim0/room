@@ -70,6 +70,12 @@
 		                    		  name="content" cols="76" rows="15"></textarea>
 		                </td>
 		            </tr>
+		            <tr>
+		                <th>첨부파일</th>
+		                <td>		                    
+		                    <input type="file" name="attach">
+		                </td>
+		            </tr>
 		            	<div class="buttons">
 			    	[<a id="write" href="javascript:">작성하기</a>]
 			    	&nbsp;&nbsp;
