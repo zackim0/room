@@ -34,13 +34,13 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">운영진 추천 게임</div>
-                                    <a href="write">
-                                    	<button class="btn btn-primary" value="글쓰기"><i class="icon-pencil icon-white"></i>글쓰기</button>
-                                    </a>
                                 </div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table">
+                                   		<a href="write">
+	                                    	<button class="btn btn-primary" value="글쓰기"><i class="icon-pencil icon-white"></i>글쓰기</button>
+	                                    </a>
                                         <thead>
                                             <tr>
                                                 <td>글번호</td>
@@ -73,16 +73,25 @@
                             </div>
                         </div>
             	<div class="pagination">
-					<ul>
-						<li><a href="#">이전</a></li>
-						<li class="active">
-							<a href="#">1</a>
-						</li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">다음</a></li>
+					<!-- <ul>
+					<c:set var="ThePager" value="${ requestScope.ThePager }">
+					<c:choose>
+						<c:when test="${ pageNo eq 1 }">
+                    		<li><a href="#">이전</a></li>
+						</c:when>
+						<c:otherwise>
+                    		<li><a href="%detail?pageNo=${ pageNo - 1}">이전</a></li>
+						</c:otherwise>
+					</c:choose>
+					<li class="active">
+						<a href="#">1</a>
+					</li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">마지막</a></li>
 					</ul>
+					</c:set> -->
+					 ${ pager }  
 				</div>
             <footer>
                 <p onclick=window.open("/room/")>&copy; 우리들의 자취방 생활</p>
