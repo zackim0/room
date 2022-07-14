@@ -40,7 +40,7 @@
 	</select>
 
 	<select id="selectBoardCount" resultType="int">
-		SELECT COUNT(*) FROM Board
+		SELECT COUNT(*) FROM Board where category = 'recipe'
 	</select>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoard">
@@ -80,5 +80,7 @@
 		FROM Board
 		WHERE category ='recipe' ORDER by board_no DESC LIMIT 3
 	</select>
+	
+	
 	
 </mapper>

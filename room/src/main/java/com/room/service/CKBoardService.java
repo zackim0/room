@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.room.dto.CKBoard;
 import com.room.dto.CKBoardAttach;
+import com.room.dto.CKBoardComment;
 
 
 public interface CKBoardService {
@@ -29,4 +30,8 @@ public interface CKBoardService {
 
 	void update(CKBoard board);
 
+	void writeBoardComment(CKBoardComment comment);
+	List<CKBoardComment> findCommentsByBoardNo(int boardNo);
+	void deleteComment(int commentNo);
+	void updateBoardComment(CKBoardComment comment);
 }

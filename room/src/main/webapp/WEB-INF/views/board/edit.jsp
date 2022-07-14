@@ -56,7 +56,7 @@
 		                             <tr>
 		                            	<th>글번호</th>
 		                            		<td>
-		                            		
+		                            		${ board.boardNo }
 		                            		<input type="hidden" name="boardNo" value="${ board.boardNo }">
 		                            	
 		                            		</td>

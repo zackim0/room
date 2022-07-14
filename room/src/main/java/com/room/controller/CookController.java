@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.room.common.Util;
 import com.room.dto.CKBoard;
 import com.room.dto.CKBoardAttach;
+import com.room.dto.CKBoardComment;
 import com.room.service.CKBoardService;
 import com.room.ui.ThePager;
 
@@ -34,17 +36,17 @@ public class CookController {
 	public String list(@RequestParam(defaultValue = "1")int pageNo, 
 			   Model model) {
 
-		int pageSize = 10; // 한 페이지에 표시할 데이터 개수
-		int pagerSize = 5; // 표시되는 페이지 번호 개수 ( 보이지 않은 페이지 번호는 다음, 이전 등으로 표시 )
-		int count = 0; // 전체 데이터 개수	
+		int pageSize = 10; 
+		int pagerSize = 5; 
+		int count = 0; 
 		
 		// List<Board> boardList = boardService.findAll();
 		List<CKBoard> cookboardList = ckBoardService.findByPage(pageNo, pageSize);		
-		count = ckBoardService.findBoardCount(); // 데이터베이스에 전체 개시물 개수 조회	
+		count = ckBoardService.findBoardCount(); 
 		
 		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "cooklist");		
 		
-		// Model 타입의 전달인자에 데이터를 저장하면 View(JSP)로 데이터가 전달됩니다. ( request에 저장 )
+		
 		model.addAttribute("cookboardList", cookboardList);
 		model.addAttribute("pager", pager);
 		model.addAttribute("pageNo", pageNo);
@@ -131,11 +133,54 @@ public class CookController {
 	
 	@PostMapping(path = { "/edit" })
 	public String edit(CKBoard Board, @RequestParam(defaultValue = "-1")int pageNo) {
+		
 		if(pageNo < 1 ) {
 			return "redirect:cooklist";
 		}
 		ckBoardService.update(Board);
 		
 		return String.format("redirect:detail?boardNo%d&pageNo=%d", Board.getBoardNo(), pageNo);
+	}
+	///////////////////////////
+	
+	// @ResponseBody  : return 값이 viewname이 아니고 응답 컨텐츠임을 알려주는 설정
+	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeComment(CKBoardComment boardComment) {
+		
+		ckBoardService.writeBoardComment(boardComment);
+		
+		return "success"; // WEB-INF/views/success.jsp
+		
+	}
+	
+	@GetMapping(path = { "/comment-list" })
+	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+		
+		List<CKBoardComment> comments = ckBoardService.findCommentsByBoardNo(boardNo);
+		
+		model.addAttribute("comments", comments);
+		
+		return "board/comments";
+		
+	}
+	
+	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
+	@ResponseBody
+	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	
+		ckBoardService.deleteComment(commentNo);
+		
+		return "success";
+	}
+	
+	@PostMapping(path = { "/comment-update" }, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updateComment(CKBoardComment boardComment) {
+		
+		ckBoardService.updateBoardComment(boardComment);
+		
+		return "success";
+		
 	}
 }

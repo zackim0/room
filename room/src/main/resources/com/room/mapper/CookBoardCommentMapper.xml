@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+<mapper namespace="com.room.mapper.CookBoardCommentMapper">
+
+	<insert id="insertBoardComment" parameterType="com.room.dto.CKBoard"
+			useGeneratedKeys="true" keyColumn="commentno" keyProperty="commentNo">
+		INSERT INTO BoardComment (board_comment_no boardno, member_id writer, comment_content content)
+		VALUES (#{boardNo}, #{writer}, #{content}, 0, 1, 0)
+	</insert>
+
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoard">
+		SELECT board_comment_no commentno, board_no boardno, member_id writer, comment_content content, comment_regdate regdate, comment_deleted deleted
+		FROM BoardComment
+		WHERE board_no = #{boardNo} and comment_deleted = FALSE
+		ORDER BY board_comment_no DESC
+	</select>	
+
+	<select id="selectRangeByBoardNo" parameterType="hashmap" resultType="com.room.dto.CKBoard">
+		SELECT commentno, boardno, writer, content, regdate, deleted
+		FROM BoardComment
+		WHERE board_no = #{boardNo} and comment_deleted = FALSE
+		ORDER BY board_no DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectCommentCount" resultType="int">
+		SELECT COUNT(*) FROM BoardComment
+	</select>
+		
+	<delete id="delete" parameterType="int">
+		UPDATE BoardComment 
+		SET deleted = TRUE 
+		WHERE board_comment_no = #{ commentNo }
+	</delete>
+	
+	<update id="update" parameterType="com.room.dto.CKBoard">
+		UPDATE BoardComment
+		SET content = #{content}
+		WHERE board_comment_no = #{commentNo}
+	</update>
+	
+</mapper>
