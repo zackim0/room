@@ -54,5 +54,26 @@
 		SET title = #{title}, content = #{content}
 		WHERE board_no = #{boardNo}
 	</update>
+	
+	<!-- 첨부파일 관련 -->
+	
+	<insert id="insertBoardAttach" parameterType="com.room.dto.GIBoardAttach">
+		INSERT BoardAttach (board_no,userfilename, savedfilename)
+		VALUES (#{boardNo},#{userFileName},#{savedFileName})
+	</insert>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="com.room.dto.GIBoardAttach">
+	 	SELECT attach_no attachNo,board_no boardNo,userfilename,savedfilename,downloadcount
+	 	FROM BoardAttach
+	 	where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectBoardAttachByAttachNo" parameterType="int" 
+											 resultType="com.room.dto.GIBoardAttach">
+		SELECT attach_no attachNo, board_no boardNo, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}										 
+	</select>
 
 </mapper>

@@ -22,7 +22,7 @@ public interface GIBoardService {
 	
 	int findBoardCount(String category);
 	
-//	BoardAttach findBoardAttachByAttachNo(int attachNo);
+	GIBoardAttach findBoardAttachByAttachNo(int attachNo);
 	
 
 //	void writeBoardComment(BoardComment comment);
