@@ -74,9 +74,9 @@
 		            	<th>첨부파일</th>
 		            	<td>
 		            	<c:forEach var="file" items="${board.files}">
-		            	<a href="download?attachNo=${file.attachNo}">
-		            	${file.userFileName}
-		            	</a>
+			            	<a href="download?attachNo=${file.attachNo}">
+			            	${file.userFileName}
+			            	</a>
 		            	<br>
 		            	</c:forEach>
 		            	</td>

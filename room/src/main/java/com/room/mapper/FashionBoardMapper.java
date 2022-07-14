@@ -30,5 +30,7 @@ public interface FashionBoardMapper {
 	List<FBoardAttach> selectBoardAttachByBoardNo(int boardNo);
 
 	void insertBoardAttach(FBoardAttach file);
+
+	FBoardAttach selectBoardAttachByAttachNo(int attachNo);
 	
 }
