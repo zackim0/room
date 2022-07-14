@@ -1,5 +1,6 @@
 package com.room.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.room.dto.MateBoard;
@@ -12,7 +13,6 @@ public class MateBoardServiceImpl implements MateBoardService {
 	@Setter
 	private MateBoardMapper mateBoardMapper;
 	
-
 	@Override
 	public void writeBoard(MateBoard board) {
 		// 게시물 데이터를 DB에 저장
@@ -36,6 +36,9 @@ public class MateBoardServiceImpl implements MateBoardService {
 		
 		MateBoard board = mateBoardMapper.selectByBoardNo(boardNo); // 게시물 데이터 조회
 		
+//		mateBoardMapper.updateBoardReadCount(boardNo);
+//		board.setReadCount(board.getReadCount() + 1);
+		
 		return board;
 		
 	}
@@ -50,6 +53,7 @@ public class MateBoardServiceImpl implements MateBoardService {
 	public List<MateBoard> find3() {
 		
 		List<MateBoard> mateBoardRecentList = mateBoardMapper.select3();
+		
 		return mateBoardRecentList;
 	}
 
@@ -58,6 +62,29 @@ public class MateBoardServiceImpl implements MateBoardService {
 
 		mateBoardMapper.update(board);
 		
+	}
+
+	@Override
+	public List<MateBoard> findByPage(int pageNo, int pageSize) {
+		
+		int from = (pageNo - 1) * pageSize;
+		int count = pageSize;
+		
+		HashMap<String,Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("count", count);
+		
+		List<MateBoard> mateBoardList = mateBoardMapper.selectByRange(params);
+		
+		return mateBoardList;
+	}
+
+	@Override
+	public int findBoardCount(String category) {
+		
+		int count = mateBoardMapper.selectBoardCount(category);
+		
+		return count;
 	}
 
 	

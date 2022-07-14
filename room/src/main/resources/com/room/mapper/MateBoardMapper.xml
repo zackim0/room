@@ -44,4 +44,15 @@
 		where board_no = #{boardNo}
 	</delete>
 	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.MateBoard">
+		SELECT board_no boardNo, title, member_id writer, readcount, regdate, deleted
+		FROM Board WHERE category = 'roommate'
+		ORDER BY board_no DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM Board WHERE category = #{ category }
+	</select>
+	
 </mapper>
