@@ -24,8 +24,9 @@ public interface GameIntroduceBoardMapper {
 
 	int selectBoardCount();
 	
-	void updateBoardReadcount(int boardNo);
+	void updateBoardReadCount(int boardNo);
 
 	int selectBoardCount(String category);
+	
 	
 }

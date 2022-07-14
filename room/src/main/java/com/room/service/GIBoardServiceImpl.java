@@ -55,6 +55,9 @@ public class GIBoardServiceImpl implements GIBoardService {
 
 		GIBoard board= gIboardMapper.selectByBoardNo(boardNo);
 		
+		gIboardMapper.updateBoardReadCount(boardNo);
+		board.setReadCount(board.getReadCount() + 1);
+		
 		return board;
 		
 	}
