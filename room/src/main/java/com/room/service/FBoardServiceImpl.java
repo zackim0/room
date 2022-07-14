@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.room.dto.FBoard;
 import com.room.dto.FBoardAttach;
+import com.room.dto.FBoardComment;
+import com.room.mapper.FashionBoardCommentMapper;
 import com.room.mapper.FashionBoardMapper;
 
 import lombok.Setter;
@@ -65,7 +67,8 @@ public class FBoardServiceImpl implements FBoardService {
 		List<FBoard> fboardRecentList = fBoardMapper.select3();
 		return fboardRecentList;
 	}
-		
+	
+	@Override
 	public void update(FBoard board) {
 		
 		fBoardMapper.update(board);
@@ -92,14 +95,24 @@ public class FBoardServiceImpl implements FBoardService {
 		return count;
 	}
 
+	
 	@Override
 	public FBoardAttach findBoardAttachByAttachNo(int attachNo) {
 		FBoardAttach attach = fBoardMapper.selectBoardAttachByAttachNo(attachNo);
 		return attach;
 	}
 
-	
+	@Setter
+	private FashionBoardCommentMapper boardCommentMapper;
 
+
+	@Override
+	public void writeBoardComment(FBoardComment comment) {
+		
+		boardCommentMapper.insertBoardComment(comment);
+		
+	}
+	
 	
 	
 

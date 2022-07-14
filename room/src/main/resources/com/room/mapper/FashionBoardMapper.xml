@@ -74,5 +74,10 @@
 		SET title = #{title}, content =#{content}
 		WHERE board_no = #{boardNo}
 	</update>
+	
+	<insert id="insertBoardComment" parameterType="com.room.dto.FBoardComment">
+		INSERT into BoardComment (board_no,member_id,comment_content)
+		VALUES (#{boardNo},{writer},{content})
+	</insert>
 
 </mapper>
