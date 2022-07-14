@@ -1,10 +1,12 @@
+<%@page import="com.room.dto.MateBoard"%>
+<%@page import="java.util.List"%>
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     
     <head>
-        <title>Tables</title>
+        <title>룸메이트 게시판</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -52,10 +54,10 @@
 												<td>${board.boardNo }</td>
 												<td><c:choose>
 														<c:when test="${board.deleted}">
-															<span style="color: lightgray">[삭제된 글]${board.title}</span>
+															<span style="color: lightgray">${board.title}&nbsp;&nbsp;&nbsp;[작성자의 요청으로 삭제된 글입니다.]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${ pageNo }'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td>${board.writer}</td>
@@ -64,12 +66,15 @@
 										</tbody>
 									</c:forEach>
 								</table>
-
+								${ pager }
+	
 
 							</div>
                             </div>
                         </div>
                         <!-- /block -->
+                        
+                        
                     </div>
 
                    

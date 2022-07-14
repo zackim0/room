@@ -1,5 +1,6 @@
 package com.room.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,12 +14,18 @@ public interface MateBoardMapper {
 
 	List<MateBoard> selectAll();
 
-	MateBoard selectByBoardNo(int boardNo);
-	
 	List<MateBoard> select3();
 
+	List<MateBoard> selectByRange(HashMap<String, Object> params);
+
+	MateBoard selectByBoardNo(int boardNo);
+	
 	void delete(int boardNo);
 
 	void update(MateBoard board);
+	
+	int selectBoardCount(String category);
+
+	void updateBoardReadCount(int boardNo);
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.room.service.GIBoardService;
 import com.room.dto.GIBoard;
+import com.room.dto.GIBoardAttach;
 import com.room.mapper.GameIntroduceBoardMapper;
 import com.room.dao.GIBoardDao;
 import com.room.dto.GIBoard;
@@ -22,7 +23,6 @@ public class GIBoardServiceImpl implements GIBoardService {
 
 		gIboardMapper.insertBoard(board);
 		
-		
 	}
 
 	@Override
@@ -33,22 +33,20 @@ public class GIBoardServiceImpl implements GIBoardService {
 		
 	}
 
-//	@Override
-//	public List<GIBoard> findByPage(int pageNo, int pageSize) {
-//		int from = (pageNo - 1) * pageSize;
-//		int count = pageSize;
-//		
-//		HashMap<String, Object> params = new HashMap<>();
-//		params.put("from", from);
-//		params.put("count", count);
-//		
-//		// List<Board> boardList = boardDao.selectByRange(params);
-//		List<GIBoard> boardList = GIboardMapper.selectByRange(params);
-//		
-//		return boardList;
-//		
-//		return null;
-//	}
+	@Override
+	public List<GIBoard> findByPage(int pageNo, int pageSize) {
+		int from = (pageNo - 1) * pageSize;
+		int count = pageSize;
+		
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("count", count);
+		
+		List<GIBoard> boardList = gIboardMapper.selectByRange(params);
+		
+		return boardList;
+		
+	}
 
 	@Override
 	public GIBoard findByBoardNo(int boardNo) {
@@ -73,10 +71,10 @@ public class GIBoardServiceImpl implements GIBoardService {
 		
 	}
 
-//	@Override
-//	public int findBoardCount() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	@Override
+	public int findBoardCount() {
+		int count = gIboardMapper.selectBoardCount();
+		return count;
+	}
 	
 }
