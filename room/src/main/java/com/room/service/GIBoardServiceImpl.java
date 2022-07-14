@@ -20,7 +20,6 @@ public class GIBoardServiceImpl implements GIBoardService {
 	@Override
 	public void writeBoard(GIBoard board) {
 
-
 		gIboardMapper.insertBoard(board);
 		
 	}
@@ -29,12 +28,14 @@ public class GIBoardServiceImpl implements GIBoardService {
 	public List<GIBoard> findAll() {
 
 		List<GIBoard> boardList = gIboardMapper.selectAll();
+		
 		return boardList;
 		
 	}
 
 	@Override
 	public List<GIBoard> findByPage(int pageNo, int pageSize) {
+		
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
 		
@@ -47,6 +48,7 @@ public class GIBoardServiceImpl implements GIBoardService {
 		return boardList;
 		
 	}
+	
 
 	@Override
 	public GIBoard findByBoardNo(int boardNo) {
@@ -72,9 +74,12 @@ public class GIBoardServiceImpl implements GIBoardService {
 	}
 
 	@Override
-	public int findBoardCount() {
-		int count = gIboardMapper.selectBoardCount();
+	public int findBoardCount(String category) {
+		
+		int count = gIboardMapper.selectBoardCount(category);
+		
 		return count;
 	}
+
 	
 }

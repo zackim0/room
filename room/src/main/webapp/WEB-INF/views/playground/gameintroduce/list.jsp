@@ -59,7 +59,7 @@
 															<span style="color: lightgray">[삭제된 글]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${ pageNo }'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td>${board.writer}</td>

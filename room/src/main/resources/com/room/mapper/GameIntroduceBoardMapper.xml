@@ -33,8 +33,8 @@
 		LIMIT #{from},#{count}
 	</select>
 	
-	<select id="selectBoardCount" resultType="int">
-		SELECT COUNT(*) FROM Board
+	<select id="selectBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM Board WHERE category = #{ category }
 	</select>
 	
 	<delete id="delete" parameterType="int">
