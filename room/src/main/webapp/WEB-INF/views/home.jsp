@@ -101,7 +101,7 @@
 		                                                		<span style="color: lightgray">[삭제된 글]${board.title}</span>
 		                                                	</c:when>
 		                                                	<c:otherwise>
-		                                                		<a href='/room/mate-board/detail?boardNo=${board.boardNo}'>${board.title}</a>
+		                                                		<a href='/room/mate-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 		                                                	</c:otherwise>
 	                                                	</c:choose>
 	                                                </td>

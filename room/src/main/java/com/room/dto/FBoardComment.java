@@ -1,27 +1,22 @@
 package com.room.dto;
 
-
 import java.util.Date;
-import java.util.List;
-
-
 
 import lombok.Data;
 
-@Data
-public class CKBoard {
+	@Data
+
+	public class FBoardComment {
+	 
 	
+	private int commentNo;
 	private int boardNo;
-	private String title;
 	private String writer;
 	private String content;
 	private Date regDate;
-	private int readCount;
 	private boolean deleted;
-	private String category;
-	private List<CKBoardAttach> files;
 	
-	
+	private int groupNo;
+	private int step;
+	private int depth;
 }
-	
-	

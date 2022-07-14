@@ -98,11 +98,49 @@
 		                        <!-- /block -->
 		                    </div>
 		                </div>
-		               	
-
-		                
-
-                	</div>
+		                <!-- 댓글 -->
+		                <div>
+		                	<button id="add-comment-btn" type="button"
+		                			class="btn btn-outline-primary btn-sm">댓글작성</button>
+		               		</div>
+						<!-- /댓글 -->
+						
+						<!-- 댓글 표시 영역 -->
+						<br>
+						<hr style="width:800px;margin:0 auto">
+						<br>
+						<table id="comment-list" style="width:800px;margin:0 auto">	                
+						</table>
+						<!-- /댓글 표시 영역 -->
+						
+			<!-- Modal -->
+				<div id="comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-modal-label" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="comment-modal-label">댓글 작성</h5>
+		        				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+		        					<span aria-hidden="true">x</span>
+		        				</button>
+		        			</div>
+		        		<div class="modal-body">
+		        		<form id="comment-form">
+		        			<div class="form-group">
+		        				<label>댓글</label>
+		        				<textarea class="form-control"
+		        						  name='content' id='modal-content'></textarea>
+		        			</div>
+		        			<input type="hidden" name='member_id' value='${loginuser.memberId }'>
+		        			<input type="hidden" name='board_no' value='${board.boardNo }'>
+		        			<input type="hideen" name='board_comment_no'>
+		        			<input type="hidden" name='action'><!-- 댓글 or 대댓글 -->
+		        		</form>
+		        		</div>
+		        		<div class="modal-footer">
+		        			<button id='modalRegisterBtn' type="button" class="btn btn-success btn-sm">댓글쓰기</button>	
+		        			<button id='modalCloseBtn' type="button" class="btn btn-succes btn-sm">취소</button>
+		        		</div>
+		        </div>	
                 </div>
 			    	     
             	</div>

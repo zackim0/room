@@ -46,29 +46,31 @@
 											</tr>
 										</thead>
 										<tbody>
-									<c:forEach var="board" items="${ requestScope.boardList }">
+									<c:forEach var="board" items="${ requestScope.cookboardList }">
 										<tr>
-											<td>${ board.board_no }</td>
+											<td>${ board.boardNo }</td>
 											<td>
 											<c:choose>
 											<c:when test="${ board.deleted }">
 												<span style="color:lightgray">[삭제된 글]</span>
 											</c:when>
 											<c:otherwise>
-												<a href='detail?boardno=${ board.board_no }&pageNo=${ pageNo }'>
+												<a href='detail?boardNo=${ board.boardNo }&pageNo=${pageNo}'>
 												${ board.title }
 												</a>
 											</c:otherwise>
 											</c:choose>
 											</td>
-											<td>${ board.member_id }</td>
-											<td>${ board.regdate }</td>
-											<td>${ board.readcount }</td>
+											<td>${board.writer}</td>
+											<td>${ board.regDate }</td>
+											<td>${ board.readCount }</td>
 										</tr>
 									</c:forEach>
 											
 										</tbody>
+										
 									</table>
+									${ pager }
                                 </div>
                             </div>
                         </div>
@@ -83,7 +85,7 @@
             
             <hr>
             <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
+                 <p onclick=window.open("/room/")>&copy; 우리들의 자취방 생활</p>
             </footer>
       
         <!--/.fluid-container-->
@@ -96,9 +98,7 @@
         <script src="/room/resources/assets/scripts.js"></script>
         <script src="/room/resources/assets/DT_bootstrap.js"></script>
         <script>
-        $(function() {
-            
-        });
+       
         </script>
     </body>
 

@@ -7,23 +7,78 @@
 <mapper namespace="com.room.mapper.CookBoardMapper">
 
 	<insert id="insertBoard" parameterType="com.room.dto.CKBoard">
-	<selectKey keyProperty="board_no" resultType="int" order="AFTER">
+	<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
 		SELECT LAST_INSERT_ID()
 	</selectKey>
-	INSERT INTO Board (title, member_id, content)
-	VALUES (#{title}, #{member_id}, #{content})
+		INSERT INTO Board (title,member_id,content, category)
+		VALUES (#{title},#{writer},#{content}, #{category})
+	</insert>
+	
+	<insert id="insertBoardAttach" parameterType="com.room.dto.CKBoardAttach">
+		INSERT BoardAttach (board_no,userfilename,savedfilename)
+		VALUES (#{boardNo},#{userFileName},#{savedFileName})
 	</insert>
 	
 	<select id="selectAll" resultType="com.room.dto.CKBoard">
-		SELECT board_no, title, member_id, readcount, regdate, deleted
-		FROM Board
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'recipe'
 		ORDER BY board_no DESC
 	</select>
 	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.CKBoard">
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'recipe'
+		ORDER BY board_no DESC
+		LIMIT #{from},#{count}
+	</select>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="com.room.dto.CKBoardAttach">
+		SELECT attach_no, board_no, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE board_no = #{boardNo}
+	</select>
+
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*) FROM Board
+	</select>
+	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoard">
-		SELECT board_no, title, member_id, content, readcount, regdate
+		SELECT board_no boardNo, title, member_id writer, content, readcount, regdate
 		FROM Board
-		where board_no = #{board_no} and deleted = false
+		where board_no = #{boardNo} and deleted = false
+	</select>
+	
+
+	<select id="selectBoardAttachByAttachNo" parameterType="int" 
+											 resultType="com.room.dto.CKBoardAttach">
+		SELECT attach_no, board_no, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		UPDATE Board 
+		SET deleted = TRUE 
+		WHERE board_no = #{boardNo}
+	</delete>
+	
+	<update id="update" parameterType="com.room.dto.CKBoard">
+		UPDATE Board
+		SET title = #{title}, content =#{content}
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<select id="select3" resultType="com.room.dto.CKBoard">
+		SELECT title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='recipe' ORDER by board_no DESC LIMIT 3
 	</select>
 	
 </mapper>
