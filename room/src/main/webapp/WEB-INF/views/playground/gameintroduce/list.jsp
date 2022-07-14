@@ -73,24 +73,6 @@
                             </div>
                         </div>
             	<div class="pagination">
-					<!-- <ul>
-					<c:set var="ThePager" value="${ requestScope.ThePager }">
-					<c:choose>
-						<c:when test="${ pageNo eq 1 }">
-                    		<li><a href="#">이전</a></li>
-						</c:when>
-						<c:otherwise>
-                    		<li><a href="%detail?pageNo=${ pageNo - 1}">이전</a></li>
-						</c:otherwise>
-					</c:choose>
-					<li class="active">
-						<a href="#">1</a>
-					</li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">마지막</a></li>
-					</ul>
-					</c:set> -->
 					 ${ pager }  
 				</div>
             <footer>
