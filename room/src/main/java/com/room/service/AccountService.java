@@ -34,11 +34,16 @@ public class AccountService implements AccountInterface {
 
 	public void delete(Member memberId) {
 
+		
 		memberMapper.delete(memberId);
 		
 	}
 
 	public void update(Member member) {
+		String passwd = member.getPasswd();
+		passwd = Util.getHashedString(passwd, "SHA-256");
+		member.setPasswd(passwd);
+		
 		memberMapper.update(member);
 		
 	}
