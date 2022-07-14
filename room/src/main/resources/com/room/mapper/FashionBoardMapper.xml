@@ -45,11 +45,18 @@
 	
 	<select id="selectBoardAttachByBoardNo" parameterType="int"
 											resultType="com.room.dto.FBoardAttach">
-	 	SELECT attach_no,board_no,userfilename,savedfilename,downloadcount
+	 	SELECT attach_no attachNo,board_no boardNo,userfilename,savedfilename,downloadcount
 	 	FROM BoardAttach
 	 	where board_no = #{boardNo}
 	</select>
 	
+	<select id="selectBoardAttachByAttachNo" parameterType="int" 
+											 resultType="com.room.dto.FBoardAttach">
+		SELECT attach_no attachNo, board_no boardNo, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}										 
+	</select>
+		
 	<delete id="delete" parameterType="int">
 		update Board
 		set deleted = true

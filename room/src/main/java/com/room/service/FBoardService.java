@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.room.dto.FBoard;
+import com.room.dto.FBoardAttach;
 	
 public interface FBoardService {
 
@@ -24,6 +25,8 @@ public interface FBoardService {
 	List<FBoard> findByPage(int pageNo, int pageSize);
 
 	int findBoardCount();
+
+	FBoardAttach findBoardAttachByAttachNo(int attachNo);
 
 }
 

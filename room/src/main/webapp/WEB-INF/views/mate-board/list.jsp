@@ -52,7 +52,7 @@
 												<td>${board.boardNo }</td>
 												<td><c:choose>
 														<c:when test="${board.deleted}">
-															<span style="color: lightgray">[삭제된 글]${board.title}</span>
+															<span style="color: lightgray">${board.title}&nbsp;&nbsp;&nbsp;[작성자의 요청으로 삭제된 글입니다.]</span>
 														</c:when>
 														<c:otherwise>
 															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>

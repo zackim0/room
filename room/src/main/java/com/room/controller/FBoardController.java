@@ -26,6 +26,7 @@ import com.room.dto.FBoardAttach;
 import com.room.service.FBoardService;
 import com.room.service.FBoardServiceImpl;
 import com.room.ui.ThePager;
+import com.room.view.FDownloadView;
 
 @Controller
 @RequestMapping(path= {"/fashion-board"})
@@ -98,21 +99,43 @@ public class FBoardController {
 	
 	@GetMapping(path = {"/detail"})
 	public String detail(@RequestParam(name="boardNo" , defaultValue = "-1")int boardNo,
+						 @RequestParam(name="pageNo",defaultValue = "-1")int pageNo,
 						Model model) {
-		if(boardNo == -1) {
+		if(boardNo == -1 || pageNo == -1) {
 			return "redirect:list";
 		}
 		
 		FBoard board = fBoardService.findByBoardNo(boardNo);
 		if(board == null) { // 해당 번호의 게시글이 없는 경우
-			System.out.println(boardNo);
 			return "redirect:list";
 		}
 		
 		model.addAttribute("board",board);
+		model.addAttribute("pageNo",pageNo);
 		
 		return "fashion-board/detail";
 	}
+	
+	//download?attachNo=1
+	@GetMapping(path= {"/download"})
+	public View download(
+			@RequestParam(name="attachNo",defaultValue = "-1")int attachNo,
+			Model model) {
+		
+		if (attachNo < 1) {
+			
+			return new RedirectView("list");
+		}
+		
+		FBoardAttach boardAttach = fBoardService.findBoardAttachByAttachNo(attachNo);
+		
+		model.addAttribute("uploadDir","/resources/upload-files/");
+		model.addAttribute("boardAttach",boardAttach);
+		
+		FDownloadView downloadView = new FDownloadView();
+		return downloadView;
+	}
+	
 	
 	@GetMapping(path = {"/delete"})
 	public String delete(

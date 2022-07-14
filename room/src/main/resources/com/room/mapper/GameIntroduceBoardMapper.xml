@@ -5,22 +5,36 @@
 
               <!-- package..class로 가정하고 사용 -->				 
 <mapper namespace="com.room.mapper.GameIntroduceBoardMapper">
-<insert id="insertBoard" parameterType="com.room.dto.GIBoard">
-	<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
-		SELECT LAST_INSERT_ID()
-	</selectKey>
-	INSERT INTO Board (title,member_id,content, category)
-	VALUES (#{title},#{writer},#{content},#{category})
-</insert>
+	
+	<insert id="insertBoard" parameterType="com.room.dto.GIBoard">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO Board (title,member_id,content, category)
+		VALUES (#{title},#{writer},#{content},#{category})
+	</insert>
+	
 	<select id="selectAll" resultType="com.room.dto.GIBoard">
 		SELECT board_no boardNo, title,member_id writer,readcount,regdate,deleted
 		FROM Board WHERE category = 'gameintro'
 		ORDER BY board_no DESC
 	</select>
+	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.GIBoard">
 		SELECT board_no boardNo, title, member_id writer,content,readcount, regdate,deleted
 		FROM Board
 		where board_no = #{boardNo} and deleted = false
+	</select>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.GIBoard">
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'gameintro'
+		ORDER BY board_no DESC
+		LIMIT #{from},#{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*) FROM Board
 	</select>
 	
 	<delete id="delete" parameterType="int">

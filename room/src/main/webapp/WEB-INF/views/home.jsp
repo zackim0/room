@@ -55,7 +55,7 @@
 	                                                <td>
 	                                                	<c:choose>
 		                                                	<c:when test="${board.deleted}">
-		                                                		<span>${board.title}</span>
+		                                                		<span style="color: lightgray">[삭제된 글]${board.title}</span>
 		                                                	</c:when>
 		                                                	<c:otherwise>
 		                                                		<span>${board.title}</span>
@@ -98,10 +98,10 @@
 	                                                <td>
 	                                                	<c:choose>
 		                                                	<c:when test="${board.deleted}">
-		                                                		<span>${board.title}</span>
+		                                                		<span style="color: lightgray">[삭제된 글]${board.title}</span>
 		                                                	</c:when>
 		                                                	<c:otherwise>
-		                                                		<span>${board.title}</span>
+		                                                		<a href='/room/mate-board/detail?boardNo=${board.boardNo}'>${board.title}</a>
 		                                                	</c:otherwise>
 	                                                	</c:choose>
 	                                                </td>

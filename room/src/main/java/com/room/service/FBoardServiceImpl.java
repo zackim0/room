@@ -92,6 +92,14 @@ public class FBoardServiceImpl implements FBoardService {
 		return count;
 	}
 
+	@Override
+	public FBoardAttach findBoardAttachByAttachNo(int attachNo) {
+		FBoardAttach attach = fBoardMapper.selectBoardAttachByAttachNo(attachNo);
+		return attach;
+	}
+
+	
+
 	
 	
 
