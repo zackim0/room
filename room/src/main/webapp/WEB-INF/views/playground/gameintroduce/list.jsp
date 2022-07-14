@@ -59,12 +59,12 @@
 															<span style="color: lightgray">[삭제된 글]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${ pageNo }'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td>${board.writer}</td>
 												<td>${board.regDate}</td>
-												<td>${board.regDate}</td>
+												<td>${board.readCount}</td>
 											</tr>
 										</tbody>
 									</c:forEach>
@@ -73,7 +73,36 @@
                             </div>
                         </div>
             	<div class="pagination">
-					 ${ pager }  
+            	 <%-- <ul>
+					<c:set var="pageSize" value="${ pageSize }">
+					<c:choose>
+						<c:when test="${ pageSize eq 1 }">
+                    		<li><a>처음</a></li>
+                    		<li><a>이전</a></li>
+						</c:when>
+						<c:otherwise>
+                    		<li><a href="%detail?pageNo=1">처음</a></li>
+                    		<li><a href="%detail?pageNo=${ pageNo - 1 }">이전</a></li>
+						</c:otherwise>
+					</c:choose>
+					<li class="active">
+						<a href="#">1</a>
+					</li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<c:choose>
+						<c:when test="${ pageNo eq pageCount }">
+							<li><a>다음</a></li>
+							<li><a>마지막</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="%detail?pageNo=${ pageNo + 1 }">다음</a></li>
+							<li><a href="%detail?pageNo=${ pageCount }">마지막</a></li>
+						</c:otherwise>
+					</c:choose>
+					</c:set> 
+					</ul>  --%>
+					${ pager }
 				</div>
             <footer>
                 <p onclick=window.open("/room/")>&copy; 우리들의 자취방 생활</p>

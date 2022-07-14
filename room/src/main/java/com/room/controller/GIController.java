@@ -25,16 +25,15 @@ public class GIController {
 	@Qualifier("gIboardService")
 	private GIBoardService gIboardService;
 	
-	@GetMapping(path = { "/","/list" })
+	@GetMapping(path = { "/list" })
 	public String list(@RequestParam(defaultValue = "1")int pageNo, Model model) {
 		
 		int pageSize = 6; // 한 페이지에 표시할 데이터 개수
 		int pagerSize = 3; // 표시되는 페이지 번호 개수 ( 보이지 않은 페이지 번호는 다음, 이전 등으로 표시 )
 		int count = 0; // 전체 데이터 개수	
 		
-// 		List<GIBoard> gIboardList = gIboardService.findAll();
 		List<GIBoard> gIboardList = gIboardService.findByPage(pageNo, pageSize);		
-		count = gIboardService.findBoardCount(); // 데이터베이스에 전체 개시물 개수 조회	
+		count = gIboardService.findBoardCount("gameintro"); // 데이터베이스에 전체 개시물 개수 조회	
 		
 		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");		
 		
@@ -87,26 +86,27 @@ public class GIController {
 	
 	@GetMapping(path = {"/detail"})
 	public String detail(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
-						Model model) {
-		if(boardNo == -1) {
+						 @RequestParam(name="pageNo", defaultValue = "-1") int pageNo,
+						 Model model) {
+		if(boardNo == -1 || pageNo == -1) {
 			return "redirect:list";
 		}
 		
 		GIBoard board = gIboardService.findByBoardNo(boardNo);
 		if(board == null) {
-			System.out.println(boardNo);
 			return "redirect:list";
 		}
 		
 		model.addAttribute("board",board);
+		model.addAttribute("pageNo",pageNo);
 		
 		return "/playground/gameintroduce/detail";
 		
 	}
 	
 	@GetMapping(path = {"/delete"})
-	public String delete(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo
-						/* @RequestParam(defaultValue = "-1") int pageNo */) {
+	public String delete(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
+						 @RequestParam(defaultValue = "-1") int pageNo ) {
 		
 		if(boardNo > 0 /* && pageNo > 0 */) {
 			gIboardService.delete(boardNo);
@@ -118,9 +118,10 @@ public class GIController {
 	
 	@GetMapping(path = {"/edit"})
 	public String showEditForm(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
-			Model model) {
+							   @RequestParam(defaultValue = "-1") int pageNo,
+							   Model model) {
 		
-		if(boardNo < 1) {
+		if(boardNo < 1 && pageNo < 1) {
 			return "redirect:list";
 		}
 		
@@ -137,9 +138,13 @@ public class GIController {
 	@PostMapping(path = {"/edit"})
 	public String edit(GIBoard board, @RequestParam(defaultValue = "-1") int pageNo) {
 		
+		if (pageNo < 1) {
+			return "redirect:list";
+		}
+		
 		gIboardService.update(board);
 		
-		return String.format("redirect:detail?boardNo=%d",board.getBoardNo());
+		return String.format("redirect:detail?boardNo=%d",board.getBoardNo(),pageNo);
 	}
 }
 

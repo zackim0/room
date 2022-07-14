@@ -9,12 +9,19 @@ import com.room.dto.GIBoardAttach;
 public interface GIBoardService {
 
 	void writeBoard(GIBoard board);
+	
 	List<GIBoard> findAll();
+	
 	List<GIBoard> findByPage(int pageNo, int pageSize);
+	
 	GIBoard findByBoardNo(int boardNo);
+	
 	void delete(int boardNo);
+	
 	void update(GIBoard board);
-	int findBoardCount();
+	
+	int findBoardCount(String category);
+	
 //	BoardAttach findBoardAttachByAttachNo(int attachNo);
 	
 

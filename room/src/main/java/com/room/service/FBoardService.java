@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.room.dto.FBoard;
 import com.room.dto.FBoardAttach;
+import com.room.dto.FBoardComment;
 	
 public interface FBoardService {
 
@@ -27,6 +28,8 @@ public interface FBoardService {
 	int findBoardCount();
 
 	FBoardAttach findBoardAttachByAttachNo(int attachNo);
+
+	void writeBoardComment(FBoardComment comment);
 
 }
 

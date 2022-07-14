@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.room.dto.FBoard;
 import com.room.dto.FBoardAttach;
+import com.room.dto.FBoardComment;
 
 @Mapper
 public interface FashionBoardMapper {
@@ -32,5 +33,7 @@ public interface FashionBoardMapper {
 	void insertBoardAttach(FBoardAttach file);
 
 	FBoardAttach selectBoardAttachByAttachNo(int attachNo);
+
+	
 	
 }

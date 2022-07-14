@@ -1,10 +1,12 @@
+<%@page import="com.room.dto.MateBoard"%>
+<%@page import="java.util.List"%>
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     
     <head>
-        <title>Tables</title>
+        <title>룸메이트 게시판</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -44,6 +46,7 @@
 											<th>제목</th>
 											<th>작성자</th>
 											<th>작성일</th>
+											<th>조회수</th>
 										</tr>
 									</thead>
 									<c:forEach var="board" items="${requestScope.mateBoardList}">
@@ -55,21 +58,25 @@
 															<span style="color: lightgray">${board.title}&nbsp;&nbsp;&nbsp;[작성자의 요청으로 삭제된 글입니다.]</span>
 														</c:when>
 														<c:otherwise>
-															<a href='detail?boardNo=${board.boardNo}'>${board.title}</a>
+															<a href='detail?boardNo=${board.boardNo}&pageNo=${ pageNo }'>${board.title}</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td>${board.writer}</td>
 												<td>${board.regDate}</td>
+												<td>${board.readCount}</td>
 											</tr>
 										</tbody>
 									</c:forEach>
 								</table>
-
+								${ pager }
+	
 
 							</div>
                             </div>
                         </div>
                         <!-- /block -->
+                        
+                        
                     </div>
 
                    

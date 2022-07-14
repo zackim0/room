@@ -16,12 +16,17 @@ public interface GameIntroduceBoardMapper {
 	
 	GIBoard selectByBoardNo(int boardNo);
 	
+	List<GIBoard> selectByRange(HashMap<String, Object> params);
+	
 	void delete(int boardNo);
 	
 	void update(GIBoard board);
 
 	int selectBoardCount();
+	
+	void updateBoardReadCount(int boardNo);
 
-	List<GIBoard> selectByRange(HashMap<String, Object> params);
+	int selectBoardCount(String category);
+	
 	
 }
