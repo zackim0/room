@@ -3,6 +3,7 @@ package com.room.service;
 import java.util.List;
 
 import com.room.dto.MateBoard;
+import com.room.dto.MateBoardAttach;
 	
 public interface MateBoardService {
 
@@ -14,6 +15,7 @@ public interface MateBoardService {
 	void delete(int boardNo);
 	void update(MateBoard board);
 	int findBoardCount(String category);
+	MateBoardAttach findBoardAttachByAttachNo(int attachNo);
 
 		
 }

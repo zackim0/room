@@ -19,6 +19,7 @@ import com.room.dto.PetBoard;
 import com.room.service.MateBoardService;
 import com.room.service.PetBoardService;
 import com.room.service.PetBoardServiceImpl;
+import com.room.ui.ThePager;
 
 @Controller
 @RequestMapping(path = { "/petboard" })
@@ -30,10 +31,21 @@ public class PetBoardController {
 	private PetBoardService petBoardService;
 	
 	@GetMapping(path = { "/list" })
-	public String list(Model model) {
-			
-		List<PetBoard> petboardList = petBoardService.findAll();		
+	public String list(@RequestParam(defaultValue = "1")int pageNo,
+			Model model) {
+		
+		int pageSize = 10;
+		int pagerSize = 5;
+		int count = 0;
+		
+		List<PetBoard> petboardList = petBoardService.findByPage(pageNo,pageSize);
+		count = petBoardService.findBoardCount("pet");
+		
+		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
+		
 		model.addAttribute("petBoardList", petboardList);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "petboard/list";
 	}
@@ -53,27 +65,32 @@ public class PetBoardController {
 	}
 	
 	@GetMapping(path = { "/detail" })
-	public String detail(@RequestParam(name="boardNo" , defaultValue = "-1")int boardNo, Model model) {
-			if(boardNo == -1) {
-			return "/list";
+	public String detail(@RequestParam(name="boardNo" , defaultValue = "-1")int boardNo,
+						 @RequestParam(defaultValue = "-1")int pageNo,
+						 Model model) {
+			if(boardNo == -1 || pageNo == -1) {
+			return "redirect:list";
 			}
 			
 			PetBoard board = petBoardService.findByBoardNo(boardNo);
 			if(board == null) { 
-			System.out.println(boardNo);
-			return "redirect:list";
+				return "redirect:list";
 			}
 			
 			model.addAttribute("board",board);
+			model.addAttribute("pageNo",pageNo);
+			
 		return "petboard/detail";
 		
 	}
 	
 	@GetMapping(path = { "/delete" })
-	public String delete(@RequestParam(name = "boardNo", defaultValue = "-1")int boardNo) {
+	public String delete(@RequestParam(name = "boardNo", defaultValue = "-1")int boardNo,
+						 @RequestParam(defaultValue = "-1")int pageNo) {
 		
-		if (boardNo > 0 ) {
+		if (boardNo > 0 && pageNo > 0) {
 			petBoardService.delete(boardNo);
+			return "redirect:list?pageNo=" + pageNo;
 		}
 		
 		return "redirect:list";	
@@ -82,9 +99,10 @@ public class PetBoardController {
 	@GetMapping(path = { "/edit" })
 	public String editForm(
 			@RequestParam(name="boardNo", defaultValue = "-1")int boardNo,
+			@RequestParam(defaultValue = "-1")int pageNo,
 			Model model){
 			
-			if(boardNo < 1) {
+			if(boardNo < 1 && pageNo < 1) {
 				return "redirect:list";
 			}
 			
@@ -94,6 +112,7 @@ public class PetBoardController {
 			}
 			
 			model.addAttribute("board",board);
+			model.addAttribute("pageNo", pageNo);
 			
 			return "mate-board/edit";
 				
@@ -101,11 +120,15 @@ public class PetBoardController {
 	
 	
 	@PostMapping(path = { "/edit" })
-	public String edit(PetBoard board) {
+	public String edit(PetBoard board, @RequestParam(defaultValue = "-1")int pageNo) {
+		
+		if(pageNo < 1) {
+			return "redirect:list";
+		}
 		
 		petBoardService.update(board);
 		
-		return String.format("redirect:detail?boardNo=%d", board.getBoardNo());
+		return String.format("redirect:detail?boardNo=%d&pageNo=%d", board.getBoardNo(), pageNo);
 		
 	}
 	

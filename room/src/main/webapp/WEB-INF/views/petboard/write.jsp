@@ -43,7 +43,7 @@
  							<div class="control-group">
  								<label class="control-label">작성자<span class="required"></span></label>
  								<div class="controls">
- 									<input name="writer" id="writer" type="text" class="span6 m-wrap" value="${ loginuser.memberId } "readonly/>
+ 									<input name="writer" id="writer" type="text" class="span6 m-wrap" value="${ loginuser.memberId }"readonly/>
  								</div>
  							</div>
  							<div class="control-group">

@@ -1,7 +1,9 @@
 package com.room.service;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.room.dto.MateBoard;
 import com.room.dto.PetBoard;
 import com.room.mapper.PetBoardMapper;
 
@@ -27,6 +29,9 @@ public class PetBoardServiceImpl implements PetBoardService {
 	public PetBoard findByBoardNo(int boardNo) {
 	  PetBoard board = petBoardMapper.selectByBoardNo(boardNo);
 	  
+	  petBoardMapper.updateBoardReadCount(boardNo);
+	  board.setReadCount(board.getReadCount() + 1);
+	  
 	  return board;
 	}
 	
@@ -40,6 +45,31 @@ public class PetBoardServiceImpl implements PetBoardService {
 	public void update(PetBoard board) {
 		petBoardMapper.update(board);
 	}
+	
+	@Override
+	public List<PetBoard> findByPage(int pageNo, int pageSize) {
+		
+		int from = (pageNo - 1) * pageSize;
+		int count = pageSize;
+		
+		HashMap<String,Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("count", count);
+		
+		List<PetBoard> mateBoardList = petBoardMapper.selectByRange(params);
+		
+		return mateBoardList;
+	}
+
+	@Override
+	public int findBoardCount(String category) {		
+		int count = petBoardMapper.selectBoardCount(category);	
+		return count;
+	}
+	
+	
+	
+	
 
 
 }
