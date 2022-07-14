@@ -14,5 +14,9 @@ public interface PetBoardMapper {
 	void insertBoard(PetBoard board);
 
 	PetBoard selectByBoardNo(int boardNo);
+	
+	void delete(int boardNo);
+	
+	void update(PetBoard board);
 
 }

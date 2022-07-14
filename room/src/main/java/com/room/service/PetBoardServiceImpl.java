@@ -29,6 +29,17 @@ public class PetBoardServiceImpl implements PetBoardService {
 	  
 	  return board;
 	}
+	
+	@Override
+	public void delete(int boardNo) {
+
+		petBoardMapper.delete(boardNo);
+	}
+	
+	@Override
+	public void update(PetBoard board) {
+		petBoardMapper.update(board);
+	}
 
 
 }
