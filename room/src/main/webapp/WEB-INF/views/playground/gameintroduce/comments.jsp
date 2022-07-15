@@ -10,11 +10,7 @@
 	        		<div id='commentview${ comment.commentNo }'>
 	        			${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]
-	                    <br /><br />
-	                    <span>
-	                    ${ comment.content }
-	                    </span>
-	                    <br /><br />
+	                    <br /><br /><span>${ comment.content }</span><br /><br />
 	                    <div style='display:${ loginuser.memberId eq comment.writer ? "block" : "none" }'>
 	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
 	                    	&nbsp;
@@ -25,9 +21,8 @@
 	                </div>
 	                
 	                <div id='commentedit${ comment.commentNo }' style="display: none">
-	                	${ comment.writer } &nbsp;&nbsp;
-	        			[${ comment.regDate }]
-						<br /><br />
+	                	${ comment.writer } &nbsp;&nbsp;[${ comment.regDate }]
+						<br />
 						<form id="updateform${ comment.commentNo }">
 						<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 						<textarea name="content" style="width: 800px" rows="3" 

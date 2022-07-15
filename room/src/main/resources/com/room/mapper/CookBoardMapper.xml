@@ -34,7 +34,7 @@
 	
 	<select id="selectBoardAttachByBoardNo" parameterType="int"
 											resultType="com.room.dto.CKBoardAttach">
-		SELECT attach_no, board_no, userfilename, savedfilename, downloadcount
+		SELECT attach_no attachNo, board_no boardNo, userfilename , savedfilename , downloadcount 
 		FROM BoardAttach
 		WHERE board_no = #{boardNo}
 	</select>
