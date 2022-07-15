@@ -11,11 +11,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
+
 
 import com.room.common.Util;
 import com.room.dto.CKBoard;
@@ -23,6 +27,7 @@ import com.room.dto.CKBoardAttach;
 import com.room.dto.CKBoardComment;
 import com.room.service.CKBoardService;
 import com.room.ui.ThePager;
+import com.room.view.CKDownloadView;
 
 @Controller
 @RequestMapping(path = { "/board" })
@@ -115,6 +120,8 @@ public class CookController {
 		return "redirect:cooklist?pageNo=" + pageNo;
 	}
 	
+	
+	
 	@GetMapping(path = { "/edit" })
 	public String showEdit(@RequestParam(name = "boardNo", defaultValue = "-1")int boardNo,
 							@RequestParam(defaultValue = "-1")int pageNo, Model model) {
@@ -129,6 +136,24 @@ public class CookController {
 		model.addAttribute("pageNo", pageNo);
 		
 		return "board/edit";
+	}
+	
+	@GetMapping(path = { "/download" })
+	public View download(
+			@RequestParam(name = "attachNo", defaultValue = "-1")int attachNo,
+			Model model) {
+		
+		if (attachNo < 1) {		
+			return new RedirectView("cooklist");
+		}
+		
+		CKBoardAttach boardAttach = ckBoardService.findBoardAttachByAttachNo(attachNo);
+		
+		model.addAttribute("uploadDir", "/resources/upload-files/");
+		model.addAttribute("boardAttach", boardAttach);
+		
+		CKDownloadView downloadView = new CKDownloadView();		
+		return downloadView;
 	}
 	
 	@PostMapping(path = { "/edit" })
