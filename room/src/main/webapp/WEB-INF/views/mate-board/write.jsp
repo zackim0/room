@@ -50,7 +50,8 @@
 		            <tr>
 		            	<form id="writeform"
 		            	action="write"
-		            	method="post">
+		            	method="post"
+		            	enctype="multipart/form-data">
 		            	<input type="hidden" name="category" value="roommate">
 		                <th>제목</th>
 		                <td>

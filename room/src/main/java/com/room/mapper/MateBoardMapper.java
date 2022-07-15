@@ -29,10 +29,11 @@ public interface MateBoardMapper {
 
 	void updateBoardReadCount(int boardNo);
 
-	void insertMateBoardAttach(MateBoardAttach file);
+	void insertBoardAttach(MateBoardAttach file);
 
 	List<MateBoardAttach> selectBoardAttachByBoardNo(int boardNo);
 
 	MateBoardAttach selectBoardAttachByAttachNo(int attachNo);
+	
 	
 }

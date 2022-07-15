@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.room.common.Util;
 import com.room.dto.FBoard;
 import com.room.dto.FBoardAttach;
+import com.room.dto.FBoardComment;
 import com.room.service.FBoardService;
 import com.room.service.FBoardServiceImpl;
 import com.room.ui.ThePager;
@@ -176,6 +178,46 @@ public class FBoardController {
 									board.getBoardNo());
 		
 	}
+	
+	//////////////////////////////////////////////////////////////
+	
+	@PostMapping(path= {"/comment-write"},produces = {"text/plain;charset=utf-8"})
+	@ResponseBody
+	public String writeComment(FBoardComment boardComment) {
+		
+		fBoardService.writeBoardComment(boardComment);
+		
+		return "success";
+	}
+	
+	@GetMapping(path= {"/comment-list"})
+	public String listComment(@RequestParam(name="boardNo")int boardNo,Model model) {
+		
+		List<FBoardComment> comments = fBoardService.findCommentsByBoardNo(boardNo);
+		
+		model.addAttribute("comments",comments);
+		
+		return "fashion-board/comments";
+	}
+	
+	@GetMapping(path= {"/comment-delete"},produces = {"text/plain; charset=utf-8"})
+	@ResponseBody
+	public String deleteComment(@RequestParam(name="commentNo")int commentNo) {
+		
+		fBoardService.deleteComment(commentNo);
+		
+		return "success";
+	}
+	
+	@PostMapping(path= {"/comment-update"},produces = "text/plain;charsert=utf-8")
+	@ResponseBody
+	public String updateComment(FBoardComment boardComment) {
+		
+		fBoardService.updateBoardComment(boardComment);
+		
+		return "success";
+	}
+	
 			
 
 

@@ -25,7 +25,7 @@ public class MateBoardServiceImpl implements MateBoardService {
 		if (board.getFiles() != null) {
 			for (MateBoardAttach file : board.getFiles()) {
 				file.setBoardNo(board.getBoardNo());
-				mateBoardMapper.insertMateBoardAttach(file);
+				mateBoardMapper.insertBoardAttach(file);
 			}
 		}
 		

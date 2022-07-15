@@ -11,7 +11,7 @@
 		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO Board (title,member_id,content, category)
+		INSERT INTO Board (title,member_id ,content, category)
 		VALUES (#{title},#{writer},#{content}, #{category})
 	</insert>
 	
@@ -75,9 +75,6 @@
 		WHERE board_no = #{boardNo}
 	</update>
 	
-	<insert id="insertBoardComment" parameterType="com.room.dto.FBoardComment">
-		INSERT into BoardComment (board_no,member_id,comment_content)
-		VALUES (#{boardNo},{writer},{content})
-	</insert>
+	
 
 </mapper>
