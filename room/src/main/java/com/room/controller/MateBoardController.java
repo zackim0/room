@@ -143,7 +143,7 @@ public class MateBoardController {
 			
 			return "mate-board/edit";
 				
-			}
+	}
 	
 	
 	@PostMapping(path = {"/edit"})
@@ -162,22 +162,23 @@ public class MateBoardController {
 	
 	
 	
-	@GetMapping(path = { "/download/{attachNo}" })
+	@GetMapping(path = { "/download" }) 
 	public View download(
-			@PathVariable int attachNo,
+			@RequestParam(name = "attachNo", defaultValue = "-1") int attachNo,
 			Model model) {
 		
 		if (attachNo < 1) {
+			// return "redirect:list";			
 			return new RedirectView("list");
 		}
 		
 		MateBoardAttach boardAttach = mateBoardService.findBoardAttachByAttachNo(attachNo);
 		
 		model.addAttribute("uploadDir", "/resources/upload-files/");
-		model.addAttribute("boardAttach", boardAttach);
+		model.addAttribute("mateBoardAttach", boardAttach);
 		
-		MateDownloadView mateDownloadView = new MateDownloadView();		
-		return mateDownloadView;
+		MateDownloadView downloadView = new MateDownloadView();		
+		return downloadView;
 	}
 	
 

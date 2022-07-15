@@ -39,8 +39,8 @@
 	</update>
 	
 	<delete id="delete" parameterType="int">
-		update Board
-		set deleted = true
+		UPDATE Board
+		SET deleted = true
 		where board_no = #{ boardNo }
 	</delete>
 	
@@ -51,7 +51,7 @@
 		LIMIT #{from}, #{count}
 	</select>
 	
-	<select id="selectBoardCount" resultType="int" parameterType="String">
+	<select id="selectBoardCount" resultType="int">
 		SELECT COUNT(*) FROM Board WHERE category = #{ category }
 	</select>
 	
@@ -62,22 +62,24 @@
 	</update>
 	
 	<insert id="insertBoardAttach" parameterType="com.room.dto.MateBoardAttach">
-		INSERT boardattach (boardno, userfilename, savedfilename)
+		INSERT BoardAttach (board_no, userfilename, savedfilename)
 		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
 	</insert>
 	
 	<select id="selectBoardAttachByBoardNo" parameterType="int"
 											resultType="com.room.dto.MateBoardAttach">
-		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
-		FROM boardattach
-		WHERE boardno = #{boardNo}										
+		SELECT attach_no attachNo, board_no boardNo,
+		userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE board_no = #{boardNo}										
 	</select>
 	
 	<select id="selectBoardAttachByAttachNo" parameterType="int"
 											resultType="com.room.dto.MateBoardAttach">
-		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
-		FROM boardattach
-		WHERE attachno = #{attachNo}
+		SELECT attach_no attachNo, board_no boardNo,
+		userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}
 	</select>
 	
 </mapper>

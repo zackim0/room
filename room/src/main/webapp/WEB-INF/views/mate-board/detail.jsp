@@ -1,3 +1,5 @@
+<%@page import="com.room.dto.MateBoardAttach"%>
+<%@page import="com.room.dto.MateBoard"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -71,11 +73,24 @@
 		            	<th>작성일</th>
 		            	<td>${board.regDate}</td>
 		            </tr>
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            	<c:forEach var="file" items="${ board.files }">
+		            	<a href="download?attachNo=${ file.attachNo }">
+		            	${ file.userFileName }
+		            	</a>
+		            	</c:forEach>
+		            	</td>
+		            </tr>
+		            
+		            
+		            
 		            	<div class="buttons">
 			    	[<a href="/room/mate-board/list">목록보기</a>]
 		            <c:if test="${loginuser.memberId eq board.writer }">
 			    	&nbsp;&nbsp;
-			    	[<a href='edit?boardNo=${board.boardNo}'>수정하기</a>]
+			    	[<a href='edit?boardNo=${board.boardNo}&pageNo=${ pageNo }'>수정하기</a>]
 			    	&nbsp;&nbsp;
 			    	[<a id='delete-btn' href='javascript'>삭제하기</a>]
 			    	</c:if>
@@ -129,7 +144,7 @@
               	 event.preventDefault();
                	 var ok = confirm('정말로 삭제하시겠습니까?');
                	 if(ok){
-               		 location.href = 'delete?boardNo=${board.boardNo}';
+               		 location.href = 'delete?boardNo=${board.boardNo}&pageNo=${ pageNo }';
                	 }
    			});
             
