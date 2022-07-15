@@ -190,7 +190,7 @@ public class MateBoardController {
 	}
 	
 	@GetMapping(path = { "/comment-list" })
-	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 		
 		List<MateBoardComment> comments = mateBoardService.findCommentsByBoardNo(boardNo);
 		
@@ -202,7 +202,7 @@ public class MateBoardController {
 	
 	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
 	@ResponseBody
-	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	public String deleteComment(@RequestParam(name = "commentNo") int commentNo) {
 	
 		mateBoardService.deleteComment(commentNo);
 		

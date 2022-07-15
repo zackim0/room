@@ -15,4 +15,8 @@ import lombok.Data;
 	private Date regDate;
 	private boolean deleted;
 	
+	private int groupNo;
+	private int step;
+	private int depth;
+	
 }
