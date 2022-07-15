@@ -5,6 +5,7 @@ import java.util.List;
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
 // import com.room.dto.GIBoardComment;
+import com.room.dto.GIBoardComment;
 
 public interface GIBoardService {
 
@@ -24,10 +25,14 @@ public interface GIBoardService {
 	
 	GIBoardAttach findBoardAttachByAttachNo(int attachNo);
 	
+	
 
-//	void writeBoardComment(BoardComment comment);
-//	List<BoardComment> findCommentsByBoardNo(int boardNo);
-//	void deleteComment(int commentNo);
-//	void updateBoardComment(BoardComment comment);
+	void writeBoardComment(GIBoardComment comment);
+	
+	List<GIBoardComment> findCommentsByBoardNo(int boardNo);
+	
+	void deleteComment(int commentNo);
+	
+	void updateBoardComment(GIBoardComment comment);
 	
 }
