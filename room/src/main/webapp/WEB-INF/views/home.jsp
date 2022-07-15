@@ -34,8 +34,8 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">의류/화장품 세일 정보</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/fashion-board/list">더보기</a>
+                                    <div class="muted pull-left">룸메이트 구하기</div>
+                                    <div class="pull-right"><a class="badge badge-info" href="/room/mate-board/list">더보기</a>
 
                                     </div>
                                 </div>
@@ -43,27 +43,22 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width:350px">제목</th> 
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
                                                 <th>작성자</th>
-                                                <th>작성일</th>
                                                 <th>조회수</th>
+                                                <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach var="board" items="${requestScope.fboardRecentList}">
+                                        <c:forEach var="board" items="${requestScope.mateBoardRecentList}">
 	                                        <tbody>
 	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
 	                                                <td>
-	                                                	<c:choose>
-		                                                	<c:when test="${board.deleted}">
-		                                                		<span style="color: lightgray">[삭제된 글]${board.title}</span>
-		                                                	</c:when>
-		                                                	<c:otherwise>
-		                                                		<span>${board.title}</span>
-		                                                	</c:otherwise>
-	                                                	</c:choose>
+                                               			<a href='/room/mate-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -77,7 +72,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">룸메이트 구하기</div>
+                                    <div class="muted pull-left">패션정보</div>
                                     <div class="pull-right"><a class="badge badge-info" href="/room/mate-board/list">더보기</a>
 
                                     </div>
@@ -86,27 +81,22 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width:350px">제목</th>
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
                                                 <th>작성자</th>
-                                                <th>작성일</th>
                                                 <th>조회수</th>
+                                                <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach var="board" items="${requestScope.mateBoardRecentList}">
+                                        <c:forEach var="board" items="${requestScope.fboardRecentList}">
 	                                        <tbody>
 	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
 	                                                <td>
-	                                                	<c:choose>
-		                                                	<c:when test="${board.deleted}">
-		                                                		<span style="color: lightgray">[삭제된 글]${board.title}</span>
-		                                                	</c:when>
-		                                                	<c:otherwise>
-		                                                		<a href='/room/mate-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
-		                                                	</c:otherwise>
-	                                                	</c:choose>
+                                               			<a href='/room/fashion-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>

@@ -24,9 +24,8 @@
     	  <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
     	  
         <div class="container-fluid">
-                <div class="span12" id="content">
-                
                      <div class="row-fluid">
+                     <div class="span12">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">

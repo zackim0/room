@@ -1,5 +1,6 @@
 package com.room.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -12,11 +13,10 @@ public class GIBoard {
 	private String title;
 	private String content;
 	private String regDate;
-	private int readcount;
+	private int readCount;
 	private boolean deleted;
 	private String writer;
 	
-	// Board 테이블과 BoardAttach 테이블 사이의 1 : Many 관계를 구현한 필드
-//	private List<FBoardAttach> files;
 	
+	private List<GIBoardAttach> files;
 }

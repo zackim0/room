@@ -22,10 +22,37 @@
 	</insert>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.PetBoard">
-		SELECT board_no, title, member_id writer,content, readcount, regdate
+		SELECT board_no boardNo, title, member_id writer, content, readcount, regdate
 		FROM Board
 		where board_no = #{boardNo} and deleted = false
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		UPDATE Board SET deleted = TRUE
+		WHERE board_no = #{boardNo}
+	</delete>
+	
+	<update id="update" parameterType="com.room.dto.PetBoard">
+		UPDATE Board SET title = #{title}, content = #{content}
+		WHERE board_no = #{boardNo}	
+	</update>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.MateBoard">
+		SELECT board_no boardNo, title, member_id writer, regdate, deleted
+		FROM Board WHERE category = 'pet'
+		ORDER BY board_no DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM Board WHERE category = #{ category }
+	</select>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{ boardNo }
+	</update>
 
 
 	

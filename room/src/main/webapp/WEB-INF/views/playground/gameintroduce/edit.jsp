@@ -46,8 +46,10 @@
 		                               <textarea id="tinymce_basic"></textarea>
 		                            </div>
 		                        </div> -->
-		                        <table>
 		                        <form id="editform" action="edit" method="post">
+		                        <input type="hidden" name="pageNo" value="${ param.pageNo }">
+		                        <table>
+		                        
 		            <tr>
 		            	<th>글번호</th>
 		            	<td>
@@ -80,6 +82,8 @@
 		            	<th>작성일</th>
 		            	<td>${board.regDate}</td>
 		            </tr>
+		            </table>
+		            </form>
 		            	<div class="buttons">
 			    			[<a href="/room/fashion-board/list">목록보기(절대경로)</a>]		    	
 			    		</div> 
@@ -89,7 +93,7 @@
 			    			[&nbsp;<a href='detail?boardNo=${board.boardNo}'>취소1</a>&nbsp;]
 			    			[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
 			    		</div>
-			    		</form>
+			    		
 		                        <!-- /block -->
 		                    </div>
 		                </div>

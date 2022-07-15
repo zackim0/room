@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.room.dto.CKBoard;
 import com.room.dto.CKBoardAttach;
+import com.room.dto.CKBoardComment;
+import com.room.mapper.CookBoardCommentMapper;
 import com.room.mapper.CookBoardMapper;
 
 import lombok.Setter;
@@ -104,5 +106,31 @@ public class CKBoardServiceImpl implements CKBoardService {
 		return count;
 	}
 	
+	@Setter
+	private CookBoardCommentMapper cookBoardCommentMapper;
+	
+	@Override
+	public void writeBoardComment(CKBoardComment comment) {
+		
+		cookBoardCommentMapper.insertBoardComment(comment);
+		
+	}
+
+	@Override
+	public List<CKBoardComment> findCommentsByBoardNo(int boardNo) {
+		List<CKBoardComment> comments = cookBoardCommentMapper.selectByBoardNo(boardNo);
+		return comments;
+	}
+
+	@Override
+	public void deleteComment(int commentNo) {
+		cookBoardCommentMapper.delete(commentNo);
+	}
+
+	@Override
+	public void updateBoardComment(CKBoardComment comment) {
+		cookBoardCommentMapper.update(comment);
+		
+	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.room.dto.MateBoard;
+import com.room.dto.MateBoardAttach;
 
 @Mapper
 public interface MateBoardMapper {
@@ -27,5 +28,11 @@ public interface MateBoardMapper {
 	int selectBoardCount(String category);
 
 	void updateBoardReadCount(int boardNo);
+
+	void insertMateBoardAttach(MateBoardAttach file);
+
+	List<MateBoardAttach> selectBoardAttachByBoardNo(int boardNo);
+
+	MateBoardAttach selectBoardAttachByAttachNo(int attachNo);
 	
 }

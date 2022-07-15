@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -24,8 +24,9 @@
                            <div class="block-content collapse in">
                                <div class="span12">
 				<!-- BEGIN FORM-->
-				<form action="write" id="writeform" method="post" class="form-horizontal">
+				<form action="edit" id="editform" method="post" class="form-horizontal">
 					<input type="hidden" name="category" value="pet">
+					<input type="hidden" name="boardNo" value="${ board.boardNo }"> 
 					<fieldset>
 						<div class="alert alert-error hide">
 							<button class="close" data-dismiss="alert"></button>
@@ -36,25 +37,26 @@
  							<div class="control-group">
  								<label class="control-label">제목<span class="required">*</span></label>
  								<div class="controls">
- 									<input type="text" id="title" name="title" data-required="1" class="span6 m-wrap" />
+ 									<input type="text" id="title" name="title" data-required="1" class="span6 m-wrap" value="${ board.title }"/>
  								</div>
  							</div>
 
  							<div class="control-group">
  								<label class="control-label">작성자<span class="required"></span></label>
  								<div class="controls">
- 									<input name="writer" id="writer" type="text" class="span6 m-wrap" value="${ loginuser.memberId }"readonly/>
+ 									<input name="writer" id="writer" type="text" class="span6 m-wrap" value="${  requestScope.board.writer } "readonly/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">작성자<span class="required"></span></label>
+ 								<label class="control-label">내용<span class="required"></span></label>
  								<div class="controls">
- 									<textarea name="content" id="content" style="width:823px; height:256px;"></textarea>
+ 									<textarea name="content" id="content" style="width:823px; height:256px;" >${ requestScope.board.content }</textarea>
  								</div>
  							</div>
 
  							<div class="form-actions">
- 								<button type="submit" id="writebtn" class="btn btn-primary">등록</button>
+ 								<button type="submit" id="editbtn" class="btn btn-primary" href='javascript:'>수정</button>
+ 								<button type="submit" id="deletebtn" class="btn btn-primary" href='javascript:'>삭제</button>
  								<button type="button" id="cancel"class="btn">취소</button>
  							</div>
 					</fieldset>
@@ -69,14 +71,22 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#writebtn").on('click', function(event) {			
+			$("#editbtn").on('click', function(event) {			
 				event.preventDefault();
 				if(!$('#title').val()) {
 					alert('제목을 입력하세요');
 					return;
 				}									
-				$('#writeform').submit();							
+				$('#editform').submit();
 			});			
+			
+			$("#deletebtn").click(function(event) {
+				event.preventDefault();
+				var ok = confirm("삭제하시겠습니까?");
+				if(ok){
+					location.href = 'delete?boardNo=${board.boardNo}';
+				}
+			})
 			
 			
 			$("#cancel").on('click', function(event) {	

@@ -1,3 +1,7 @@
+<%@page import="com.room.dto.GIBoardAttach"%>
+<%@page import="com.room.dto.Member"%>
+<%@page import="com.room.dto.GIBoard"%>
+
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -65,6 +69,19 @@
 		                  ${ fn:replace(board.content, enter , '<br>') }
 		                </td>
 		            </tr>
+		            
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            	<c:forEach var="file" items="${board.files}">
+			            	<a href="download?attachNo=${file.attachNo}">
+			            	${file.userFileName}
+			            	</a>
+		            	<br>
+		            	</c:forEach>
+		            	</td>
+		            </tr>
+		            
 		            <tr>
 		            	<th>작성일</th>
 		            	<td>${board.regDate}</td>
@@ -76,7 +93,7 @@
 			    		<c:if test="${loginuser.memberId eq board.writer }">
 		               	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
 		               	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
-		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
+		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}&pageNo=${ pageNo }'>수정</a>&nbsp;]
 		               	</c:if>	
 			    		</div> 
 		                        <!-- /block -->
