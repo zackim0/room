@@ -24,7 +24,7 @@
                            <div class="block-content collapse in">
                                <div class="span12">
 				<!-- BEGIN FORM-->
-				<form action="write" id="writeform" method="post" class="form-horizontal">
+				<form action="write" id="writeform" method="post" enctype="multipart/form-data" class="form-horizontal">
 					<input type="hidden" name="category" value="pet">
 					<fieldset>
 						<div class="alert alert-error hide">
@@ -52,7 +52,13 @@
  									<textarea name="content" id="content" style="width:823px; height:256px;"></textarea>
  								</div>
  							</div>
-
+							<div class="control-group">
+ 									<label class="control-label">첨부파일</label>
+ 								<div class="controls">
+ 									<input type="file" name="attach">
+ 								</div>
+ 							</div>
+							
  							<div class="form-actions">
  								<button type="submit" id="writebtn" class="btn btn-primary">등록</button>
  								<button type="button" id="cancel"class="btn">취소</button>

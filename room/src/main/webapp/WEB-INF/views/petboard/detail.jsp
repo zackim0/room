@@ -10,7 +10,7 @@
     
     <head>
     	<meta charset="utf-8"/>
-        <title>WYSIWYG Editors</title>
+        <title>상세보기</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -71,12 +71,23 @@
 		            	<th>작성일</th>
 		            	<td>${board.regDate}</td>
 		            </tr>
+		            
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            	<c:forEach var="file" items="${ board.files }">
+		            	<a href="download?attachNo=${ file.attachNo }">
+		            	${ file.userFileName }
+		            	</a>
+		            	</c:forEach>
+		            	</td>
+		            </tr>
 		            	<div class="buttons">
 		            	<%-- ${loginuser.memberId } / ${board.writer } / ${loginuser.memberId eq board.writer } / ${ fn:length(loginuser.memberId) } / ${ fn:length(board.writer) } --%>
 			    	[<a href="/room/petboard/list">목록보기</a>]
 					<c:if test="${loginuser.memberId eq board.writer }">
 			    	&nbsp;&nbsp;
-			    	[<a href='edit?boardNo=${board.boardNo}'>수정하기</a>]
+			    	[<a href='edit?boardNo=${board.boardNo}&pageNo=${pageNo}'>수정하기</a>]
 			    	&nbsp;&nbsp;
 			    	[<a id='delete-btn' href='javascript'>삭제하기</a>]
 					</c:if>
@@ -95,9 +106,7 @@
 			    	     
             	</div>
             <hr>
-            <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
-            </footer>
+
             
         </div>
 
@@ -130,7 +139,7 @@
               	 event.preventDefault();
                	 var ok = confirm('정말로 삭제하시겠습니까?');
                	 if(ok){
-               		 location.href = 'delete?boardNo=${board.boardNo}';
+               		 location.href = 'delete?boardNo=${board.boardNo}&pageNo=${pageNo}';
                	 }
    			});
             
@@ -166,6 +175,9 @@
 		});
 		
         </script>
+                    <footer>
+                <p>&copy; Vincent Gabriel 2013</p>
+            </footer>
     </body>
 
 </html>

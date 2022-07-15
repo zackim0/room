@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.room.dto.MateBoard;
 import com.room.dto.PetBoard;
+import com.room.dto.PetBoardAttach;
 
 public interface PetBoardService {
 
@@ -20,5 +21,7 @@ public interface PetBoardService {
 	List<PetBoard> findByPage(int pageNo, int pageSize);
 
 	int findBoardCount(String string);
+
+	PetBoardAttach findBoardAttachByAttachNo(int attachNo);
 
 }

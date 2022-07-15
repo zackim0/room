@@ -1,5 +1,7 @@
 package com.room.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,14 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.room.dto.FBoard;
-import com.room.dto.MateBoard;
+import com.room.common.Util;
+import com.room.dto.MateBoardAttach;
 import com.room.dto.PetBoard;
-import com.room.service.MateBoardService;
+import com.room.dto.PetBoardAttach;
 import com.room.service.PetBoardService;
 import com.room.service.PetBoardServiceImpl;
 import com.room.ui.ThePager;
+import com.room.view.MateDownloadView;
+import com.room.view.PetDownloadView;
 
 @Controller
 @RequestMapping(path = { "/petboard" })
@@ -57,8 +64,31 @@ public class PetBoardController {
 	}
 	
 	@PostMapping(path = { "/write" })
-	public String  writeForm(PetBoard board, HttpServletRequest req) {
+	public String  writeForm(PetBoard board, 
+							 HttpServletRequest req,
+							 MultipartFile[] attach) {
 		
+		String uploadDir = req.getServletContext().getRealPath("/resources/upload-files");
+		
+		ArrayList<PetBoardAttach> files = new ArrayList<>();
+		for(MultipartFile file : attach) {
+			String userFileName = file.getOriginalFilename();
+			if(userFileName != null && userFileName.length() > 0 ) {
+				PetBoardAttach f = new PetBoardAttach();
+				String savedFileName = Util.makeUniqueFileName(userFileName);
+				f.setUserFileName(userFileName);
+				f.setSavedFileName(savedFileName);
+				try {
+					File path = new File(uploadDir, savedFileName);
+					file.transferTo(path);
+					files.add(f);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		board.setFiles(files);
 		petBoardService.writeBoard(board);
 		
 		return "redirect:/petboard/list";
@@ -114,7 +144,7 @@ public class PetBoardController {
 			model.addAttribute("board",board);
 			model.addAttribute("pageNo", pageNo);
 			
-			return "mate-board/edit";
+			return "petboard/edit";
 				
 			}
 	
@@ -131,6 +161,23 @@ public class PetBoardController {
 		return String.format("redirect:detail?boardNo=%d&pageNo=%d", board.getBoardNo(), pageNo);
 		
 	}
+	@GetMapping(path = { "/download" })
+	public View download(
+			@RequestParam(name = "attachNo", defaultValue = "-1")
+			int attachNo, Model model) {
+		
+		if(attachNo < 1) {
+			return new RedirectView("list");
+		}
+		PetBoardAttach boardAttach = petBoardService.findBoardAttachByAttachNo(attachNo);
+		
+		model.addAttribute("uploadDir", "/resources/upload-files/");
+		model.addAttribute("petBoardAttach", boardAttach);
+		
+		PetDownloadView downloadView = new PetDownloadView();		
+		return downloadView;
+	}
+	
 	
 	
 }
