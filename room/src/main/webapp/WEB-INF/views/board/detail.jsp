@@ -1,3 +1,7 @@
+<%@page import="com.room.dto.CKBoardAttach"%>
+<%@page import="com.room.dto.Member"%>
+<%@page import="com.room.dto.CKBoard"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -158,7 +162,7 @@
 		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
 
 		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
-		<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
         $(function() {
@@ -171,7 +175,7 @@
                	 }
    			});
          // comment 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-    		$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    		$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
     		
     		$('#add-comment-btn').on('click', function(event) {
     			$('#modal-content').val("");
@@ -207,7 +211,7 @@
     						$('#comment-modal').modal('hide');
     						
     						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-    						$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    						$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
     					} else {
     						alert('댓글 쓰기 실패');
     					}
@@ -221,7 +225,7 @@
     		// $('.deletecomment').on('click', function(event) { // 현재 존재하는 .deletecomment
     		$('#comment-list').on('click', '.deletecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
     			// 어느 댓글을 삭제할까요? --> 삭제할 댓글 번호는 무엇?
-    			var commentNo = $(this).attr("data-commentno"); // this : 이벤트 발생 객체 (여기서는 <a>)
+    			var commentNo = $(this).attr("data-commentNo"); // this : 이벤트 발생 객체 (여기서는 <a>)
     			var ok = confirm(commentNo + "번 댓글을 삭제할까요?");
     			if (!ok) {
     				return;
@@ -231,11 +235,11 @@
     				"url": "comment-delete",
     				"method" : "get",
     				"async" : true,
-    				"data" : "commentno=" + commentNo,
+    				"data" : "commentNo=" + commentNo,
     				"dataType" : "text",
     				"success" : function(data, status, xhr) {					
     					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-    					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    					$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
     				},
     				"error" : function(xhr, status, err) {
     					alert('삭제 실패');
@@ -250,7 +254,7 @@
     		
     		var currentEditCommentNo = null;
     		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment			
-    			var commentNo = $(this).attr("data-commentno");
+    			var commentNo = $(this).attr("data-commentNo");
     			if (currentEditCommentNo) {
     				toggleEditDisplay(currentEditCommentNo, false);
     			}
@@ -259,13 +263,13 @@
     		});
     		
     		$('#comment-list').on('click', '.cancel', function(event) { // 현재 + 미래에 존재하는 .deletecomment
-    			var commentNo = $(this).attr("data-commentno");
+    			var commentNo = $(this).attr("data-commentNo");
     			toggleEditDisplay(commentNo, false);
     			currentEditCommentNo = null;
     		});
     		
     		$('#comment-list').on('click', '.updatecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
-    			var commentNo = $(this).attr("data-commentno");
+    			var commentNo = $(this).attr("data-commentNo");
     			var formData = $('#updateform' + commentNo).serialize();
     			$.ajax({
     				"url" : "comment-update",
@@ -275,7 +279,7 @@
     				"dataType" : "text",
     				"success" : function(data, status, xhr) {
     					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-    					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    					$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
     				}, 
     				"error" : function(xhr, status, err) {
     					alert('수정 실패')	;
