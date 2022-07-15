@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.room.dto.MateBoard;
 import com.room.dto.MateBoardAttach;
+import com.room.dto.MateBoardComment;
 	
 public interface MateBoardService {
 
@@ -16,6 +17,12 @@ public interface MateBoardService {
 	void update(MateBoard board);
 	int findBoardCount(String category);
 	MateBoardAttach findBoardAttachByAttachNo(int attachNo);
+	
+	
+	void writeBoardComment(MateBoardComment comment);
+	List<MateBoardComment> findCommentsByBoardNo(int boardNo);
+	void deleteComment(int commentNo);
+	void updateBoardComment(MateBoardComment comment);
 
 		
 }

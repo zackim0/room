@@ -18,6 +18,7 @@
 	</bean>
 	<bean id="mateBoardService" class="com.room.service.MateBoardServiceImpl">
 		<property name="mateBoardMapper" ref="mateBoardMapper" />
+		<property name="mateBoardCommentMapper" ref="mateBoardCommentMapper" />
 	</bean> 
 	<bean id="ckBoardService" class="com.room.service.CKBoardServiceImpl">
 		<property name="cookBoardMapper" ref="cookBoardMapper" />
