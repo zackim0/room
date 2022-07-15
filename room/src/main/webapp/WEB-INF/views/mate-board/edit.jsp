@@ -52,6 +52,7 @@
 		            	action="edit"
 		            	method="post">
 		            	<input type="hidden" name="boardNo" value="${board.boardNo}">
+		            	<input type="hidden" name="pageNo" value="${pageNo}">
 		            <tr>
 		                <th>제목</th>
 		                <td>

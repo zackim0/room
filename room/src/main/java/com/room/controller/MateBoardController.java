@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.room.common.Util;
 import com.room.dto.MateBoard;
 import com.room.dto.MateBoardAttach;
+import com.room.dto.MateBoardComment;
 import com.room.service.MateBoardService;
 import com.room.ui.ThePager;
 import com.room.view.MateDownloadView;
@@ -143,8 +145,7 @@ public class MateBoardController {
 			
 			return "mate-board/edit";
 				
-			}
-	
+	}
 	
 	@PostMapping(path = {"/edit"})
 	public String edit(MateBoard board,
@@ -160,11 +161,9 @@ public class MateBoardController {
 		
 	}
 	
-	
-	
-	@GetMapping(path = { "/download/{attachNo}" })
+	@GetMapping(path = { "/download" }) 
 	public View download(
-			@PathVariable int attachNo,
+			@RequestParam(name = "attachNo", defaultValue = "-1") int attachNo,
 			Model model) {
 		
 		if (attachNo < 1) {
@@ -174,10 +173,50 @@ public class MateBoardController {
 		MateBoardAttach boardAttach = mateBoardService.findBoardAttachByAttachNo(attachNo);
 		
 		model.addAttribute("uploadDir", "/resources/upload-files/");
-		model.addAttribute("boardAttach", boardAttach);
+		model.addAttribute("mateBoardAttach", boardAttach);
 		
-		MateDownloadView mateDownloadView = new MateDownloadView();		
-		return mateDownloadView;
+		MateDownloadView downloadView = new MateDownloadView();		
+		return downloadView;
+	}
+	
+	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeComment(MateBoardComment boardComment) {
+		
+		mateBoardService.writeBoardComment(boardComment);
+		
+		return "success";
+		
+	}
+	
+	@GetMapping(path = { "/comment-list" })
+	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+		
+		List<MateBoardComment> comments = mateBoardService.findCommentsByBoardNo(boardNo);
+		
+		model.addAttribute("comments", comments);
+		
+		return "board/comments";
+		
+	}
+	
+	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
+	@ResponseBody
+	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	
+		mateBoardService.deleteComment(commentNo);
+		
+		return "success";
+	}
+	
+	@PostMapping(path = { "/comment-update" }, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updateComment(MateBoardComment boardComment) {
+		
+		mateBoardService.updateBoardComment(boardComment);
+		
+		return "success";
+		
 	}
 	
 

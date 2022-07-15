@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.room.dto.FBoardAttach;
 import com.room.dto.GIBoard;
+import com.room.dto.GIBoardAttach;
 
 @Mapper
 public interface GameIntroduceBoardMapper {
@@ -28,5 +30,10 @@ public interface GameIntroduceBoardMapper {
 
 	int selectBoardCount(String category);
 	
+	List<GIBoardAttach> selectBoardAttachByBoardNo(int boardNo);
+
+	void insertBoardAttach(GIBoardAttach file);
+
+	GIBoardAttach selectBoardAttachByAttachNo(int attachNo);
 	
 }

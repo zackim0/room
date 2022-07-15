@@ -1,3 +1,7 @@
+<%@page import="com.room.dto.GIBoardAttach"%>
+<%@page import="com.room.dto.Member"%>
+<%@page import="com.room.dto.GIBoard"%>
+
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -65,6 +69,19 @@
 		                  ${ fn:replace(board.content, enter , '<br>') }
 		                </td>
 		            </tr>
+		            
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            	<c:forEach var="file" items="${board.files}">
+			            	<a href="download?attachNo=${file.attachNo}">
+			            	${file.userFileName}
+			            	</a>
+		            	<br>
+		            	</c:forEach>
+		            	</td>
+		            </tr>
+		            
 		            <tr>
 		            	<th>작성일</th>
 		            	<td>${board.regDate}</td>
@@ -76,19 +93,33 @@
 			    		<c:if test="${loginuser.memberId eq board.writer }">
 		               	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
 		               	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
-		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
+		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}&pageNo=${ pageNo }'>수정</a>&nbsp;]
 		               	</c:if>	
 			    		</div> 
 		                        <!-- /block -->
 		                    </div>
 		                </div>
-		               	
-
-		                
-
                 	</div>
                 </div>
-			    	     
+			    <br><br>
+				<!-- comment 쓰기 영역 -->	
+				<div>
+					<button id="add-comment-btn" type="button" 
+							class="btn btn-outline-primary btn-sm">댓글쓰기</button>
+				</div>	
+				<!-- / comment 쓰기 영역 -->	
+					
+		        <!-- comment 표시 영역 -->
+		        <br>
+		        <hr style="width:800px;margin:0 auto">
+		        <br>
+		        <table id="comment-list" style="width:800px;margin:0 auto">
+		        
+		        </table>
+				<!-- / comment 표시 영역 -->        
+			</div>
+			</div>
+			<br><br><br><br><br>
             	</div>
             <hr>
             <footer>
@@ -123,6 +154,80 @@
             	 }
    			});
             
+           /*  $('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    		
+    		$('#add-comment-btn').on('click', function(event) {
+    			$('#modal-content').val("");
+    			$('#comment-modal').modal('show'); // show modal
+    		});
+    		
+    		$('#modalCloseBtn').on('click', function(event) {
+    			$('#comment-modal').modal('hide'); // hide modal
+    		});
+    		
+    		$('#modalRegisterBtn').on('click', function(event) {
+    			event.preventDefault();
+    			
+    			var content = $('#modal-content').val(); // val() == value 속성
+    			if (content.length == 0) {
+    				alert('내용을 작성하세요');
+    				return;
+    			}
+    			
+    			var formData = $('#comment-form').serialize();
+    			// var formData = $('#comment-form').serializeArray();
+    			// alert(formData);		
+    			// return;
+    			
+    			$.ajax({
+    				"url" : "comment-write",
+    				"method" : "post",
+    				"async" : true,
+    				"data" : formData, // boardno=1&writer=imauser1&content=test
+    				"dataType" : "text",
+    				"success" : function(data, status, xhr) {
+    					if (data === "success") {
+    						$('#comment-modal').modal('hide');
+    						
+    						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+    						$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    					} else {
+    						alert('댓글 쓰기 실패');
+    					}
+    				},
+    				"error" : function(xhr, status, err) {
+    					alert('댓글 쓰는 중 오류 발생');
+    				}
+    			});
+    		});
+    		
+    		// $('.deletecomment').on('click', function(event) { // 현재 존재하는 .deletecomment
+    		$('#comment-list').on('click', '.deletecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+    			// 어느 댓글을 삭제할까요? --> 삭제할 댓글 번호는 무엇?
+    			var commentNo = $(this).attr("data-commentno"); // this : 이벤트 발생 객체 (여기서는 <a>)
+    			var ok = confirm(commentNo + "번 댓글을 삭제할까요?");
+    			if (!ok) {
+    				return;
+    			}
+    			
+    			$.ajax({
+    				"url": "comment-delete",
+    				"method" : "get",
+    				"async" : true,
+    				"data" : "commentno=" + commentNo,
+    				"dataType" : "text",
+    				"success" : function(data, status, xhr) {					
+    					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+    					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+    				},
+    				"error" : function(xhr, status, err) {
+    					alert('삭제 실패');
+    				}
+    			});
+    		}); */
+    		
+    		
+    		
             // Bootstrap
             $('#bootstrap-editor').wysihtml5();
 
@@ -134,6 +239,47 @@
 			]});
             $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
         });
+    		
+        function toggleEditDisplay(commentNo, isEdit) {
+			$('#commentview' + commentNo).css('display', isEdit ? 'none' : 'block');
+			$('#commentedit' + commentNo).css('display', isEdit ? 'block' : 'none');
+		}
+		
+		var currentEditCommentNo = null;
+		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment			
+			var commentNo = $(this).attr("data-commentno");
+			if (currentEditCommentNo) {
+				toggleEditDisplay(currentEditCommentNo, false);
+			}
+			currentEditCommentNo = commentNo;			
+			toggleEditDisplay(commentNo, true);
+		});
+		
+		$('#comment-list').on('click', '.cancel', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			var commentNo = $(this).attr("data-commentno");
+			toggleEditDisplay(commentNo, false);
+			currentEditCommentNo = null;
+		});
+		
+		$('#comment-list').on('click', '.updatecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			var commentNo = $(this).attr("data-commentno");
+			var formData = $('#updateform' + commentNo).serialize();
+			$.ajax({
+				"url" : "comment-update",
+				"method" : "post",
+				"async" : true,
+				"data" : formData,
+				"dataType" : "text",
+				"success" : function(data, status, xhr) {
+					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
+				}, 
+				"error" : function(xhr, status, err) {
+					alert('수정 실패')	;
+				}
+			
+			});
+		});
 
         // Tiny MCE
         tinymce.init({

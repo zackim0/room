@@ -1,5 +1,6 @@
 package com.room.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -15,4 +16,7 @@ public class GIBoard {
 	private int readCount;
 	private boolean deleted;
 	private String writer;
+	
+	
+	private List<GIBoardAttach> files;
 }

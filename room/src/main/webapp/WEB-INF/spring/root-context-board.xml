@@ -11,12 +11,15 @@
 	
 	<bean id="gIboardService" class="com.room.service.GIBoardServiceImpl">
 		<property name="gIboardMapper" ref="gameIntroduceBoardMapper" />
+		<property name="gIboardCommentMapper" ref="gameIntroduceBoardCommentMapper" />
 	</bean>
 	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
 		<property name="fBoardMapper" ref="fashionBoardMapper" />
+		<property name="boardCommentMapper" ref="fashionBoardCommentMapper" />
 	</bean>
 	<bean id="mateBoardService" class="com.room.service.MateBoardServiceImpl">
 		<property name="mateBoardMapper" ref="mateBoardMapper" />
+		<property name="mateBoardCommentMapper" ref="mateBoardCommentMapper" />
 	</bean> 
 	<bean id="ckBoardService" class="com.room.service.CKBoardServiceImpl">
 		<property name="cookBoardMapper" ref="cookBoardMapper" />

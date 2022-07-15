@@ -2,40 +2,40 @@ package com.room.dto;
 
 public class GIBoardAttach {
 
-	private int attach_no;
-	private int board_no;
-	private String savedfilename;
-	private String userfilename;
-	private int downloadcount;
-	public int getAttach_no() {
-		return attach_no;
-	}
-	public void setAttach_no(int attach_no) {
-		this.attach_no = attach_no;
-	}
-	public int getBoard_no() {
-		return board_no;
-	}
-	public void setBoard_no(int board_no) {
-		this.board_no = board_no;
-	}
-	public String getSavedfilename() {
-		return savedfilename;
-	}
-	public void setSavedfilename(String savedfilename) {
-		this.savedfilename = savedfilename;
-	}
-	public String getUserfilename() {
-		return userfilename;
-	}
-	public void setUserfilename(String userfilename) {
-		this.userfilename = userfilename;
-	}
-	public int getDownloadcount() {
-		return downloadcount;
-	}
-	public void setDownloadcount(int downloadcount) {
-		this.downloadcount = downloadcount;
-	}
+	private int attachNo;
+	private int boardNo;
+	private String userFileName;
+	private String savedFileName;
+	private int downloadCount;
 	
+	public int getAttachNo() {
+		return attachNo;
+	}
+	public void setAttachNo(int attachNo) {
+		this.attachNo = attachNo;
+	}
+	public int getBoardNo() {
+		return boardNo;
+	}
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+	public String getSavedFileName() {
+		return savedFileName;
+	}
+	public void setSavedFileName(String savedFileName) {
+		this.savedFileName = savedFileName;
+	}
+	public String getUserFileName() {
+		return userFileName;
+	}
+	public void setUserFileName(String userFileName) {
+		this.userFileName = userFileName;
+	}
+	public int getDownloadCount() {
+		return downloadCount;
+	}
+	public void setDownloadCount(int downloadCount) {
+		this.downloadCount = downloadCount;
+	}
 }

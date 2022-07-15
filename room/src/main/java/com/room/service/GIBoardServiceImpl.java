@@ -6,9 +6,9 @@ import java.util.List;
 import com.room.service.GIBoardService;
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
+import com.room.dto.GIBoardComment;
+import com.room.mapper.GameIntroduceBoardCommentMapper;
 import com.room.mapper.GameIntroduceBoardMapper;
-import com.room.dao.GIBoardDao;
-import com.room.dto.GIBoard;
 
 import lombok.Setter;
 
@@ -22,6 +22,13 @@ public class GIBoardServiceImpl implements GIBoardService {
 
 		gIboardMapper.insertBoard(board);
 		
+		// 첨부파일 데이터를 DB에 저장
+				if(board.getFiles() != null) {
+					for (GIBoardAttach file : board.getFiles()	) {
+						file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
+						gIboardMapper.insertBoardAttach(file);
+					}
+				}
 	}
 
 	@Override
@@ -54,6 +61,10 @@ public class GIBoardServiceImpl implements GIBoardService {
 	public GIBoard findByBoardNo(int boardNo) {
 
 		GIBoard board= gIboardMapper.selectByBoardNo(boardNo);
+		//첨부 파일 조회가 빠졌음
+		
+		List<GIBoardAttach> files = gIboardMapper.selectBoardAttachByBoardNo(boardNo); // 첨부 파일 데이터 조회
+		board.setFiles(files);
 		
 		gIboardMapper.updateBoardReadCount(boardNo);
 		board.setReadCount(board.getReadCount() + 1);
@@ -83,6 +94,41 @@ public class GIBoardServiceImpl implements GIBoardService {
 		
 		return count;
 	}
+	
+	@Override
+	public GIBoardAttach findBoardAttachByAttachNo(int attachNo) {
+		
+		GIBoardAttach attach = gIboardMapper.selectBoardAttachByAttachNo(attachNo);
+		return attach;
+	}
+	
+	// private BoardCommentDao boardCommentDao = new BoardCommentDao();
+		@Setter
+		private GameIntroduceBoardCommentMapper gIboardCommentMapper;
+		
+		@Override
+		public void writeBoardComment(GIBoardComment comment) {
+			
+			gIboardCommentMapper.insertBoardComment(comment);
+			
+		}
 
+		@Override
+		public List<GIBoardComment> findCommentsByBoardNo(int boardNo) {
+			List<GIBoardComment> comments = gIboardCommentMapper.selectByBoardNo(boardNo);
+			return comments;
+		}
+
+		@Override
+		public void deleteComment(int commentNo) {
+			gIboardCommentMapper.delete(commentNo);
+		}
+
+		@Override
+		public void updateBoardComment(GIBoardComment comment) {
+			gIboardCommentMapper.update(comment);
+			
+		}
+	
 	
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.room.dto.MateBoard;
 import com.room.dto.MateBoardAttach;
+import com.room.dto.MateBoardComment;
+import com.room.mapper.MateBoardCommentMapper;
 import com.room.mapper.MateBoardMapper;
 
 import lombok.Setter;
@@ -25,7 +27,7 @@ public class MateBoardServiceImpl implements MateBoardService {
 		if (board.getFiles() != null) {
 			for (MateBoardAttach file : board.getFiles()) {
 				file.setBoardNo(board.getBoardNo());
-				mateBoardMapper.insertMateBoardAttach(file);
+				mateBoardMapper.insertBoardAttach(file);
 			}
 		}
 		
@@ -106,6 +108,31 @@ public class MateBoardServiceImpl implements MateBoardService {
 		
 	}
 
+	@Setter
+	private MateBoardCommentMapper mateBoardCommentMapper;
 	
+	@Override
+	public void writeBoardComment(MateBoardComment comment) {
+		
+		mateBoardCommentMapper.insertBoardComment(comment);
+		
+	}
+
+	@Override
+	public List<MateBoardComment> findCommentsByBoardNo(int boardNo) {
+		List<MateBoardComment> comments = mateBoardCommentMapper.selectByBoardNo(boardNo);
+		return comments;
+	}
+
+	@Override
+	public void deleteComment(int commentNo) {
+		mateBoardCommentMapper.delete(commentNo);
+	}
+
+	@Override
+	public void updateBoardComment(MateBoardComment comment) {
+		mateBoardCommentMapper.update(comment);
+		
+	}
 
 }

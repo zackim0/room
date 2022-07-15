@@ -112,6 +112,24 @@ public class FBoardServiceImpl implements FBoardService {
 		boardCommentMapper.insertBoardComment(comment);
 		
 	}
+
+	@Override
+	public List<FBoardComment> findCommentsByBoardNo(int boardNo) {
+		List<FBoardComment> comments = boardCommentMapper.selectByBoardNo(boardNo);
+		return comments;
+	}
+
+	@Override
+	public void deleteComment(int commentNo) {
+		boardCommentMapper.delete(commentNo);
+		
+	}
+
+	@Override
+	public void updateBoardComment(FBoardComment comment) {
+		boardCommentMapper.update(comment);
+		
+	}
 	
 	
 	
