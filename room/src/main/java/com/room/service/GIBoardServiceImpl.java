@@ -103,32 +103,32 @@ public class GIBoardServiceImpl implements GIBoardService {
 	}
 	
 	// private BoardCommentDao boardCommentDao = new BoardCommentDao();
-		@Setter
-		private GameIntroduceBoardCommentMapper gIboardCommentMapper;
+	@Setter
+	private GameIntroduceBoardCommentMapper gIboardCommentMapper;
+	
+	@Override
+	public void writeBoardComment(GIBoardComment comment) {
 		
-		@Override
-		public void writeBoardComment(GIBoardComment comment) {
-			
-			gIboardCommentMapper.insertBoardComment(comment);
-			
-		}
+		gIboardCommentMapper.insertBoardComment(comment);
+		
+	}
 
-		@Override
-		public List<GIBoardComment> findCommentsByBoardNo(int boardNo) {
-			List<GIBoardComment> comments = gIboardCommentMapper.selectByBoardNo(boardNo);
-			return comments;
-		}
+	@Override
+	public List<GIBoardComment> findCommentsByBoardNo(int boardNo) {
+		List<GIBoardComment> comments = gIboardCommentMapper.selectByBoardNo(boardNo);
+		return comments;
+	}
 
-		@Override
-		public void deleteComment(int commentNo) {
-			gIboardCommentMapper.delete(commentNo);
-		}
+	@Override
+	public void deleteComment(int commentNo) {
+		gIboardCommentMapper.delete(commentNo);
+	}
 
-		@Override
-		public void updateBoardComment(GIBoardComment comment) {
-			gIboardCommentMapper.update(comment);
-			
-		}
+	@Override
+	public void updateBoardComment(GIBoardComment comment) {
+		gIboardCommentMapper.update(comment);
+		
+	}
 	
 	
 }
