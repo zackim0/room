@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.room.dto.MateBoard;
+import com.room.dto.MateBoardAttach;
 import com.room.dto.PetBoard;
+import com.room.dto.PetBoardAttach;
 import com.room.mapper.PetBoardMapper;
 
 import lombok.Setter;
@@ -23,11 +25,21 @@ public class PetBoardServiceImpl implements PetBoardService {
 	@Override
 	public void writeBoard(PetBoard board) {
 		petBoardMapper.insertBoard(board);
+		
+		if(board.getFiles() != null) {
+			for(PetBoardAttach file : board.getFiles()) {
+				file.setBoardNo(board.getBoardNo());
+				petBoardMapper.insertBoardAttach(file);
+			}
+		}
 	}
 	
 	@Override
 	public PetBoard findByBoardNo(int boardNo) {
 	  PetBoard board = petBoardMapper.selectByBoardNo(boardNo);
+	  
+	  List<PetBoardAttach> files = petBoardMapper.selectBoardAttachByBoardNo(boardNo);
+	  board.setFiles(files);
 	  
 	  petBoardMapper.updateBoardReadCount(boardNo);
 	  board.setReadCount(board.getReadCount() + 1);
@@ -65,6 +77,14 @@ public class PetBoardServiceImpl implements PetBoardService {
 	public int findBoardCount(String category) {		
 		int count = petBoardMapper.selectBoardCount(category);	
 		return count;
+	}
+	
+	@Override
+	public PetBoardAttach findBoardAttachByAttachNo(int attachNo) {
+		
+		PetBoardAttach attach = petBoardMapper.selectBoardAttachByAttachNo(attachNo);
+		return attach;
+		
 	}
 	
 	

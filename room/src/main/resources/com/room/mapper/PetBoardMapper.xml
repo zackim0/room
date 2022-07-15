@@ -37,7 +37,7 @@
 		WHERE board_no = #{boardNo}	
 	</update>
 	
-	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.MateBoard">
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.PetBoard">
 		SELECT board_no boardNo, title, member_id writer, regdate, deleted
 		FROM Board WHERE category = 'pet'
 		ORDER BY board_no DESC
@@ -53,6 +53,26 @@
 		SET readcount = readcount + 1 
 		WHERE board_no = #{ boardNo }
 	</update>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="com.room.dto.PetBoardAttach">
+		SELECT attach_no attachNo, board_no boardNo, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE board_no = #{boardNo}										
+	</select>
+	
+	<select id="selectBoardAttachByAttachNo" parameterType="int"
+											resultType="com.room.dto.PetBoardAttach">
+		SELECT attach_no attachNo, board_no boardNo,
+		userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}
+	</select>
+	
+	<insert id="insertBoardAttach" parameterType="com.room.dto.PetBoardAttach">
+		INSERT BoardAttach (board_no, userfilename, savedfilename)
+		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
+	</insert>
 
 
 	

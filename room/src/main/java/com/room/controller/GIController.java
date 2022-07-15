@@ -189,7 +189,7 @@ public class GIController {
 	}
 	
 	@GetMapping(path = { "/comment-list" })
-	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 	
 		List<GIBoardComment> comments = gIboardService.findCommentsByBoardNo(boardNo);
 		

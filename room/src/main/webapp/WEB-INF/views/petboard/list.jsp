@@ -4,7 +4,7 @@
 <html>
     
     <head>
-        <title>Tables</title>
+        <title>반려견 목록</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
