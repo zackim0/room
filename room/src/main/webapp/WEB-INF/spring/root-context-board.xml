@@ -11,6 +11,7 @@
 	
 	<bean id="gIboardService" class="com.room.service.GIBoardServiceImpl">
 		<property name="gIboardMapper" ref="gameIntroduceBoardMapper" />
+		<property name="gIboardCommentMapper" ref="gameIntroduceBoardCommentMapper" />
 	</bean>
 	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
 		<property name="fBoardMapper" ref="fashionBoardMapper" />

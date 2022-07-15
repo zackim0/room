@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.room.service.GIBoardService;
-import com.room.dto.FBoardAttach;
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
+import com.room.dto.GIBoardComment;
+import com.room.mapper.GameIntroduceBoardCommentMapper;
 import com.room.mapper.GameIntroduceBoardMapper;
-import com.room.dao.GIBoardDao;
-import com.room.dto.GIBoard;
 
 import lombok.Setter;
 
@@ -102,7 +101,34 @@ public class GIBoardServiceImpl implements GIBoardService {
 		GIBoardAttach attach = gIboardMapper.selectBoardAttachByAttachNo(attachNo);
 		return attach;
 	}
+	
+	// private BoardCommentDao boardCommentDao = new BoardCommentDao();
+		@Setter
+		private GameIntroduceBoardCommentMapper gIboardCommentMapper;
+		
+		@Override
+		public void writeBoardComment(GIBoardComment comment) {
+			
+			gIboardCommentMapper.insertBoardComment(comment);
+			
+		}
 
+		@Override
+		public List<GIBoardComment> findCommentsByBoardNo(int boardNo) {
+			List<GIBoardComment> comments = gIboardCommentMapper.selectByBoardNo(boardNo);
+			return comments;
+		}
+
+		@Override
+		public void deleteComment(int commentNo) {
+			gIboardCommentMapper.delete(commentNo);
+		}
+
+		@Override
+		public void updateBoardComment(GIBoardComment comment) {
+			gIboardCommentMapper.update(comment);
+			
+		}
 	
 	
 }

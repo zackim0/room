@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.room.dto.GIBoardComment;
 import com.room.common.Util;
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
 import com.room.service.GIBoardService;
 import com.room.ui.ThePager;
-import com.room.view.FDownloadView;
 import com.room.view.GameIntroduceDownloadView;
 
 @Controller // http 요청 처리 객체로 ioc 컨테이너에 등록
@@ -123,7 +124,7 @@ public class GIController {
 //			return "redirect:list?pageNo=" + pageNo;
 		}
 		
-		return "redirect:list";
+		return "redirect:list?pageNo=" + pageNo;
 	}
 	
 	@GetMapping(path = {"/edit"})
@@ -141,6 +142,7 @@ public class GIController {
 		}
 		
 		model.addAttribute("board",board);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "/playground/gameintroduce/edit";
 	}
@@ -172,7 +174,49 @@ public class GIController {
 		
 		GameIntroduceDownloadView downloadView = new GameIntroduceDownloadView();
 		return downloadView;
-		
 	}
+	
+/////////////////////////////////////////////////////////
+	
+	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody // return값이 viewname이 아니고 응답 컨텐츠임을 알려준느 설정.
+	public String writeComment(GIBoardComment boardComment) {
+	
+		gIboardService.writeBoardComment(boardComment);
+		
+		return "success"; // jspfile이 아닌, 그 자체로 응답이 됌.
+	
+	}
+	
+	@GetMapping(path = { "/comment-list" })
+	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+	
+		List<GIBoardComment> comments = gIboardService.findCommentsByBoardNo(boardNo);
+		
+		model.addAttribute("comments", comments);
+		
+		return "board/comments";
+	
+	}
+	
+	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
+	@ResponseBody
+	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	
+		gIboardService.deleteComment(commentNo);
+		
+		return "success";
+	}
+	
+	@PostMapping(path = { "/comment-update" }, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updateComment(GIBoardComment boardComment) {
+	
+		gIboardService.updateBoardComment(boardComment);
+		
+		return "sucess";
+	
+	}
+	
 }
 
