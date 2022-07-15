@@ -14,6 +14,7 @@
 	</bean>
 	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
 		<property name="fBoardMapper" ref="fashionBoardMapper" />
+		<property name="boardCommentMapper" ref="fashionBoardCommentMapper" />
 	</bean>
 	<bean id="mateBoardService" class="com.room.service.MateBoardServiceImpl">
 		<property name="mateBoardMapper" ref="mateBoardMapper" />

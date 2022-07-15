@@ -31,6 +31,12 @@ public interface FBoardService {
 
 	void writeBoardComment(FBoardComment comment);
 
+	List<FBoardComment> findCommentsByBoardNo(int boardNo);
+
+	void deleteComment(int commentNo);
+
+	void updateBoardComment(FBoardComment boardComment);
+
 }
 
 

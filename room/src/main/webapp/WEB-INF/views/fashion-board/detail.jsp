@@ -130,9 +130,9 @@
 		        				<textarea class="form-control"
 		        						  name='content' id='modal-content'></textarea>
 		        			</div>
-		        			<input type="hidden" name='member_id' value='${loginuser.memberId }'>
-		        			<input type="hidden" name='board_no' value='${board.boardNo }'>
-		        			<input type="hideen" name='board_comment_no'>
+		        			<input type="hidden" name='writer' value='${loginuser.memberId }'>
+		        			<input type="hidden" name='boardNo' value='${board.boardNo }'>
+		        			<input type="hidden" name='boardCommentNo' value="0">
 		        			<input type="hidden" name='action'><!-- 댓글 or 대댓글 -->
 		        		</form>
 		        		</div>
@@ -159,7 +159,7 @@
 
 		<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
 		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
-
+	
 		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
 
         <script src="/room/resources/assets/scripts.js"></script>
@@ -176,6 +176,127 @@
             		 location.href = 'delete?boardNo=${board.boardNo}';
             	 }
    			});
+            
+         // comment 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+    		$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
+            
+            $('#add-comment-btn').on('click',function(event){
+            	$('#modal-content').val("");
+            	$('#comment-modal').modal('show'); // show modal
+            });
+            
+            
+            $('#modalCloseBtn').on('click', function(event) {
+    			$('#comment-modal').modal('hide'); // hide modal
+    		});
+    		
+    		$('#modalRegisterBtn').on('click', function(event) {
+    			event.preventDefault();
+    			
+    		
+    			var content = $('#modal-content').val(); // val() == value 속성
+    			if (content.length == 0) {
+    				alert('내용을 작성하세요');
+    				return;
+    			}
+    			
+    			var formData = $('#comment-form').serialize();
+    			// var formData = $('#comment-form').serializeArray();
+    			// alert(formData);		
+    			// return;
+    		
+            	
+            $.ajax({
+            	"url" :"comment-write",
+            	"method" : "post",
+            	"async" : true,
+            	"data":formData, 
+            	"dataType" :"text",
+            	"success" : function(data,status,xhr) {
+            		if(data === "success"){
+            			$('#comment-modal').modal('hide');
+            			
+            			// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+            			$('#comment-list').load('comment-list?boardNo=' + ${board.boardNo});
+            		} else {
+            			alert('댓글 쓰기 실패');
+            		}
+					
+				},
+				"error" : function (xhr,status,err) {
+					alert('댓글 쓰는 중 오류 발생');
+				} 	
+            });
+          });
+    		
+    		// $('.deletecomment').on('click',function(evnet){ // 현재 존재하는 . deletecomment
+    		$('#comment-list').on('click','.deletecomment',function(event){ // 현재 + 미래에 존재하는 .deletecomment
+    			// 어느 댓글을 삭제할까요? --> 삭제할 댓글 번호는 무엇?	
+    			var commentNo = $(this).attr("data-commentNo"); // this : 이벤트 발생 객체 ( 여기서는 <a>)
+    			var ok = confirm(commentNo + "번 댓글을 삭제할까요?");
+    			if(!ok){
+    				return;
+    			}
+    		
+    			$.ajax({
+    				"url" : "comment-delete",
+    				"method" : "get",
+    				"async" : true,
+    				"data" : "commentNo=" + commentNo,
+    				"dataType" : "text",
+    				"success" : function (data,status,xhr) {
+						// 갱신된 목록 표시 ( load: 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+						$('#comment-list').load('comment-list?boardNo='+${board.boardNo});
+					},
+					"error" : function(xhr,status,err){
+							alert('삭제 실패');
+						}
+	   				});
+    			
+    			function toggleEditDisplay(commentNo, isEdit) {
+    				$('#commentview' + commentNo).css('display', isEdit ? 'none' : 'block');
+    				$('#commentedit' + commentNo).css('display', isEdit ? 'block' : 'none');
+    			}
+    			var currentEditCommentNo = null;
+    			$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment			
+    				var commentNo = $(this).attr("data-commentNo");
+    				if (currentEditCommentNo) {
+    					toggleEditDisplay(currentEditCommentNo, false);
+    				}
+    				currentEditCommentNo = commentNo;			
+    				toggleEditDisplay(commentNo, true);
+    			});
+    			
+    			$('#comment-list').on('click', '.cancel', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+    				var commentNo = $(this).attr("data-commentNo");
+    				toggleEditDisplay(commentNo, false);
+    				currentEditCommentNo = null;
+    			});
+    			
+    			$('#comment-list').on('click', '.updatecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+    				var commentNo = $(this).attr("data-commentNo");
+    				var formData = $('#updateform' + commentNo).serialize();
+    				$.ajax({
+    					"url" : "comment-update",
+    					"method" : "post",
+    					"async" : true,
+    					"data" : formData,
+    					"dataType" : "text",
+    					"success" : function(data, status, xhr) {
+    						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+    						$('#comment-list').load('comment-list?boardNo=' + ${ board.boardNo });
+    					}, 
+    					"error" : function(xhr, status, err) {
+    						alert('수정 실패')	;
+    					}
+    				
+    				});
+    				
+    				
+    			});
+    			
+    				
+    			});
             
             // Bootstrap
             $('#bootstrap-editor').wysihtml5();
