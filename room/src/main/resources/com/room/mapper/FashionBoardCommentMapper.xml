@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.room.mapper.FashionBoardCommentMapper">
+
+	<insert id="insertBoardComment" parameterType="com.room.dto.FBoardComment"
+			useGeneratedKeys="true" keyColumn="board_comment_no" keyProperty="commentNo">
+		INSERT INTO BoardComment 
+		(board_no, member_id, comment_content)
+		VALUES 
+		(#{boardNo}, #{writer}, #{content})		
+	</insert>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.FBoardComment">
+		SELECT board_comment_no commentNo,board_no boardNo,member_id writer,comment_content content,
+				comment_regdate regDate,comment_deleted deleted
+		FROM BoardComment
+		WHERE board_no = #{boardNo} and comment_deleted = FALSE
+		ORDER BY board_comment_no DESC
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		UPDATE BoardComment
+		SET comment_deleted = TRUE
+		WHERE board_comment_no = #{commentNo}
+	</delete>
+	<update id="update" parameterType="com.room.dto.FBoardComment">
+		UPDATE BoardComment
+		SET comment_content = #{content}
+		WHERE board_comment_no = #{commentNo}
+	</update>
+</mapper>
