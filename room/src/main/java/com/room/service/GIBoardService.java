@@ -13,6 +13,8 @@ public interface GIBoardService {
 	
 	List<GIBoard> findAll();
 	
+	List<GIBoard> find3();
+	
 	List<GIBoard> findByPage(int pageNo, int pageSize);
 	
 	GIBoard findByBoardNo(int boardNo);

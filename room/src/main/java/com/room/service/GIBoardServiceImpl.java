@@ -129,6 +129,14 @@ public class GIBoardServiceImpl implements GIBoardService {
 		gIboardCommentMapper.update(comment);
 		
 	}
+
+	@Override
+	public List<GIBoard> find3() {
+		
+		List<GIBoard> gIboardRecentList = gIboardMapper.select3();
+		
+		return gIboardRecentList;
+	}
 	
 	
 }

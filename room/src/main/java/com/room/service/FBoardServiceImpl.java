@@ -90,8 +90,8 @@ public class FBoardServiceImpl implements FBoardService {
 	}
 
 	@Override
-	public int findBoardCount() {
-		int count = fBoardMapper.selectBoardCount();
+	public int findBoardCount(String category) {
+		int count = fBoardMapper.selectBoardCount(category);
 		return count;
 	}
 

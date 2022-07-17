@@ -55,6 +55,13 @@
 		WHERE board_no = #{boardNo}
 	</update>
 	
+	<select id="select3" resultType="com.room.dto.GIBoard">
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='gameintro' and deleted = FALSE
+		ORDER by board_no DESC LIMIT 3
+	</select>
+	
 	<!-- 첨부파일 관련 -->
 	
 	<insert id="insertBoardAttach" parameterType="com.room.dto.GIBoardAttach">

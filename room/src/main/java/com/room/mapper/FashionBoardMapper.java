@@ -26,7 +26,7 @@ public interface FashionBoardMapper {
 
 	List<FBoard> selectByRange(HashMap<String, Object> params);
 
-	int selectBoardCount();
+	int selectBoardCount(String category);
 
 	List<FBoardAttach> selectBoardAttachByBoardNo(int boardNo);
 

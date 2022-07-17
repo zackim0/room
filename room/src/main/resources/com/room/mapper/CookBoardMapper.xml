@@ -40,7 +40,7 @@
 	</select>
 
 	<select id="selectBoardCount" resultType="int">
-		SELECT COUNT(*) FROM Board where category = 'recipe'
+		SELECT COUNT(*) FROM Board where category = #{category}
 	</select>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoard">
@@ -65,7 +65,7 @@
 	
 	<update id="update" parameterType="com.room.dto.CKBoard">
 		UPDATE Board
-		SET title = #{title}, content =#{content}
+		SET title = #{title}, content = #{content}
 		WHERE board_no = #{boardNo}
 	</update>
 	
@@ -76,9 +76,9 @@
 	</update>
 	
 	<select id="select3" resultType="com.room.dto.CKBoard">
-		SELECT title, member_id writer, regdate, readcount
-		FROM Board
-		WHERE category ='recipe' ORDER by board_no DESC LIMIT 3
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate
+		FROM Board WHERE category = 'recipe' and deleted = FALSE
+		ORDER BY board_no DESC LIMIT 3
 	</select>
 	
 	

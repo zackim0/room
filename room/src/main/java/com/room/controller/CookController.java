@@ -47,7 +47,7 @@ public class CookController {
 		
 		// List<Board> boardList = boardService.findAll();
 		List<CKBoard> cookboardList = ckBoardService.findByPage(pageNo, pageSize);		
-		count = ckBoardService.findBoardCount(); 
+		count = ckBoardService.findBoardCount("recipe"); 
 		
 		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "cooklist");		
 		

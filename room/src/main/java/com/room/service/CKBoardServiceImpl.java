@@ -100,9 +100,9 @@ public class CKBoardServiceImpl implements CKBoardService {
 	}
 	
 	@Override
-	public int findBoardCount() {
+	public int findBoardCount(String category) {
 		
-		int count = cookBoardMapper.selectBoardCount();
+		int count = cookBoardMapper.selectBoardCount(category);
 		return count;
 	}
 	
