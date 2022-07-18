@@ -7,6 +7,10 @@
     
     <head>
         <title>레시피 공유 게시판</title>
+
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -29,7 +33,7 @@
                     
                     <div class="nav-collapse collapse">
 
- <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
+ 				<jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
                     </div>
                     <!--/.nav-collapse -->
                 </div>
@@ -44,7 +48,7 @@
                 <div class="span12">
                 	<div class="row-fluid">
 
-		                <div class="span11" >
+		                <div class="span11">
 		                    <div class="row-fluid">
 		                        <!-- block -->
 		                        <div class="block" style="height:800px">
@@ -65,24 +69,19 @@
 		                            		<input type="hidden" name="writer" value="${ loginuser.memberId }">
 		                            		</td>
 		                            	</tr>
-		                            	<tr>
+	
+		                               	<tr>
 		                            		<th>첨부파일</th>
 		                            		<td>
 		                            		<input type="file" name="attach">
 		                            		</td>
 		                            	</tr>
-		                            	<tr>
-		                            		<th>내용</th>
-		                            		<td>
-		                            		 <textarea  name="content" cols="300" rows="30"></textarea>
-		                               		</td>
-		                               	</tr>
 		                            </table>
-		                           
-		                            
-		                            
-		                            
-		                            
+		                            <div class="form-group">
+		                            	 <label for="content">내용</label>
+		                            	<textarea id="summernote" class="form-control" rows="5" name="content"></textarea>
+		                            </div>
+
 		                        </div>
 		                        <!-- /block -->
 		                    </div>
@@ -105,13 +104,15 @@
                 <p>&copy; Vincent Gabriel 2013</p>
             </footer>
      
+     	<!-- summernote editor -->
+     	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
         <!--/.fluid-container-->
         <script src="/room/resources/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
         <script src="/room/resources/vendors/jquery-1.9.1.min.js"></script>
         <script src="/room/resources/bootstrap/js/bootstrap.min.js"></script>
 		<script src="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
-
+		
 		<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
 		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
 
@@ -119,38 +120,21 @@
 
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
-        $(function() {
-            // Bootstrap
-            $('#bootstrap-editor').wysihtml5();
-
-            // Ckeditor standard
-            $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-			]});
-            $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
-        });
-
-        // Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_basic",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview anchor",
-		        "searchreplace visualblocks code fullscreen",
-		        "insertdatetime media table contextmenu paste"
-		    ],
-		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | "
-		});
+       	   $('#summernote').summernote({
+        placeholder: '글쓰는 화면',
+        tabsize: 2,
+        height: 100
+      }); 
+        	
         
         $(function(){
         	$('#write').on('click', function(event){
         		event.preventDefault();
-        	
         		$('#writeform').submit();
         	});
-        	
         });
-
-		
+       
+       
 
         </script>
     </body>

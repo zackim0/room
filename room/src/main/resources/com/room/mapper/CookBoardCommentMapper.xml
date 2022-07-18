@@ -24,10 +24,10 @@
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.CKBoardComment">
 		SELECT board_comment_no commentNo,board_no boardNo,member_id writer,comment_content content,
-				comment_regdate regDate,comment_deleted deleted
+				comment_regdate regDate,comment_deleted deleted, groupno, step, depth
 		FROM BoardComment
 		WHERE board_no = #{boardNo}
-		ORDER BY groupno DESC, step ASC
+		ORDER BY groupno ASC, step ASC
 	</select>
 	
 	<select id="selectByCommentNo" parameterType="int" resultType="com.room.dto.CKBoardComment">
@@ -35,7 +35,7 @@
 				comment_regdate regDate,comment_deleted deleted,groupno, step, depth
 		FROM BoardComment
 		WHERE board_comment_no = #{commentNo}
-		ORDER BY board_comment_no DESC
+		ORDER BY board_comment_no ASC
 	</select>
 	
 	<delete id="delete" parameterType="int">
