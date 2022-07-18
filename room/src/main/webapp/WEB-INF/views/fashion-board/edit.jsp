@@ -26,90 +26,67 @@
         
         <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
         
-        <div class="container-fluid">
-            <div class="row-fluid">
-                
-                <!--/span-->
-                
-                <div class="span12">
-                	<div class="row-fluid">
+       <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <form id="editform" action="edit" method="post">
+                                      <fieldset>
+                                        <legend>글 수정</legend>
+                                        <div class="control-group">
+                                         <tr>
+								            <th>글번호:</th>
+								           	<td>
+								          		<input type="hidden"
+								            		   name="boardNo" value="${board.boardNo}">
+								            	${ board.boardNo }
+								            </td>
+								            </tr>
+								            <br>
+								            <br>	
+								          <tr>
+                                          <th>제목:</th>
+                                          <div class="controls">
+											<td>
+												<input type="text" name="title" value="${board.title }">
+                                           	</td>
+                                            <p class="help-block">수정할 내용을 입력하세요.</p>
+                                          </div>
+                                          </tr>
+                                        </div>
+                                        <div class="control-group">
+                                          <tr>
+                                          <th>작성자:</th>
+                                          <div class="controls">
+										  <input type="text" name="writer" value="${board.writer}" readonly> 
+                                          </div>
+                                          </tr>
+                                         </div>
+                                          <br>
+                                          <br>
+                                          
+                                       <div class="control-group">
+                                          <label class="control-label" >내용</label>
+                                          <div class="controls">
+                                            <input type="text" name="content" value="${board.content}" style="width: 810px; height: 200px">
+                                          </div>
+                                        </div>
+                                          <p class="help-block">수정할 내용을 입력하세요.</p>
+                                        <div class="form-actions">
+                                          <button type="submit" class="btn btn-primary">수정</button> 
+                                          <button type="reset" class="btn"><a href='javascript:history.back()'>취소</a></button>                                        
+                                        </div>
+                                   
+                                         
+                                       
+                                      </fieldset>
+                                    </form>
 
-
-		                
-		               
-
-		                <div class="span12" id="content">
-		                    <div class="row-fluid">
-		                        <!-- block -->
-		                        <!-- <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left"></div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="tinymce_basic"></textarea>
-		                            </div>
-		                        </div> -->
-		                        <table>
-		                        <form id="editform" action="edit" method="post">
-		            <tr>
-		            	<th>글번호</th>
-		            	<td>
-		            		<input type="hidden"
-		            				name="boardNo" value="${board.boardNo}">
-		            		${ board.boardNo }
-		            	</td>
-		            </tr>
-		            <tr>
-		                <th>제목</th>
-		                <td>
-		                	<input type="text" name="title" value="${board.title}">
-		                </td>
-		            </tr>
-		            <tr>
-		                <th>작성자</th>
-		                <td>
-		               	<input type="text" name="writer" value="${board.writer}" readonly>
-		            	</td>
-		            </tr>
-		            <tr>
-		                <th>내용</th>
-		                <td>		                    
-		                  <textarea name="content" style="resize:none" cols="76" rows="15">
-		                  	${board.content}
-		                  </textarea>
-		                </td>
-		            </tr>
-		            <tr>
-		            	<th>작성일</th>
-		            	<td>${board.regDate}</td>
-		            </tr>
-		            	<div class="buttons">
-			    			[<a href="/room/fashion-board/list">목록보기(절대경로)</a>]		    	
-			    		</div> 
-			    		<div class="buttons">
-			    			[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
-			    			&nbsp;&nbsp;
-			    			[&nbsp;<a href='detail?boardNo=${board.boardNo}'>취소1</a>&nbsp;]
-			    			[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
-			    		</div>
-			    		</form>
-		                        <!-- /block -->
-		                    </div>
-		                </div>
-		               	
-
-		                
-
-                	</div>
-                </div>
-			    	     
-            	</div>
-            <hr>
-            <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
-            </footer>
-            
-        </div>
+                                </div>
+                            </div>
+                        </div>
 
         <!--/.fluid-container-->
         

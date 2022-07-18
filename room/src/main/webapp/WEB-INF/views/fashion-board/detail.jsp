@@ -29,125 +29,113 @@
         
         <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
         
-        <div class="container-fluid">
-            <div class="row-fluid">
-                
-                <!--/span-->
-                
-                <div class="span12">
-                	<div class="row-fluid">
-
-
-		                
-		               
-
-		                <div class="span12" id="content">
-		                    <div class="row-fluid">
-		                        <!-- block -->
-		                        <!-- <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left"></div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="tinymce_basic"></textarea>
-		                            </div>
-		                        </div> -->
-		                        <table>
-		            <tr>
-		                <th>제목</th>
-		                <td>${ board.title }</td>
-		            </tr>
-		            <tr>
-		                <th>작성자</th>
-		                <td>${ requestScope.board.writer}</td>
-		            </tr>
-		            <tr>
-		                <th>내용</th>
-		                <td>		                    
-		                  <% String enter2 = "r\n"; %> 
-		                  <c:set var = "enter" value="
-		                  " />
-		                  ${ fn:replace(board.content, enter , '<br>') }
-		                </td>
-		            </tr>
-		             <tr>
-		            	<th>첨부파일</th>
-		            	<td>
-		            	<c:forEach var="file" items="${board.files}">
-			            	<a href="download?attachNo=${file.attachNo}">
-			            	${file.userFileName}
-			            	</a>
-		            	<br>
-		            	</c:forEach>
-		            	</td>
-		            </tr>
-		            <tr>
-		            	<th>작성일</th>
-		            	<td>${board.regDate}</td>
-		            </tr>
-		            	<div class="buttons">
-			    			[<a href="/room/fashion-board/list">목록보기(절대경로)</a>]		    	
-			    		</div> 
-			    		<div class="buttons">
-			    		<c:if test="${loginuser.memberId eq board.writer }">
-		               	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
-		               	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
-		               	[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
-		               	</c:if>	
-			    		</div> 
-		                        <!-- /block -->
-		                    </div>
-		                </div>
-		                <!-- 댓글 -->
-		                <div>
-		                	<button id="add-comment-btn" type="button"
-		                			class="btn btn-outline-primary btn-sm">댓글작성</button>
-		               		</div>
-						<!-- /댓글 -->
-						
-						<!-- 댓글 표시 영역 -->
-						<br>
-						<hr style="width:800px;margin:0 auto">
-						<br>
-						<table id="comment-list" style="width:800px;margin:0 auto">	                
-						</table>
-						<!-- /댓글 표시 영역 -->
-						
-			<!-- Modal -->
-				<div id="comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-modal-label" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="comment-modal-label">댓글 작성</h5>
-		        				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-		        					<span aria-hidden="true">x</span>
-		        				</button>
-		        			</div>
-		        		<div class="modal-body">
-		        		<form id="comment-form">
-		        			<div class="form-group">
-		        				<label>댓글</label>
-		        				<textarea class="form-control"
-		        						  name='content' id='modal-content'></textarea>
-		        			</div>
-		        			<input type="hidden" name='writer' value='${loginuser.memberId }'>
-		        			<input type="hidden" name='boardNo' value='${board.boardNo }'>
-		        			<input type="hidden" name='boardCommentNo' value="0">
-		        			<input type="hidden" name='action'><!-- 댓글 or 대댓글 -->
-		        		</form>
-		        		</div>
-		        		<div class="modal-footer">
-		        			<button id='modalRegisterBtn' type="button" class="btn btn-success btn-sm">댓글쓰기</button>	
-		        			<button id='modalCloseBtn' type="button" class="btn btn-succes btn-sm">취소</button>
-		        		</div>
-		        </div>	
-                </div>
-			    	     
-            	</div>
+        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">게시글 상세보기</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+									<div class="alert">
+										<strong>제목:</strong>
+										<tr>
+											<td>${board.title}</td>
+										</tr>
+									</div>
+									<div class="alert alert-info">										
+										<strong>작성자:</strong>
+										<tr>
+											<td>${requestScope.board.writer}</td>
+										</tr>
+									</div>
+									<div  style=word-break:break-all;  class="alert alert-success">
+										<strong>내용:</strong> 
+										<tr>
+											<td>${board.content}</td>
+										</tr>
+									</div>
+									<div class="alert alert-error">										
+										<strong>작성일:</strong>
+										<tr>
+											<td>${board.regDate}</td>
+										</tr>
+									</div>
+									<div class="external-event ui-draggable" style="position: relative;">
+										<strong>첨부파일:</strong>
+										<tr>
+											<td>
+											<c:forEach var="file" items="${board.files}">
+												<a href="download?attachNo=${file.attachNo}">
+												${file.userFileName}
+												</a>
+											</c:forEach>
+											</td>
+										</tr>
+									</div>
+									<br>
+									<div class="buttons">
+										[<a href="/room/fashion-board/list">목록보기</a>]
+										<c:if test="${loginuser.memberId eq board.writer}">									
+										[&nbsp;<a id='delete-btn' href='javascript:'>삭제</a>&nbsp;]
+										[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
+										</c:if>
+									</div>
+									<br>
+									
+									<!-- 댓글 -->
+									<div>
+										<button id="add-comment-btn" type="button"
+												class="btn btn-outline-primary btn-sm">댓글작성</button>
+									
+									</div>
+									<!-- /댓글 -->
+									
+									<!-- 댓글 표시 영역 -->
+									<h4>댓글</h4>
+									<div class="alert alert-block">
+									<hr style="width:800px;margin:0 auto">
+									<table id="comment-list" style="width:800px;margin:0 auto">
+									</table>																			
+									</div>
+									<!-- /댓글 표시 영역 -->	
+                            
+                            
+                            </div>
+                        </div>
             <hr>
             <footer>
                 <p>&copy; Vincent Gabriel 2013</p>
             </footer>
+            	
+            	<!-- Modal -->
+            		<div id="comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-modal-label" aria-hidden="true">
+            			<div class="modal-dialog" role="document">
+            				<div class="modal-content">
+            					<div class="modal-header">
+            						<h5 class="modal-title" id="comment-modal-label">댓글 작성</h5>
+            						<button class="close" type="button" data-dismiss="modal" aria-lable="Close">
+            							<span aria-hidden="true">x</span>
+            						</button>
+            					</div>
+            				</div>
+            			</div>
+            			<div class="modal-body">
+            			<form id="comment-form">
+            				<div class="form-group">
+            					<label>댓글</label>
+            					<textarea class="form-control"
+            							  name='content' id='modal-content'></textarea>
+            				</div>
+            				<input type="hidden" name='writer' value='${loginuser.memberId}'>
+            				<input type="hidden" name='boardNo' value='${board.boardNo}'>
+            				<input type="hidden" name='boardCommentNo' value="o">
+ 							<input type="hidden" name='action'>           				
+            			</form>
+            			</div>
+            			<div class="modal-footer">
+		        			<button id='modalRegisterBtn' type="button" class="btn btn-success btn-sm">댓글쓰기</button>	
+		        			<button id='modalCloseBtn' type="button" class="btn btn-succes btn-sm">취소</button>
+		        		</div>
+            		</div>
             
         </div>
 
