@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+<mapper namespace="com.room.mapper.RecrultBoardMapper">
+	
+	<insert id="insertBoard" parameterType="com.room.dto.RecrultBoard">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO Board (title,member_id,content, category)
+		VALUES (#{title},#{writer},#{content},#{category})
+	</insert>
+	
+	<select id="selectAll" resultType="com.room.dto.RecrultBoard">
+		SELECT board_no boardNo, title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'recrult'
+		ORDER BY board_no DESC
+	</select>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.RecrultBoard">
+		SELECT board_no boardNo, title, member_id writer,content,readcount, regdate,deleted
+		FROM Board
+		where board_no = #{boardNo} and deleted = false
+	</select>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.RecrultBoard">
+		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
+		FROM Board WHERE category = 'recrult'
+		ORDER BY board_no DESC
+		LIMIT #{from},#{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM Board WHERE category = #{ category }
+	</select>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		update Board
+		set deleted = true
+		where board_no = #{boardNo}
+	</delete>
+	
+	<update id="update" parameterType="com.room.dto.RecrultBoard">
+		UPDATE Board
+		SET title = #{title}, content = #{content}
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<select id="select3" resultType="com.room.dto.RecrultBoard">
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='recrult' and deleted = FALSE
+		ORDER by board_no DESC LIMIT 3
+	</select>
+	
+	<!-- 첨부파일 관련 -->
+	
+	<insert id="insertBoardAttach" parameterType="com.room.dto.RecrultBoardAttach">
+		INSERT BoardAttach (board_no,userfilename, savedfilename)
+		VALUES (#{boardNo},#{userFileName},#{savedFileName})
+	</insert>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="com.room.dto.RecrultBoardAttach">
+	 	SELECT attach_no attachNo,board_no boardNo,userfilename,savedfilename,downloadcount
+	 	FROM BoardAttach
+	 	where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectBoardAttachByAttachNo" parameterType="int" 
+											 resultType="com.room.dto.RecrultBoardAttach">
+		SELECT attach_no attachNo, board_no boardNo, userfilename, savedfilename, downloadcount
+		FROM BoardAttach
+		WHERE attach_no = #{attachNo}										 
+	</select>
+	
+
+</mapper>

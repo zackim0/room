@@ -6,7 +6,8 @@
 <html>
     
     <head>
-        <title>글쓰기 - 만나서 놀 사람</title>
+    	<meta charset="utf-8"/>
+        <title>글쓰기 - 운영진 추천 게임 게시판</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -19,7 +20,9 @@
     </head>
     
     <body>
-        <jsp:include page="/WEB-INF/views/modules/navbar.jsp" /> 
+        
+        <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
+        
         <div class="container-fluid">
             <div class="row-fluid">
                 
@@ -27,49 +30,52 @@
                 
                 <div class="span12">
                 	<div class="row-fluid">
-		                <div class="span12" id="content">
-		                    <div class="row-fluid">
-		                        <!-- block -->
-		                        <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left">CKEditor Full</div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="ckeditor_full"></textarea>
-		                            </div>
-		                        </div>
-		                        <!-- /block -->
-		                    </div>
-		                </div>
 
 		                <div class="span12" id="content">
 		                    <div class="row-fluid">
 		                        <!-- block -->
-		                        <div class="block">
+		                        <!-- <div class="block">
 		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left">TinyMCE Basic</div>
+		                                <div class="muted pull-left"></div>
 		                            </div>
 		                            <div class="block-content collapse in">
 		                               <textarea id="tinymce_basic"></textarea>
 		                            </div>
-		                        </div>
-		                        <!-- /block -->
-		                        <button class="btn btn-primary"><i class="icon-ok icon-white"></i> 등록</button>
-								<button class="btn btn-danger"><i class="icon-remove icon-white"></i> 취소</button>
-		                    </div>
-		                </div>
-
-		                <div class="span12" id="content">
-		                    <div class="row-fluid">
-		                        <!-- block -->
-		                        <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left">TinyMCE Full</div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="tinymce_full"></textarea>
-		                            </div>
-		                        </div>
+		                        </div> -->
+		                        <table>
+		            <tr>
+			           <form id="writeform" action="write" method="post" enctype="multipart/form-data">
+		            	<input type="hidden" name="category" value="recrult">
+		                <th>제목</th>
+		                <td>
+		                    <input type="text" name="title" style="width:550px" />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>작성자</th>
+						<td>
+							<input type="text" name="writer" value="${loginuser.memberId}" readonly> 
+						</td>
+		            </tr>
+		            <tr>
+		                <th>내용</th>
+		                <td>		                    
+		                    <textarea 
+		                    		  name="content" cols="76" rows="15"></textarea>
+		                </td>
+		            </tr>
+		            <tr>
+		            	<th>첨부파일</th>
+		            	<td>
+		            		<input type="file" name="attach">
+		            	</td>
+		            </tr>
+		            	<div class="buttons">
+			    	[<a id="write" href="javascript:">글쓰기</a>]
+			    	&nbsp;&nbsp;
+			    	[<a href="list">목록보기(절대경로)</a>]
+			    	</div>  
+			    	</form>   
 		                        <!-- /block -->
 		                    </div>
 		                </div>
@@ -78,12 +84,13 @@
 
                 	</div>
                 </div>
-
-            </div>
+			    	     
+            	</div>
             <hr>
             <footer>
-                <p>&copy; 우리들의 자취방 생활</p>
+                <p onclick=window.open("/room/")>&copy; 우리들의 자취방 생활</p>
             </footer>
+            
         </div>
 
         <!--/.fluid-container-->
@@ -140,6 +147,13 @@
 		        {title: 'Test template 2', content: 'Test 2'}
 		    ]
 		});
+		
+		$(function(){
+			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
+				event.preventDefault();
+				$('#writeform').submit();
+			})
+		})
 
         </script>
     </body>

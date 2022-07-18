@@ -10,7 +10,7 @@
     
     <head>
     	<meta charset="utf-8"/>
-        <title>WYSIWYG Editors</title>
+        <title>글 수정 - 추천 게임 게시판</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">

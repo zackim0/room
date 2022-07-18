@@ -74,7 +74,7 @@
                                 </a>
                                 <ul class="dropdown-menu" id="menu3">
                                     <li>
-                                        <a tabindex="-1" href="/room/playground/gameintroduce/list">운영진 추천 게임</a>
+                                        <a tabindex="-1" href="/room/playground/gameintroduce/list">추천 게임</a>
                                     </li>
                                     <li>
                                         <a tabindex="-1" href="/room/playground/recrult/list">만나서 놀 사람</a>
