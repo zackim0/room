@@ -129,6 +129,7 @@
 						<textarea class="form-control" 
 								  name='content' id='modal-content'></textarea>
 					</div>
+					
 					<input type="hidden" name='writer' value='${ loginuser.memberId }'>
 					<input type="hidden" name='boardNo' value='${ board.boardNo }'>
 					<input type="hidden" name='commentNo' value="0">

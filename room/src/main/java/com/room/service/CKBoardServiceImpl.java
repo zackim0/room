@@ -23,6 +23,7 @@ public class CKBoardServiceImpl implements CKBoardService {
 		
 		List<CKBoard> cookboardList = cookBoardMapper.selectAll();
 		
+		
 		return cookboardList;
 	}
 	
@@ -92,7 +93,6 @@ public class CKBoardServiceImpl implements CKBoardService {
 		cookBoardMapper.update(board);
 		
 	}
-	
 	@Override
 	public List<CKBoard> find3(){
 		List<CKBoard> ckboardRecentList = cookBoardMapper.selcet3();
