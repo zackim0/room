@@ -1,13 +1,16 @@
+<%@page import="com.room.dto.FBoard"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
+    	 
+
     	 
 <!DOCTYPE html>
 <html>
     
     <head>
     	<meta charset="utf-8"/>
-        <title>글쓰기 - 추천 게임 게시판</title>
+        <title>WYSIWYG Editors</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -31,6 +34,7 @@
                 <div class="span12">
                 	<div class="row-fluid">
 
+
 		                <div class="span12" id="content">
 		                    <div class="row-fluid">
 		                        <!-- block -->
@@ -42,43 +46,58 @@
 		                               <textarea id="tinymce_basic"></textarea>
 		                            </div>
 		                        </div> -->
+		                        <form id="editform" action="edit" method="post">
+		                        <input type="hidden" name="pageNo" value="${ param.pageNo }">
 		                        <table>
+		                        
 		            <tr>
-			           <form id="writeform" action="write" method="post" enctype="multipart/form-data">
-		            	<input type="hidden" name="category" value="gameintro">
+		            	<th>글번호</th>
+		            	<td>
+		            		<input type="hidden"
+		            				name="boardNo" value="${board.boardNo}">
+		            		${ board.boardNo }
+		            	</td>
+		            </tr>
+		            <tr>
 		                <th>제목</th>
 		                <td>
-		                    <input type="text" name="title" style="width:550px" />
+		                	<input type="text" name="title" value="${board.title}">
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-						<td>
-							<input type="text" name="writer" value="${loginuser.memberId}" readonly> 
-						</td>
+		                <td>
+		               	<input type="text" name="writer" value="${board.writer}" readonly>
+		            	</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea 
-		                    		  name="content" cols="76" rows="15"></textarea>
+		                  <textarea name="content" style="resize:none" cols="76" rows="15">
+		                  	${board.content}
+		                  </textarea>
 		                </td>
 		            </tr>
 		            <tr>
-		            	<th>첨부파일</th>
-		            	<td>
-		            		<input type="file" name="attach">
-		            	</td>
+		            	<th>작성일</th>
+		            	<td>${board.regDate}</td>
 		            </tr>
+		            </table>
+		            </form>
 		            	<div class="buttons">
-			    	[<a id="write" href="javascript:">글쓰기</a>]
-			    	&nbsp;&nbsp;
-			    	[<a href="list">목록보기(절대경로)</a>]
-			    	</div>  
-			    	</form>   
+			    			[<a href="/room/fashion-board/list">목록보기(절대경로)</a>]		    	
+			    		</div> 
+			    		<div class="buttons">
+			    			[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
+			    			&nbsp;&nbsp;
+			    			[&nbsp;<a href='detail?boardNo=${board.boardNo}'>취소1</a>&nbsp;]
+			    			[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
+			    		</div>
+			    		
 		                        <!-- /block -->
 		                    </div>
 		                </div>
+		               	
 
 		                
 
@@ -94,6 +113,7 @@
         </div>
 
         <!--/.fluid-container-->
+        
         <script src="/room/resources/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
         <script src="/room/resources/vendors/jquery-1.9.1.min.js"></script>
         <script src="/room/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -101,60 +121,23 @@
 
 		<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
 		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
-
+		
+		<script src="/room/resources/js/jquery-3.6.0.js"></script>
+		
 		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
 
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
-        $(function() {
-            // Bootstrap
-            $('#bootstrap-editor').wysihtml5();
-
-            // Ckeditor standard
-            $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-				{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-				[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-			]});
-            $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
+     
+     	$(function () {
+			
+		  
+        $('#edit-btn').on('click',function(event){
+        	event.preventDefault();
+        	$('#editform').submit();
         });
-
-        // Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_basic",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview anchor",
-		        "searchreplace visualblocks code fullscreen",
-		        "insertdatetime media table contextmenu paste"
-		    ],
-		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-		});
-
-		// Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_full",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-		        "searchreplace wordcount visualblocks visualchars code fullscreen",
-		        "insertdatetime media nonbreaking save table contextmenu directionality",
-		        "emoticons template paste textcolor"
-		    ],
-		    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-		    toolbar2: "print preview media | forecolor backcolor emoticons",
-		    image_advtab: true,
-		    templates: [
-		        {title: 'Test template 1', content: 'Test 1'},
-		        {title: 'Test template 2', content: 'Test 2'}
-		    ]
-		});
-		
-		$(function(){
-			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
-				event.preventDefault();
-				$('#writeform').submit();
-			})
-		})
-
+        
+     	}); 
         </script>
     </body>
 

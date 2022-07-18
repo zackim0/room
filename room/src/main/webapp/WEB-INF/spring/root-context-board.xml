@@ -13,6 +13,12 @@
 		<property name="gIboardMapper" ref="gameIntroduceBoardMapper" />
 		<property name="gIboardCommentMapper" ref="gameIntroduceBoardCommentMapper" />
 	</bean>
+	<bean id="recrultboardService" class="com.room.service.RecrultBoardServiceImpl">
+		<property name="recrultboardMapper" ref="recrultBoardMapper" />
+		<property name="recrultboardCommentMapper" ref="recrultBoardCommentMapper" />
+	</bean>
+	
+	
 	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
 		<property name="fBoardMapper" ref="fashionBoardMapper" />
 		<property name="boardCommentMapper" ref="fashionBoardCommentMapper" />

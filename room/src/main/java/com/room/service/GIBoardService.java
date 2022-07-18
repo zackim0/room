@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
-// import com.room.dto.GIBoardComment;
 import com.room.dto.GIBoardComment;
 
 public interface GIBoardService {

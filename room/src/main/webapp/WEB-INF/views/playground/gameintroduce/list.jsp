@@ -4,7 +4,7 @@
 <html class="no-js">
     
     <head>
-        <title>운영진 추천 게임 게시판</title>
+        <title>추천 게임 게시판</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -33,7 +33,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">운영진 추천 게임</div>
+                                    <div class="muted pull-left">추천 게임</div>
                                 </div>
                                 </div>
                                 <div class="block-content collapse in">
