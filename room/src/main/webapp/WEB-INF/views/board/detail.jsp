@@ -180,6 +180,8 @@
     		
     		$('#add-comment-btn').on('click', function(event) {
     			$('#modal-content').val("");
+    			$('#comment-form input[name=commentNo]').val(0);
+    			$('#comment-form').attr('action', "comment-write");
     			$('#comment-modal').modal('show'); // show modal
     		});
     		
@@ -202,7 +204,7 @@
     			// return;
     			
     			$.ajax({
-    				"url" : "comment-write",
+    				"url" : $('#comment-form').attr('action'),
     				"method" : "post",
     				"async" : true,
     				"data" : formData, // boardno=1&writer=imauser1&content=test
@@ -289,6 +291,14 @@
     			});
     			
     			
+    		});
+    		
+    		$('#comment-list').on('click', '.recomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+    			var commentNo = $(this).attr("data-commentno");
+    			$('#model-content').val("");
+    			$('#comment-form input[name=commentNo]').val(commentNo);
+    			$('#comment-form').attr('action', "recomment-write");
+    			$('#comment-modal').modal('show'); // show model
     		});
             
         });
