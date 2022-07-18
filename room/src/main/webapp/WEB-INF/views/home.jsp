@@ -30,7 +30,7 @@
                 <div class="span12" id="content">
 
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span4">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
@@ -68,12 +68,12 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        <div class="span6">
+                        <div class="span4">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">패션정보</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/mate-board/list">더보기</a>
+                                    <div class="muted pull-left">패션 정보 게시판</div>
+                                    <div class="pull-right"><a class="badge badge-info" href="/room/fashion-board/list">더보기</a>
 
                                     </div>
                                 </div>
@@ -96,7 +96,45 @@
                                                			<a href='/room/fashion-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.readCount}</td>
+	                                                <td>${board.regDate}</td>
+	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                        <div class="span4">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">게임 소개</div>
+                                    <div class="pull-right"><a class="badge badge-info" href="/room/playground/gameintroduce/list">더보기</a>
+
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
+                                                <th>작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="board" items="${requestScope.gIboardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/playgound/gameintroduce/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.regDate}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>

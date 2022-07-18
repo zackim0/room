@@ -4,9 +4,9 @@
 				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
               <!-- package..class로 가정하고 사용 -->				 
-<mapper namespace="com.room.mapper.GameIntroduceBoardMapper">
+<mapper namespace="com.room.mapper.RecrultBoardMapper">
 	
-	<insert id="insertBoard" parameterType="com.room.dto.GIBoard">
+	<insert id="insertBoard" parameterType="com.room.dto.RecrultBoard">
 		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -14,21 +14,21 @@
 		VALUES (#{title},#{writer},#{content},#{category})
 	</insert>
 	
-	<select id="selectAll" resultType="com.room.dto.GIBoard">
+	<select id="selectAll" resultType="com.room.dto.RecrultBoard">
 		SELECT board_no boardNo, title,member_id writer,readcount,regdate,deleted
-		FROM Board WHERE category = 'gameintro'
+		FROM Board WHERE category = 'recrult'
 		ORDER BY board_no DESC
 	</select>
 	
-	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.GIBoard">
+	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.RecrultBoard">
 		SELECT board_no boardNo, title, member_id writer,content,readcount, regdate,deleted
 		FROM Board
 		where board_no = #{boardNo} and deleted = false
 	</select>
 	
-	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.GIBoard">
+	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.RecrultBoard">
 		SELECT board_no boardNo,title,member_id writer,readcount,regdate,deleted
-		FROM Board WHERE category = 'gameintro'
+		FROM Board WHERE category = 'recrult'
 		ORDER BY board_no DESC
 		LIMIT #{from},#{count}
 	</select>
@@ -49,35 +49,35 @@
 		where board_no = #{boardNo}
 	</delete>
 	
-	<update id="update" parameterType="com.room.dto.GIBoard">
+	<update id="update" parameterType="com.room.dto.RecrultBoard">
 		UPDATE Board
 		SET title = #{title}, content = #{content}
 		WHERE board_no = #{boardNo}
 	</update>
 	
-	<select id="select3" resultType="com.room.dto.GIBoard">
+	<select id="select3" resultType="com.room.dto.RecrultBoard">
 		SELECT board_no boardNo, title, member_id writer, regdate, readcount
 		FROM Board
-		WHERE category ='gameintro' and deleted = FALSE
+		WHERE category ='recrult' and deleted = FALSE
 		ORDER by board_no DESC LIMIT 3
 	</select>
 	
 	<!-- 첨부파일 관련 -->
 	
-	<insert id="insertBoardAttach" parameterType="com.room.dto.GIBoardAttach">
+	<insert id="insertBoardAttach" parameterType="com.room.dto.RecrultBoardAttach">
 		INSERT BoardAttach (board_no,userfilename, savedfilename)
 		VALUES (#{boardNo},#{userFileName},#{savedFileName})
 	</insert>
 	
 	<select id="selectBoardAttachByBoardNo" parameterType="int"
-											resultType="com.room.dto.GIBoardAttach">
+											resultType="com.room.dto.RecrultBoardAttach">
 	 	SELECT attach_no attachNo,board_no boardNo,userfilename,savedfilename,downloadcount
 	 	FROM BoardAttach
 	 	where board_no = #{boardNo}
 	</select>
 	
 	<select id="selectBoardAttachByAttachNo" parameterType="int" 
-											 resultType="com.room.dto.GIBoardAttach">
+											 resultType="com.room.dto.RecrultBoardAttach">
 		SELECT attach_no attachNo, board_no boardNo, userfilename, savedfilename, downloadcount
 		FROM BoardAttach
 		WHERE attach_no = #{attachNo}										 

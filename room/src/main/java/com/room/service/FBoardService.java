@@ -25,7 +25,7 @@ public interface FBoardService {
 
 	List<FBoard> findByPage(int pageNo, int pageSize);
 
-	int findBoardCount();
+	int findBoardCount(String category);
 
 	FBoardAttach findBoardAttachByAttachNo(int attachNo);
 

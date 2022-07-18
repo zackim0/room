@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="selectBoardCount" resultType="int">
-		SELECT COUNT(*) FROM Board
+		SELECT COUNT(*) FROM Board WHERE category = #{ category }
 	</select>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.FBoard">

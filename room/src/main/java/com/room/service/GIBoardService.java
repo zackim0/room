@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.room.dto.GIBoard;
 import com.room.dto.GIBoardAttach;
-// import com.room.dto.GIBoardComment;
 import com.room.dto.GIBoardComment;
 
 public interface GIBoardService {
@@ -12,6 +11,8 @@ public interface GIBoardService {
 	void writeBoard(GIBoard board);
 	
 	List<GIBoard> findAll();
+	
+	List<GIBoard> find3();
 	
 	List<GIBoard> findByPage(int pageNo, int pageSize);
 	

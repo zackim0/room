@@ -201,7 +201,7 @@ public class GIController {
 	
 	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
 	@ResponseBody
-	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	public String deleteComment(@RequestParam(name = "commentNo") int commentNo) {
 	
 		gIboardService.deleteComment(commentNo);
 		

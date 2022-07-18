@@ -31,7 +31,7 @@ public interface CookBoardMapper {
 
 	CKBoardAttach selectBoardAttachByAttachNo(int attachNo);
 
-	int selectBoardCount();
+	int selectBoardCount(String category);
 
 	void update(CKBoard board);
 

@@ -14,7 +14,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>${ board.title }-추천 게임 게시판</title>
+<title>${ board.title }-운영진추천게임 게시판</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css"
 	href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"
@@ -94,7 +94,7 @@
 									<td>${board.regDate}</td>
 								</tr>
 								<div class="buttons">
-									[<a href="/room/playground/gameintroduce/list">목록보기</a>]
+									[<a href="/room/playground/recrult/list">목록보기</a>]
 								</div>
 								<div class="buttons">
 									<c:if test="${loginuser.memberId eq board.writer }">

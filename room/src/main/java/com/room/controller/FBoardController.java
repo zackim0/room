@@ -48,7 +48,7 @@ public class FBoardController {
 //		
 		//List<FBoard> fboardList = fBoardService.findAll();
 		List<FBoard> fboardList = fBoardService.findByPage(pageNo, pageSize);		
-		count = fBoardService.findBoardCount(); // 데이터베이스에 전체 개시물 개수 조회	
+		count = fBoardService.findBoardCount("fashion"); // 데이터베이스에 전체 개시물 개수 조회	
 //		
 		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");		
 //		

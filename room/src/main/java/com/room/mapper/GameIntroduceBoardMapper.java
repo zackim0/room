@@ -24,8 +24,6 @@ public interface GameIntroduceBoardMapper {
 	
 	void update(GIBoard board);
 
-	int selectBoardCount();
-	
 	void updateBoardReadCount(int boardNo);
 
 	int selectBoardCount(String category);
@@ -35,5 +33,7 @@ public interface GameIntroduceBoardMapper {
 	void insertBoardAttach(GIBoardAttach file);
 
 	GIBoardAttach selectBoardAttachByAttachNo(int attachNo);
+
+	List<GIBoard> select3();
 	
 }

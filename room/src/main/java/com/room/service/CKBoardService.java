@@ -17,7 +17,7 @@ public interface CKBoardService {
 	void delete(int boardNo);
 	List<CKBoard> find3();
 	List<CKBoard> findByPage(int pageNo, int pageSize);
-	int findBoardCount();
+	int findBoardCount(String category);
 	CKBoardAttach findBoardAttachByAttachNo(int attachNo);
 	void update(CKBoard board);
 	
