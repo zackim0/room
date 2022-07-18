@@ -4,7 +4,7 @@
 <html class="no-js">
     
     <head>
-        <title>만나서 놀 사람 게시판</title>
+        <title>번개 모임 게시판</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">

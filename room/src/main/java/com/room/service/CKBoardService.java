@@ -26,4 +26,5 @@ public interface CKBoardService {
 	List<CKBoardComment> findCommentsByBoardNo(int boardNo);
 	void deleteComment(int commentNo);
 	void updateBoardComment(CKBoardComment comment);
+	void writeBoardReComment(CKBoardComment boardComment);
 }

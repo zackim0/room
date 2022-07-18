@@ -14,7 +14,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>${ board.title }-운영진추천게임 게시판</title>
+<title>${ board.title }-번개 모임 게시판</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css"
 	href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"

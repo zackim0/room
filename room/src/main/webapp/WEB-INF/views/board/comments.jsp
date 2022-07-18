@@ -7,6 +7,10 @@
 			<tr id="tr${ comment.commentNo }">
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;padding-left:${comment.depth * 20}px">
 	        		
+	        		<c:if test="${ comment.depth > 0 }">
+	        		
+	        		</c:if> 
+	        		
 	        		<div id='commentview${ comment.commentNo }'>
 	        			${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]
@@ -15,13 +19,18 @@
 	                    ${ comment.content }
 	                    </span>
 	                    <br /><br />
-	                    <div style='display:${ loginuser.memberId eq comment.writer ? "block" : "none" }'>
+	                    <span style='display:${ loginuser.memberId eq comment.writer ? "" : "none" }'>
 	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
 	                    	&nbsp;
 	                    	<a class="deletecomment"
 	                    	   href="javascript:"
 	                    	   data-commentno="${ comment.commentNo }">삭제</a>
-	                    </div>	                    
+	                    </span>	                    
+	                    	&nbsp;
+	                    	<a class="recomment"
+	                    	   href="javascript:"
+	                    	   data-commentno="${ comment.commentNo }">댓글쓰기</a>
+	                    	  <br><br>
 	                </div>
 	                
 	                <div id='commentedit${ comment.commentNo }' style="display: none">

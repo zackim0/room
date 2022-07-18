@@ -19,5 +19,10 @@ public interface CookBoardCommentMapper {
 	int selectCommentCount();
 	void delete(int commentNo);
 	void update(CKBoardComment boardComment);
+	
+	CKBoardComment selectByCommentNo(int commentNo);
+	void insertBoardReComment(CKBoardComment boardComment);
+	void updateGroupNo(CKBoardComment comment);
+	void updateStep(@Param("groupNo") int groupNo, @Param("step") int step);
 
 }
