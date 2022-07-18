@@ -54,7 +54,7 @@
 			        	 <input type="hidden" name="category" value="fashion">
 		                <th>제목</th>
 		                <td>
-		                    <input type="text" name="title" style="width:550px" />
+		                    <input type="text" name="title" class="span8" />
 		                </td>
 		            </tr>
 		            <tr>
@@ -62,7 +62,7 @@
 						<td>
 							
 							<input type="text"
-									name="writer" value="${loginuser.memberId}"> 
+									name="writer" value="${loginuser.memberId}" readonly> 
 						</td>
 		            </tr>
 		            <tr>
