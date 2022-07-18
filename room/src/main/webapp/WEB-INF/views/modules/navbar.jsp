@@ -13,8 +13,24 @@
                      <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="/room/home">우리들의 자취방 생활</a>
-                    <div class="nav-collapse collapse">
+                    <div class="nav-collapse collapse">                    	
                         <ul class="nav pull-right">
+                        	<li>
+                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">글쓰기<span class="caret"></span></button>
+                        	<ul class="dropdown-menu">
+								<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
+								<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
+								<li class="divider"></li>
+								<li><a href="/room/board/write">레시피 공유</a></li>
+								<li><a href="#">조리도구 거래</a></li>
+								<li class="divider"></li>
+								<li><a href="/room/playground/gameintroduce/write">추천 게임</a></li>
+								<li><a href="/room/playground/recrult/write">번개 모임</a></li>
+								<li class="divider"></li>
+								<li><a href="/room/fashion-board/write">패션 정보</a></li>
+								<li><a href="#">미용실 추천/후기</a></li>
+							 </ul>
+                        	</li>
                             <li class="dropdown">
                                <!--  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i> -->
 								
@@ -23,7 +39,7 @@
 								<li><a href="/room/account/login">로그인</a></li>
 								<li><a href="/room/account/register">회원가입</a></li>
 								</c:when>
-								<c:otherwise>		
+								<c:otherwise>
 								 <a role="button" class="dropdown-toggle" data-toggle="dropdown"> ${ loginuser.memberId }님 반갑습니다 <i class="caret"></i>													
 									<ul class="dropdown-menu">								
                                     <li>
@@ -88,10 +104,10 @@
                                 </a>
                                 <ul class="dropdown-menu" id="menu4">
                                     <li>
-                                        <a tabindex="-1" href="#">미용실 후기/추천</a>
+                                        <a tabindex="-1" href="/room/fashion-board/list">패션 정보</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="/room/fashion-board/list">의류/화장품 세일 정보</a>
+                                        <a tabindex="-1" href="#">미용실 후기/추천</a>
                                     </li>
                                 </ul>
                             </li>

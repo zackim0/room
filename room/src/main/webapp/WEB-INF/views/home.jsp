@@ -35,8 +35,11 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">룸메이트 구하기</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/mate-board/list">더보기</a>
-
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/mate-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">

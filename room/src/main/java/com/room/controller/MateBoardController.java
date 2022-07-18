@@ -189,6 +189,16 @@ public class MateBoardController {
 		
 	}
 	
+	@PostMapping(path = { "/recomment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeReComment(MateBoardComment boardComment) {
+		
+		mateBoardService.writeBoardReComment(boardComment);
+		
+		return "success";
+		
+	}
+	
 	@GetMapping(path = { "/comment-list" })
 	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 		
@@ -196,7 +206,7 @@ public class MateBoardController {
 		
 		model.addAttribute("comments", comments);
 		
-		return "board/comments";
+		return "mate-board/comments";
 		
 	}
 	
