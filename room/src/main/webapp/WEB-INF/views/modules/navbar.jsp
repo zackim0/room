@@ -93,7 +93,7 @@
                                         <a tabindex="-1" href="/room/playground/gameintroduce/list">추천 게임</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="/room/playground/recrult/list">만나서 놀 사람</a>
+                                        <a tabindex="-1" href="/room/playground/recrult/list">번개 모임</a>
                                     </li>
                                     <li class="divider"></li>
                                 </ul>
