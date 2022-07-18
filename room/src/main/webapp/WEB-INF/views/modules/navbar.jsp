@@ -16,7 +16,9 @@
                     <div class="nav-collapse collapse">                    	
                         <ul class="nav pull-right">
                         	<li>
-                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">글쓰기<span class="caret"></span></button>
+                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                        	<i class="icon-pencil icon-white"></i>
+                        	&nbsp;글쓰기<span class="caret"></span></button>
                         	<ul class="dropdown-menu">
 								<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
 								<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
@@ -65,7 +67,7 @@
                                         <a href="/room/mate-board/list">룸메이트 구하기</a>
                                     </li>
                                     <li>
-                                        <a href="/room/petboard/list">산책메이트 구하기</a>
+                                        <a href="/room/petboard/list" id="pet">산책메이트 구하기</a>
                                     </li>
                                     <li class="divider"></li>
                                 </ul>
@@ -131,3 +133,13 @@
                 </div>
             </div>
         </div>
+        
+        
+        <script>
+        $(function() {
+        	$("#pet").on('click', function(event) {
+        		event.preventDefault();
+        	});
+        });
+        
+        </script>

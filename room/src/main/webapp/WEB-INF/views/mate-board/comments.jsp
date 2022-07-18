@@ -11,12 +11,18 @@
 	        		<br>
 	        			${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]
+	                    <br /><br />	                    
+	                    <c:choose>
+	                    <c:when test="${ not comment.deleted }">
+	                    <span>${ comment.content }</span>
+	                    </c:when>
+	                    <c:otherwise>
+	                    <span style="color:lightgray">삭제된 글</span>
+	                    </c:otherwise>
+	                    </c:choose>
+	                    
 	                    <br /><br />
-	                    <span>
-	                    ${ comment.content }
-	                    </span>
-	                    <br /><br />
-	                    <span style='display:${ loginuser.memberId eq comment.writer ? "" : "none" }'>
+	                    <span style='display:${ not comment.deleted and loginuser.memberId eq comment.writer ? "" : "none" }'>
 	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
 	                    	&nbsp;
 	                    	<a class="deletecomment"
@@ -26,7 +32,7 @@
 	                    </span>
 	                    <a class="recomment"
                     	   href="javascript:"
-                    	   data-commentno="${ comment.commentNo }">댓글쓰기</a>
+                    	   data-commentno="${ comment.commentNo }">댓글쓰기</a>                    	
 	                    <br /><br />	                    
 	                </div>
 	                
@@ -36,7 +42,7 @@
 	        			[${ comment.regDate }]
 						<br /><br />
 						<form id="updateform${ comment.commentNo }">
-						<input type="hidden" name="commentno" value="${ comment.commentNo }" />
+						<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 						<textarea name="content" style="width: 800px" rows="3" 
 							maxlength="200">${ comment.content }</textarea>
 						</form>

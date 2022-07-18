@@ -12,10 +12,12 @@ import com.room.dto.CKBoard;
 import com.room.dto.FBoard;
 import com.room.dto.GIBoard;
 import com.room.dto.MateBoard;
+import com.room.dto.PetBoard;
 import com.room.service.CKBoardService;
 import com.room.service.FBoardService;
 import com.room.service.GIBoardService;
 import com.room.service.MateBoardService;
+import com.room.service.PetBoardService;
 
 @Controller // http 요청 처리 객체로 ioc 컨테이너에 등록
 public class HomeController {
@@ -34,7 +36,11 @@ public class HomeController {
 	
 	@Autowired
 	@Qualifier("gIboardService")
-	private GIBoardService gIboardService; 
+	private GIBoardService gIboardService;
+	
+	@Autowired
+	@Qualifier("petBoardService")
+	private PetBoardService petBoardService;
 
 	@RequestMapping(path = { "/", "/home" }) // "/" 또는 "/home" 요청을 처리하는 메서드로 등록
 	public String home(Model model) {
@@ -50,6 +56,9 @@ public class HomeController {
 		
 		List<GIBoard> gIboardRecentList = gIboardService.find3();
 		model.addAttribute("gIboardRecentList", gIboardRecentList);
+		
+		List<PetBoard> petBoardList = petBoardService.findAll();
+		model.addAttribute("petBoardList", petBoardList);
 
 		return "home"; // /WEB-INF/views/ + home + .jsp -> /WEB-INF/views/home.jsp
 	}
