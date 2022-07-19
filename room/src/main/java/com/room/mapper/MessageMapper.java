@@ -16,4 +16,6 @@ public interface MessageMapper {
 
 	void insertMessage(Message message);
 
+	void receiver(Member member);
+
 }

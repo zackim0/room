@@ -45,4 +45,11 @@ public class MessageServiceImpl implements MessageService {
 		messageMapper.insertMessage(message);
 	}
 
+
+	@Override
+	public void reciver(Member member) {
+		messageMapper.receiver(member);
+		
+	}
+
 }

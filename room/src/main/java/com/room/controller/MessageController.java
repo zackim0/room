@@ -63,6 +63,15 @@ public class MessageController {
 		return "redirect:list";
 	}
 	
+	@PostMapping(path= {"/receiver"})
+	public String receiver(Member member, Model model) {
+		
+		List<Member> memberList = messageService.findMemberList();
+		model.addAttribute("memberList",memberList);
+		
+		return "message/receiver";
+	}
+	
 	
 	
 	
