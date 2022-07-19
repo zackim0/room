@@ -50,6 +50,9 @@ public class FBoardServiceImpl implements FBoardService {
 		
 		board.setFiles(files);
 		
+		fBoardMapper.updateBoardReadCount(boardNo);
+		board.setReadCount(board.getReadCount() + 1);
+		
 		return board;
 
 		

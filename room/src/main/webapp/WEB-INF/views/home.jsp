@@ -180,7 +180,7 @@
                                                 <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach var="board" items="${requestScope.cookBoardRecentList}">
+                                        <c:forEach var="board" items="${requestScope.ckboardRecentList}">
 	                                        <tbody>
 	                                            <tr>
 	                                            	<td>${ board.boardNo }</td>
