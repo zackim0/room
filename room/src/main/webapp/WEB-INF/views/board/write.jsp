@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="form-actions">
                                           <button type="submit" id="write" class="btn btn-primary">작성하기</button>
-                                          <button type="reset" class="btn">취소</button>
+                                          <button type="button" onclick="location.href='/room/board/cooklist'" class="btn">취소</button>
                                         </div>
                                       </fieldset>
                                     </form>
