@@ -55,32 +55,36 @@
 		                            <div class="navbar navbar-inner block-header">
 		                                <div class="muted pull-left">게시글 쓰기</div>
 		                            </div>
-		                             <table>
-		                            	<tr>
-		                            	<th>제목</th>
-		                            	<td>
-		                            		<input type="text" name="title" style="width:550px">
-		                            	</td>
-		                            	</tr>
-		                            	<tr>
-		                            		<th>글쓴이</th>
-		                            		<td>
-		                            		${ loginuser.memberId }
-		                            		<input type="hidden" name="writer" value="${ loginuser.memberId }">
-		                            		</td>
-		                            	</tr>
-	
-		                               	<tr>
-		                            		<th>첨부파일</th>
-		                            		<td>
-		                            		<input type="file" name="attach">
-		                            		</td>
-		                            	</tr>
+		                            <table>
+		                            <tr>
+		                            <th>제목</th>
+							                <td>
+							                    <input type="text" name="title" class="span8" />
+							                </td>
+							            </tr>
+							            <tr>
+							                <th>작성자</th>
+											<td>
+												${ loginuser.memberId }
+												<input type="hidden"
+														name="writer" value="${loginuser.memberId}"> 
+											</td>
+							            </tr>
+							            <tr>
+							                <th>내용</th>
+							                <td>		                    
+							                    <textarea 
+							                    		  name="content" cols="76" rows="15"></textarea>
+							                </td>
+							            </tr>
+							            <tr>
+							            	<th>첨부파일</th>
+							            	<td>
+							            		<input type="file" name="attach">
+							            	</td>
+							            </tr>
+		                            
 		                            </table>
-		                            <div class="form-group">
-		                            	 <label for="content">내용</label>
-		                            	<textarea id="summernote" class="form-control" rows="5" name="content"></textarea>
-		                            </div>
 
 		                        </div>
 		                        <!-- /block -->
@@ -120,13 +124,7 @@
 
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
-       	   $('#summernote').summernote({
-        placeholder: '글쓰는 화면',
-        tabsize: 2,
-        height: 100
-      }); 
-        	
-        
+ 
         $(function(){
         	$('#write').on('click', function(event){
         		event.preventDefault();

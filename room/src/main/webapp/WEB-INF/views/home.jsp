@@ -153,8 +153,8 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Clients</div>
-                                    <div class="pull-right"><span class="badge badge-info">17</span>
+                                    <div class="muted pull-left">레시피 공유</div>
+                                    <div class="pull-right"><a class="badge badge-info" href="/room/board/cooklist">더보기</a>
 
                                     </div>
                                 </div>
@@ -162,32 +162,26 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
+                                                <th>작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Vincent</td>
-                                                <td>Gabriel</td>
-                                                <td>@gabrielva</td>
+                                        <c:forEach var="board" items="${requestScope.ckboardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/board//detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.regDate}</td>
+	                                                <td>${board.regDate}</td>
                                             </tr>
                                         </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>

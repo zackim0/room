@@ -76,9 +76,10 @@
 	</update>
 	
 	<select id="select3" resultType="com.room.dto.CKBoard">
-		SELECT board_no boardNo,title,member_id writer,readcount,regdate
-		FROM Board WHERE category = 'recipe' and deleted = FALSE
-		ORDER BY board_no DESC LIMIT 3
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='recipe' and deleted = FALSE
+		ORDER by board_no DESC LIMIT 3
 	</select>
 	
 	

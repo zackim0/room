@@ -19,7 +19,7 @@ public interface CookBoardMapper {
 
 	void delete(int boardNo);
 
-	List<CKBoard> selcet3();
+	List<CKBoard> select3();
 
 	void insertBoardAttach(CKBoardAttach BoardAttach);
 

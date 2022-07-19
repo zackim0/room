@@ -30,9 +30,9 @@ public class HomeController {
 	@Qualifier("mateBoardService")
 	private MateBoardService mateBoardService;
 	
-//	@Autowired
-//	@Qualifier("ckBoardService")
-//	private CKBoardService ckBoardService;
+	@Autowired
+	@Qualifier("ckBoardService")
+	private CKBoardService ckBoardService;
 	
 	@Autowired
 	@Qualifier("gIboardService")
@@ -51,8 +51,8 @@ public class HomeController {
 		List<MateBoard> mateBoardRecentList = mateBoardService.find3();		
 		model.addAttribute("mateBoardRecentList", mateBoardRecentList);
 		
-//		List<CKBoard> ckboardRecentList = ckBoardService.find3();
-//		model.addAttribute("ckboardRecentList", ckboardRecentList);
+		List<CKBoard> ckboardRecentList = ckBoardService.find3();
+		model.addAttribute("ckboardRecentList", ckboardRecentList);
 		
 		List<GIBoard> gIboardRecentList = gIboardService.find3();
 		model.addAttribute("gIboardRecentList", gIboardRecentList);
