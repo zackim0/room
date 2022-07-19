@@ -11,6 +11,7 @@
 
 	<mappers>
 		<mapper resource="com/room/mapper/MemberMapper.xml" />
+		<mapper resource="com/room/mapper/MessageMapper.xml" />
 	</mappers>
 	
 </configuration>
