@@ -7,7 +7,7 @@
     
     <head>
     	<meta charset="utf-8"/>
-        <title>룸메이트 구하기</title>
+        <title>자취생활 꿀Tip 작성</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">

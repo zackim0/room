@@ -76,8 +76,11 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">패션 정보 게시판</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/fashion-board/list">더보기</a>
-
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/fashion-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -118,8 +121,11 @@
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">게임 소개</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/playground/gameintroduce/list">더보기</a>
-
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/playground/gameintroduce/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -155,9 +161,12 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">게임 소개</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/playground/gameintroduce/list">더보기</a>
-
+                                    <div class="muted pull-left">레시피 공유</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/board/cooklist">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -171,12 +180,98 @@
                                                 <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <c:forEach var="board" items="${requestScope.gIboardRecentList}">
+                                        <c:forEach var="board" items="${requestScope.cookBoardRecentList}">
 	                                        <tbody>
 	                                            <tr>
 	                                            	<td>${ board.boardNo }</td>
 	                                                <td>
-                                               			<a href='/room/playground/gameintroduce/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+                                               			<a href='/room/board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.regDate}</td>
+	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">산책메이트 구하기</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/petboard/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
+                                                <th>작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="board" items="${requestScope.petBoardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/petboard/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.regDate}</td>
+	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                        <div class="span6">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">자취생활 꿀Tip</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/tip-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                            	<th>글 번호</th>
+                                                <th>제목</th>
+                                                <th>작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="board" items="${requestScope.tipBoardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/tip-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
 	                                                <td>${board.regDate}</td>

@@ -6,7 +6,7 @@
 <html>
     
     <head>
-        <title>룸메이트 게시판</title>
+        <title>자취생활 꿀Tip</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -34,7 +34,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">룸메이트 구하기</div>
+                                <div class="muted pull-left">자취생활 꿀Tip</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
