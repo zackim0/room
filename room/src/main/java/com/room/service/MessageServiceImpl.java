@@ -52,4 +52,11 @@ public class MessageServiceImpl implements MessageService {
 		
 	}
 
+
+	@Override
+	public Message findByMessageNo(int message_No) {
+		Message message = messageMapper.selectByMessageNo(message_No);
+		return message;
+	}
+
 }

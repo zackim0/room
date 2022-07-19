@@ -45,19 +45,22 @@
 						                </tr> 
 						              </thead>
 						              <c:forEach items="${requestScope.messageList}" var="message">
-						              <tbody>
-						              	<tr>
-						                  <th><a href="detail?message_No=${message.message_No}">${message.message_No}</a></th>
-						                  <th>${message.sender}</th>
-						                  <th>${message.receiver}</th>
-						                  <th>${message.readTime}</th>
-						                </tr>
-						              </tbody>
+							          <c:if test="${message.receiver eq loginuser.memberId }">
+							              <tbody>
+							              	<tr>
+							                  <th><a href="detail?message_No=${message.message_No}">${message.message_No}</a></th>
+							                  <th>${message.sender}</th>
+							                  <th>${message.receiver}</th>
+							                  <th>${message.readTime}</th>
+							                </tr>
+							              </tbody>
+							             </c:if> 
 						              </c:forEach>
 						            </table>
 						             
 						          
                                 </div>
+                                
                                 
                             </div>
                         </div>

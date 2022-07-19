@@ -72,6 +72,23 @@ public class MessageController {
 		return "message/receiver";
 	}
 	
+	@GetMapping(path= {"/detail"})
+	public String detail(@RequestParam(name="message_No",defaultValue = "-1")int message_No,
+						Model model) {
+		
+		if (message_No == -1) {
+			return "redirect:list";
+		}
+		Message message = messageService.findByMessageNo(message_No);
+		if(message == null) {
+			return "redirect:list";
+		}
+		
+		model.addAttribute("message",message);
+		
+		return "message/detail";
+	}
+	
 	
 	
 	

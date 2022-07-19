@@ -17,4 +17,6 @@ public interface MessageService {
 	
 	void reciver(Member member);
 
+	Message findByMessageNo(int message_No);
+
 }

@@ -18,4 +18,6 @@ public interface MessageMapper {
 
 	void receiver(Member member);
 
+	Message selectByMessageNo(int message_No);
+
 }
