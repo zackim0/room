@@ -45,6 +45,7 @@
 											<th>제목</th>
 											<th>작성자</th>
 											<th>작성일</th>
+											<th>조회수</th>
 										</tr>
 									</thead>
 									<c:forEach var="board" items="${requestScope.petBoardList}">
@@ -61,6 +62,7 @@
 													</c:choose></td>
 												<td>${board.writer}</td>
 												<td>${board.regDate}</td>
+												<td>${board.readCount}</td>
 											</tr>
 										</tbody>
 									</c:forEach>

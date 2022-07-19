@@ -25,6 +25,7 @@ import com.room.dto.PetBoardAttach;
 import com.room.service.PetBoardService;
 import com.room.service.PetBoardServiceImpl;
 import com.room.ui.ThePager;
+import com.room.ui.ThePager2;
 import com.room.view.MateDownloadView;
 import com.room.view.PetDownloadView;
 
@@ -48,7 +49,7 @@ public class PetBoardController {
 		List<PetBoard> petboardList = petBoardService.findByPage(pageNo,pageSize);
 		count = petBoardService.findBoardCount("pet");
 		
-		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
+		ThePager2 pager = new ThePager2(count, pageNo, pageSize, pagerSize, "list");
 		
 		model.addAttribute("petBoardList", petboardList);
 		model.addAttribute("pager", pager);
