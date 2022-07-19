@@ -38,9 +38,9 @@
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table">
-                                   		<a href="write">
+                                   		<!-- <a href="write">
 	                                    	<button class="btn btn-primary" value="글쓰기"><i class="icon-pencil icon-white"></i>글쓰기</button>
-	                                    </a>
+	                                    </a> -->
                                         <thead>
                                             <tr>
                                                 <td>글번호</td>
