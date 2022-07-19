@@ -22,17 +22,7 @@
     <body>
         
         <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
-        
-        <div class="container-fluid">
-            <div class="row-fluid">
-                
-                <!--/span-->
-                
-                <div class="span12">
-                	<div class="row-fluid">
-
-		                <div class="span12" id="content">
-		                    <div class="row-fluid">
+    
 		                        <!-- block -->
 		                        <!-- <div class="block">
 		                            <div class="navbar navbar-inner block-header">
@@ -42,7 +32,7 @@
 		                               <textarea id="tinymce_basic"></textarea>
 		                            </div>
 		                        </div> -->
-		                        <table>
+		          <table>
 		            <tr>
 			           <form id="writeform" action="write" method="post" enctype="multipart/form-data">
 		            	<input type="hidden" name="category" value="gameintro">
@@ -70,12 +60,13 @@
 		            		<input type="file" name="attach">
 		            	</td>
 		            </tr>
-		            	<div class="buttons">
-			    	[<a id="write" href="javascript:">글쓰기</a>]
-			    	&nbsp;&nbsp;
-			    	[<a href="list">목록보기(절대경로)</a>]
-			    	</div>  
-			    	</form>   
+		            </table>
+			    	<a id="write" href="javascript:">
+			    		<button class="btn btn-primary"><i class="icon-pencil icon-white"></i> 글쓰기</button>
+			    	</a>
+			    	<a href="list">
+						<button class="btn"><i class="icon-remove"></i>목록보기</button>
+					</a>
 		                        <!-- /block -->
 		                    </div>
 		                </div>

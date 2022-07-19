@@ -4,7 +4,7 @@
 <html class="no-js">
     
     <head>
-        <title>만나서 놀 사람 게시판</title>
+        <title>번개 모임 게시판</title>
         <!-- Bootstrap -->
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -33,14 +33,14 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">만나서 놀 사람</div>
+                                    <div class="muted pull-left">번개 모임</div>
                                 </div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table">
-                                   		<a href="write">
+                                   		<!-- <a href="write">
 	                                    	<button class="btn btn-primary" value="글쓰기"><i class="icon-pencil icon-white"></i>글쓰기</button>
-	                                    </a>
+	                                    </a> -->
                                         <thead>
                                             <tr>
                                                 <td>글번호</td>

@@ -23,6 +23,7 @@ public interface MateBoardService {
 	List<MateBoardComment> findCommentsByBoardNo(int boardNo);
 	void deleteComment(int commentNo);
 	void updateBoardComment(MateBoardComment comment);
+	void writeBoardReComment(MateBoardComment boardComment);
 
 		
 }

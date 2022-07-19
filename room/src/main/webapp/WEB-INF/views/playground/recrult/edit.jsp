@@ -10,7 +10,7 @@
     
     <head>
     	<meta charset="utf-8"/>
-        <title>WYSIWYG Editors</title>
+        <title>글 수정 - 번개 모임 게시판</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -84,16 +84,15 @@
 		            </tr>
 		            </table>
 		            </form>
-		            	<div class="buttons">
-			    			[<a href="/room/fashion-board/list">목록보기(절대경로)</a>]		    	
-			    		</div> 
-			    		<div class="buttons">
-			    			[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
-			    			&nbsp;&nbsp;
-			    			[&nbsp;<a href='detail?boardNo=${board.boardNo}'>취소1</a>&nbsp;]
-			    			[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
-			    		</div>
-			    		
+		            <a href="list">
+						<button class="btn"><i class="icon-share-alt"></i>목록보기</button>
+					</a>
+			    			<a id="edit-btn" href="javascript:">
+								<button class="btn btn-primary"><i class="icon-pencil icon-white"></i>글수정</button>
+							</a>
+							<a href='javascript:history.back()'>
+								<button class="btn btn-danger"><i class="icon-remove icon-white"></i>취소</button>
+							</a>
 		                        <!-- /block -->
 		                    </div>
 		                </div>

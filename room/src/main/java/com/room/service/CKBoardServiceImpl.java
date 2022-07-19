@@ -27,6 +27,8 @@ public class CKBoardServiceImpl implements CKBoardService {
 		return cookboardList;
 	}
 	
+	
+	
 	@Override
 	public List<CKBoard> findByPage(int pageNo, int pageSize) {
 		
@@ -95,7 +97,7 @@ public class CKBoardServiceImpl implements CKBoardService {
 	}
 	@Override
 	public List<CKBoard> find3(){
-		List<CKBoard> ckboardRecentList = cookBoardMapper.selcet3();
+		List<CKBoard> ckboardRecentList = cookBoardMapper.select3();
 		return ckboardRecentList;
 	}
 	
@@ -113,6 +115,8 @@ public class CKBoardServiceImpl implements CKBoardService {
 	public void writeBoardComment(CKBoardComment comment) {
 		
 		cookBoardCommentMapper.insertBoardComment(comment);
+		comment.setGroupNo(comment.getGroupNo());
+		cookBoardCommentMapper.updateGroupNo(comment);
 		
 	}
 
@@ -130,6 +134,17 @@ public class CKBoardServiceImpl implements CKBoardService {
 	@Override
 	public void updateBoardComment(CKBoardComment comment) {
 		cookBoardCommentMapper.update(comment);
+		
+	}
+
+	@Override
+	public void writeBoardReComment(CKBoardComment boardComment) {
+		CKBoardComment parentComment = 
+				cookBoardCommentMapper.selectByCommentNo(boardComment.getCommentNo());
+		boardComment.setGroupNo(parentComment.getGroupNo());
+		boardComment.setDepth(parentComment.getDepth() + 1);
+		boardComment.setStep(parentComment.getStep() + 1);
+		cookBoardCommentMapper.insertBoardReComment(boardComment);
 		
 	}
 	

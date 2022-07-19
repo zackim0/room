@@ -17,8 +17,6 @@
 		<property name="recrultboardMapper" ref="recrultBoardMapper" />
 		<property name="recrultboardCommentMapper" ref="recrultBoardCommentMapper" />
 	</bean>
-	
-	
 	<bean id="fBoardService" class="com.room.service.FBoardServiceImpl">
 		<property name="fBoardMapper" ref="fashionBoardMapper" />
 		<property name="boardCommentMapper" ref="fashionBoardCommentMapper" />
@@ -33,9 +31,11 @@
 	</bean>
 	<bean id="petBoardService" class="com.room.service.PetBoardServiceImpl">
 		<property name="petBoardMapper" ref="petBoardMapper" />
-		
 	</bean>
-	
+	<bean id="tipBoardService" class="com.room.service.TipBoardServiceImpl">
+		<property name="tipBoardMapper" ref="tipBoardMapper" />
+		<property name="tipBoardCommentMapper" ref="tipBoardCommentMapper" />
+	</bean>
 
 </beans>
 

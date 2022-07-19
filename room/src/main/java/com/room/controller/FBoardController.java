@@ -141,9 +141,12 @@ public class FBoardController {
 	
 	@GetMapping(path = {"/delete"})
 	public String delete(
-			@RequestParam(name="boardNo",defaultValue = "-1")int boardNo) {
-		if(boardNo > 0) {
+			@RequestParam(name="boardNo",defaultValue = "-1")int boardNo,
+			@RequestParam(defaultValue = "-1")int pageNo) {
+		
+		if(boardNo > 0 && pageNo >0) {
 			fBoardService.delete(boardNo);
+			return "redirect:list?pageNo=" + pageNo;
 		}
 		return "redirect:list";
 		
@@ -152,9 +155,10 @@ public class FBoardController {
 	@GetMapping(path= {"/edit"})
 	public String showEditForm(
 			@RequestParam(name="boardNo",defaultValue = "-1")int boardNo,
+			@RequestParam(defaultValue = "-1")int pageNo,
 			Model model){
 			
-			if(boardNo < 1) {
+			if(boardNo < 1 && pageNo < 1) {
 				return "redirect:list";
 			}
 			
@@ -164,18 +168,23 @@ public class FBoardController {
 			}
 			
 			model.addAttribute("board",board);
+			model.addAttribute("pageNo", pageNo);
 			
 			return "fashion-board/edit";
 				
 			}
 	
 	@PostMapping(path= {"/edit"})
-	public String edit(FBoard board) {
+	public String edit(FBoard board,
+						@RequestParam(defaultValue = "-1")int pageNo) {
 		
+		if (pageNo < 1) {
+			return "redirect:list";
+		}
 		fBoardService.update(board);
 		
-		return String.format("redirect:detail?boardNo=%d",
-									board.getBoardNo());
+		return String.format("redirect:detail?boardNo=%d&pageNo=%d",
+									board.getBoardNo(), pageNo);
 		
 	}
 	

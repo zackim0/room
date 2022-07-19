@@ -119,7 +119,7 @@ public class GIController {
 	public String delete(@RequestParam(name="boardNo", defaultValue = "-1") int boardNo,
 						 @RequestParam(defaultValue = "-1") int pageNo ) {
 		
-		if(boardNo > 0 /* && pageNo > 0 */) {
+		if(boardNo > 0  && pageNo > 0 ) {
 			gIboardService.delete(boardNo);
 //			return "redirect:list?pageNo=" + pageNo;
 		}

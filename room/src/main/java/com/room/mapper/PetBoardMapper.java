@@ -16,6 +16,7 @@ public interface PetBoardMapper {
 
 	void insertBoard(PetBoard board);
 
+	List<PetBoard> select3();
 	
 	PetBoard selectByBoardNo(int boardNo); 
 	

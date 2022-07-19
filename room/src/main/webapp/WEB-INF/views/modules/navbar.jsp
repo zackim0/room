@@ -13,8 +13,36 @@
                      <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="/room/home">우리들의 자취방 생활</a>
-                    <div class="nav-collapse collapse">
+                    <div class="nav-collapse collapse">                    	
                         <ul class="nav pull-right">
+                        	<li>
+                        		<c:choose>
+                        		<c:when test="${ empty loginuser}">
+                        		</c:when>
+                        		<c:otherwise>
+									 <button class="btn btn-info">
+									 <i class="icon-envelope icon-white"></i>
+									 &nbsp;쪽지함
+									 </button>
+		                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+		                        	<i class="icon-pencil icon-white"></i>
+		                        	&nbsp;글쓰기<span class="caret"></span></button>
+		                        	<ul class="dropdown-menu">
+										<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
+										<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/board/write">레시피 공유</a></li>
+										<li><a href="/room/tip-board/write">자취생활 꿀Tip</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/playground/gameintroduce/write">추천 게임</a></li>
+										<li><a href="/room/playground/recrult/write">번개 모임</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/fashion-board/write">패션 정보</a></li>
+										<li><a href="#">미용실 추천/후기</a></li>
+									 </ul>
+                        		</c:otherwise>
+                        		</c:choose>
+                        	</li>
                             <li class="dropdown">
                                <!--  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i> -->
 								
@@ -23,7 +51,7 @@
 								<li><a href="/room/account/login">로그인</a></li>
 								<li><a href="/room/account/register">회원가입</a></li>
 								</c:when>
-								<c:otherwise>		
+								<c:otherwise>
 								 <a role="button" class="dropdown-toggle" data-toggle="dropdown"> ${ loginuser.memberId }님 반갑습니다 <i class="caret"></i>													
 									<ul class="dropdown-menu">								
                                     <li>
@@ -49,7 +77,7 @@
                                         <a href="/room/mate-board/list">룸메이트 구하기</a>
                                     </li>
                                     <li>
-                                        <a href="/room/petboard/list">산책메이트 구하기</a>
+                                        <a href="/room/petboard/list" id="pet">산책메이트 구하기</a>
                                     </li>
                                     <li class="divider"></li>
                                 </ul>
@@ -77,7 +105,7 @@
                                         <a tabindex="-1" href="/room/playground/gameintroduce/list">추천 게임</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="/room/playground/recrult/list">만나서 놀 사람</a>
+                                        <a tabindex="-1" href="/room/playground/recrult/list">번개 모임</a>
                                     </li>
                                     <li class="divider"></li>
                                 </ul>
@@ -88,10 +116,10 @@
                                 </a>
                                 <ul class="dropdown-menu" id="menu4">
                                     <li>
-                                        <a tabindex="-1" href="#">미용실 후기/추천</a>
+                                        <a tabindex="-1" href="/room/fashion-board/list">패션 정보</a>
                                     </li>
                                     <li>
-                                        <a tabindex="-1" href="/room/fashion-board/list">의류/화장품 세일 정보</a>
+                                        <a tabindex="-1" href="#">미용실 후기/추천</a>
                                     </li>
                                 </ul>
                             </li>
@@ -101,7 +129,7 @@
                                 </a>
                                 <ul class="dropdown-menu" id="menu5">
                                     <li>
-                                        <a tabindex="-1" href="#">초기 생활 TIP </a>
+                                        <a tabindex="-1" href="/room/tip-board/list">초기 생활 TIP </a>
                                     </li>
                                     <li>
                                         <a tabindex="-1" href="#">부동산 관련 TIP </a>
@@ -115,3 +143,13 @@
                 </div>
             </div>
         </div>
+        
+        
+        <script>
+        $(function() {
+        	$("#pet").on('click', function(event) {
+        		event.preventDefault();
+        	});
+        });
+        
+        </script>

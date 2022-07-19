@@ -1,3 +1,6 @@
+<%@ page language="java" 
+		 contentType="text/html; charset=utf-8"
+    	 pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,13 +19,13 @@
     <div class="container"  >
 
       <form class="form-signin" method="post" action="/room/account/login">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">로그인 할꺼니?</h2>
         <input type="text" class="input-block-level" name="memberId" placeholder="">
         <input type="password" class="input-block-level" name="passwd" placeholder="Password">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <button class="btn btn-large btn-primary" type="submit">로그인</button>
       </form>
 
     </div> <!-- /container -->

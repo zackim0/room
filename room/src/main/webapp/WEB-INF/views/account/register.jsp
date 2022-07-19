@@ -3,6 +3,7 @@
     
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     
@@ -13,18 +14,24 @@
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/assets/styles.css" rel="stylesheet" media="screen">
         <script src="/room/resources/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    	<style type="text/css">
+		.error {
+		color: red;
+		font-weight: bold;
+	}
+	</style>
     </head>
 <body>
  	<div class="row-fluid">
                         <!-- block -->
                        <div class="block">
                            <div class="navbar navbar-inner block-header">
-                               <div class="muted pull-left">register</div>
+                               <div class="muted pull-left">회원가입</div>
                            </div>
                            <div class="block-content collapse in">
                                <div class="span12">
 				<!-- BEGIN FORM-->
-				<form action="register" id="registerform" method="post" class="form-horizontal">
+				<form:form id="registerform" action="/room/account/register" method="post" modelAttribute="member">
 					<fieldset>
 						<div class="alert alert-error hide">
 							<button class="close" data-dismiss="alert"></button>
@@ -33,37 +40,44 @@
 							<button class="close" data-dismiss="alert"></button>
 						</div>
  							<div class="control-group">
- 								<label class="control-label">MemberId<span class="required">*</span></label>
- 								<div class="controls">
+ 														
+ 								<spring:message code="register.id" />
+ 								<div class="controls">										
  									<input type="text" id="memberId" name="memberId" data-required="1" class="span6 m-wrap"/>
+ 												<form:errors path="memberId" cssClass="error" /><br />
+
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">NickName<span class="required">*</span></label>
+ 								<spring:message code="register.nickname" />
  								<div class="controls">
  									<input type="text" id="nickname" name="nickname" data-required="1" class="span6 m-wrap"/>
+ 									<form:errors path="nickname" cssClass="error" /><br />
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">password<span class="required">*</span></label>
+ 								<spring:message code="register.passwd" />
  								<div class="controls">
- 									<input name="passwd" id="passwd" type="passwd" class="span6 m-wrap"/>
+ 										<input name="passwd" id="passwd" type="passwd" class="span6 m-wrap"/><br />
+ 										<form:errors path="passwd" cssClass="error" />
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">Email<span class="required"></span></label>
+ 								<spring:message code="register.email" />
  								<div class="controls">
- 									<input name="email" id="email" type="text" class="span6 m-wrap"/>
+ 									<input name="email" id="email" type="text" class="span6 m-wrap"/><br />
+ 									<form:errors path="email" cssClass="error" />
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">region<span class="required">*</span></label>
+ 								<spring:message code="register.region" />
  								<div class="controls">
- 									<input name="region" id="region" type="text" class="span6 m-wrap"/>
+ 									<input name="region" id="region" type="text" class="span6 m-wrap"/><br />
+ 									<form:errors path="region" cssClass="error" />
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">pet<span class="required">*</span></label>
+ 							<spring:message code="register.pet" />
  								<div class="controls">
  									<select class="span6 m-wrap" name="pet" id="pet">
  										<option value="1">yes</option>
@@ -72,11 +86,17 @@
  								</div>
  							</div>
  							<div class="form-actions">
- 								<button type="submit" id="registerbtn" class="btn btn-primary">Validate</button>
- 								<button type="button" id="cancel"class="btn">Cancel</button>
+ 								<button type="submit" id="registerbtn" class="btn btn-primary">
+ 									<spring:message code="register.register" />
+ 								</button>
+ 								
+ 								<button type="button" id="cancel"class="btn">
+ 									<spring:message code="register.cancel" />
+ 								</button>
+ 								
  							</div>
 					</fieldset>
-				</form>
+				</form:form>
 				<!-- END FORM-->
 			</div>
 		    </div>
@@ -87,7 +107,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#registerbtn").on('click', function(event) {
+			/* $("#registerbtn").on('click', function(event) {
 				
 				event.preventDefault();
 				//유효성 검사
@@ -97,7 +117,7 @@
 				}
 						
 				$('#registerform').submit();
-			});
+			}); */
 			$("#cancel").on('click', function(event) {	
 				event.preventDefault();
 				location.href = '/room/home';

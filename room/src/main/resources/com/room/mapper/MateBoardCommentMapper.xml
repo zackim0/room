@@ -8,16 +8,32 @@
 	<insert id="insertBoardComment" parameterType="com.room.dto.MateBoardComment"
 			useGeneratedKeys="true" keyColumn="board_comment_no" keyProperty="commentNo">
 		INSERT INTO BoardComment 
-		(board_no, member_id, comment_content)
+		(board_no, member_id, comment_content, groupno, step, depth)
 		VALUES 
-		(#{boardNo}, #{writer}, #{content})		
+		(#{boardNo}, #{writer}, #{content}, 0, 1, 0)		
+	</insert>
+	
+	<insert id="insertBoardReComment" parameterType="com.room.dto.MateBoardComment"
+			useGeneratedKeys="true" keyColumn="board_comment_no" keyProperty="commentNo">
+		INSERT INTO BoardComment 
+		(board_no, member_id, comment_content, groupno, step, depth)
+		VALUES 
+		(#{boardNo}, #{writer}, #{content}, #{groupNo}, #{step}, #{depth})		
 	</insert>
 	
 	<select id="selectByBoardNo" parameterType="int" resultType="com.room.dto.MateBoardComment">
 		SELECT board_comment_no commentNo,board_no boardNo,member_id writer,comment_content content,
-				comment_regdate regDate,comment_deleted deleted
+				comment_regdate regDate,comment_deleted deleted, groupno, step, depth
 		FROM BoardComment
-		WHERE board_no = #{boardNo} and comment_deleted = FALSE
+		WHERE board_no = #{boardNo}
+		ORDER BY groupno DESC, step ASC
+	</select>
+	
+	<select id="selectByCommentNo" parameterType="int" resultType="com.room.dto.MateBoardComment">
+		SELECT board_comment_no commentNo,board_no boardNo,member_id writer,comment_content content,
+				comment_regdate regDate,comment_deleted deleted,groupno, step, depth
+		FROM BoardComment
+		WHERE board_comment_no = #{commentNo}
 		ORDER BY board_comment_no DESC
 	</select>
 	
@@ -31,4 +47,19 @@
 		SET comment_content = #{content}
 		WHERE board_comment_no = #{commentNo}
 	</update>
+	
+	<update id="updateGroupNo" parameterType="com.room.dto.MateBoardComment">
+		UPDATE BoardComment
+		SET groupno = #{groupNo}
+		WHERE board_comment_no = #{commentNo}
+	</update>
+	
+	<update id="updateStep" parameterType="hashmap">
+	<![CDATA[
+		UPDATE BoardComment
+		SET step = step + 1
+		WHERE groupno = #{groupNo} AND step > #{step}
+	]]>
+	</update>
+	
 </mapper>

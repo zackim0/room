@@ -12,12 +12,12 @@
     
     <head>
         <title>레시피 공유</title>
-        <!-- Bootstrap -->
         
-        <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="/room/resources/assets/styles.css" rel="stylesheet" media="screen">
-        <link href="/room/resources/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+        
+       <!-- Bootstrap -->
+		<link rel="stylesheet" type="text/css"href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
+		<link href="/room/resources/bootstrap/css/bootstrap.min.css"rel="stylesheet" media="screen">
+		<link href="/room/resources/assets/styles.css" rel="stylesheet" media="screen">
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -40,19 +40,24 @@
                   <div class="block-content collapse in">
                       <div class="span12">
                           
-<table>
 
+<div class="alert">
 	<tr>
-		<th>제목</th>
+		<th>제목:</th>
 		<td>${ board.title }</td>
 		</tr>
+		</div>
 		
+		<div class="alert alert-info">
 		<tr>
-			<th>글쓴이</th>
+			<th>글쓴이:</th>
 			<td>${ requestScope.board.writer }</td>
 		</tr>
+		</div>
+		
+		<div style="word-break: break-all;" class="alert alert-success">
 		<tr>
-			<th>내용</th>
+			<th>내용:</th>
                <td>
 			<% String enter2 = "\r\n"; %>
 			<c:set var="enter" value="
@@ -60,9 +65,11 @@
                ${ fn:replace(board.content, enter, '<br>') }
                </td>
                </tr>
+               </div>
                
+               <div class="external-event ui-draggable" style="position: relative;">
                <tr>
-	           	<th>첨부파일</th>
+	           	<th>첨부파일:</th>
 	           	<td>
 	           	<c:forEach var="file" items="${ board.files }">
 	           	<a href="download?attachNo=${ file.attachNo }">
@@ -72,15 +79,16 @@
 	           	</c:forEach>
 	           	</td>
 	           </tr>
+	           </div>
+	           <div class="alert alert-error">
              <tr>
-		<th>작성일</th>
+		<th>작성일:</th>
 		<td>${ board.regDate }</td>
 		</tr>
+		</div>
 	
-	<tbody>
 	
-	</tbody>
-</table>
+
                 </div>
             </div>
         </div>
@@ -100,7 +108,7 @@
           </div>
       </div>
        <!-- comment 표시 영역 -->
-       <div>
+       <div class="alert alert-block">
         <br>
         <hr style="width:800px;margin:0 auto">
         <br>
@@ -180,6 +188,8 @@
     		
     		$('#add-comment-btn').on('click', function(event) {
     			$('#modal-content').val("");
+    			$('#comment-form input[name=commentNo]').val(0);
+    			$('#comment-form').attr('action', "comment-write");
     			$('#comment-modal').modal('show'); // show modal
     		});
     		
@@ -202,7 +212,7 @@
     			// return;
     			
     			$.ajax({
-    				"url" : "comment-write",
+    				"url" : $('#comment-form').attr('action'),
     				"method" : "post",
     				"async" : true,
     				"data" : formData, // boardno=1&writer=imauser1&content=test
@@ -289,6 +299,14 @@
     			});
     			
     			
+    		});
+    		
+    		$('#comment-list').on('click', '.recomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+    			var commentNo = $(this).attr("data-commentno");
+    			$('#model-content').val("");
+    			$('#comment-form input[name=commentNo]').val(commentNo);
+    			$('#comment-form').attr('action', "recomment-write");
+    			$('#comment-modal').modal('show'); // show model
     		});
             
         });

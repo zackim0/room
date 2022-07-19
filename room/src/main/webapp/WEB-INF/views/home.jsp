@@ -30,13 +30,16 @@
                 <div class="span12" id="content">
 
                     <div class="row-fluid">
-                        <div class="span4">
+                        <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">룸메이트 구하기</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/mate-board/list">더보기</a>
-
+                                    <div class="pull-left">룸메이트 구하기</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/mate-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -44,8 +47,8 @@
                                         <thead>
                                             <tr>
                                             	<th>글 번호</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:100px">작성자</th>
                                                 <th>조회수</th>
                                                 <th>작성일</th>
                                             </tr>
@@ -68,13 +71,16 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        <div class="span4">
+                        <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">패션 정보 게시판</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/fashion-board/list">더보기</a>
-
+                                    <div class="pull-left">패션 정보 공유</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/fashion-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -82,8 +88,8 @@
                                         <thead>
                                             <tr>
                                             	<th>글 번호</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:150px">작성자</th>
                                                 <th>조회수</th>
                                                 <th>작성일</th>
                                             </tr>
@@ -96,7 +102,7 @@
                                                			<a href='/room/fashion-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -106,13 +112,19 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        <div class="span4">
+                    </div>
+                    
+                    <div class="row-fluid">
+                        <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">게임 소개</div>
-                                    <div class="pull-right"><a class="badge badge-info" href="/room/playground/gameintroduce/list">더보기</a>
-
+                                    <div class="pull-left">게임 소개</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/playground/gameintroduce/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
@@ -120,8 +132,8 @@
                                         <thead>
                                             <tr>
                                             	<th>글 번호</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:150px">작성자</th>
                                                 <th>조회수</th>
                                                 <th>작성일</th>
                                             </tr>
@@ -131,10 +143,51 @@
 	                                            <tr>
 	                                            	<td>${ board.boardNo }</td>
 	                                                <td>
-                                               			<a href='/room/playgound/gameintroduce/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+                                               			<a href='/room/playground/gameintroduce/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                        <div class="span6">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="pull-left">레시피 공유</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/board/cooklist">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                            	<th>글 번호</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:150px">작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
+                                            </tr>
+                                        </thead>
+                                        <c:forEach var="board" items="${requestScope.ckboardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -145,46 +198,44 @@
                             <!-- /block -->
                         </div>
                     </div>
+                    
                     <div class="row-fluid">
                         <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Clients</div>
-                                    <div class="pull-right"><span class="badge badge-info">17</span>
-
+                                    <div class="pull-left">산책메이트 구하기</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/petboard/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
+                                            	<th>글 번호</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:150px">작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Vincent</td>
-                                                <td>Gabriel</td>
-                                                <td>@gabrielva</td>
-                                            </tr>
-                                        </tbody>
+                                        <c:forEach var="board" items="${requestScope.petBoardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/petboard/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.readCount}</td>
+	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
@@ -194,43 +245,46 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Invoices</div>
-                                    <div class="pull-right"><span class="badge badge-info">812</span>
-
+                                    <div class="pull-left">자취생활 꿀Tip</div>
+                                    <div class="pull-right">
+	                                    <a class="badge badge-info" href="/room/tip-board/list">
+	                                    <i class="icon-eye-open icon-white"></i>
+	                                    &nbsp;더보기
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="block-content collapse in">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Amount</th>
+                                            	<th>글 번호</th>
+                                                <th style="width:350px">제목</th>
+                                                <th style="width:150px">작성자</th>
+                                                <th>조회수</th>
+                                                <th>작성일</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>02/02/2013</td>
-                                                <td>$25.12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>01/02/2013</td>
-                                                <td>$335.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>01/02/2013</td>
-                                                <td>$29.99</td>
-                                            </tr>
-                                        </tbody>
+                                        <c:forEach var="board" items="${requestScope.tipBoardRecentList}">
+	                                        <tbody>
+	                                            <tr>
+	                                            	<td>${ board.boardNo }</td>
+	                                                <td>
+                                               			<a href='/room/tip-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
+	                                                </td>
+	                                                <td>${board.writer}</td>
+	                                                <td>${board.readCount}</td>
+	                                                <td>${board.regDate}</td>
+	                                            </tr>
+	                                        </tbody>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
                             <!-- /block -->
                         </div>
+                        
                     </div>
+                    
                     
                 </div>
             </div>

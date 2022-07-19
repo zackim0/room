@@ -65,8 +65,13 @@
 										</tbody>
 									</c:forEach>
 								</table>
-							${ pager }
-
+							<div class="pagination">
+								<ul>
+									<li>
+										${ pager }
+									</li>
+								</ul>
+							</div>
 							</div>
                             </div>
                         </div>
@@ -79,9 +84,7 @@
 											
             </div>
             <hr>
-            <footer>
-                <p>&copy; Vincent Gabriel 2013</p>
-            </footer>
+
         </div>
         </div>
         <!--/.fluid-container-->

@@ -115,6 +115,8 @@ public class MateBoardServiceImpl implements MateBoardService {
 	public void writeBoardComment(MateBoardComment comment) {
 		
 		mateBoardCommentMapper.insertBoardComment(comment);
+		comment.setGroupNo(comment.getCommentNo()); // 생성된 댓글 번호를 그룹 번호로 사용
+		mateBoardCommentMapper.updateGroupNo(comment);
 		
 	}
 
@@ -132,6 +134,18 @@ public class MateBoardServiceImpl implements MateBoardService {
 	@Override
 	public void updateBoardComment(MateBoardComment comment) {
 		mateBoardCommentMapper.update(comment);
+		
+	}
+
+	@Override
+	public void writeBoardReComment(MateBoardComment boardComment) {
+		// 댓글의 대상글 정보 조회
+		MateBoardComment parentComment =
+			mateBoardCommentMapper.selectByCommentNo(boardComment.getCommentNo());
+		boardComment.setGroupNo(parentComment.getGroupNo());
+		boardComment.setDepth(parentComment.getDepth() + 1);
+		boardComment.setStep(parentComment.getStep() + 1);
+		mateBoardCommentMapper.insertBoardReComment(boardComment);
 		
 	}
 

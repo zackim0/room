@@ -40,8 +40,8 @@ public class MateBoardController {
 	public String list(@RequestParam(defaultValue = "1")int pageNo,
 			Model model) {
 		
-		int pageSize = 3;
-		int pagerSize = 3;
+		int pageSize = 10;
+		int pagerSize = 5;
 		int count = 0;
 		
 		List<MateBoard> mateBoardList = mateBoardService.findByPage(pageNo, pageSize);
@@ -189,6 +189,16 @@ public class MateBoardController {
 		
 	}
 	
+	@PostMapping(path = { "/recomment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeReComment(MateBoardComment boardComment) {
+		
+		mateBoardService.writeBoardReComment(boardComment);
+		
+		return "success";
+		
+	}
+	
 	@GetMapping(path = { "/comment-list" })
 	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 		
@@ -196,7 +206,7 @@ public class MateBoardController {
 		
 		model.addAttribute("comments", comments);
 		
-		return "board/comments";
+		return "mate-board/comments";
 		
 	}
 	

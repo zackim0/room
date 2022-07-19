@@ -179,6 +179,17 @@ public class CookController {
 		
 	}
 	
+	@PostMapping(path = { "/recomment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeReComment(CKBoardComment boardComment) {
+		
+	
+		ckBoardService.writeBoardReComment(boardComment);
+		
+		return "success";
+	
+	}
+	
 	@GetMapping(path = { "/comment-list" })
 	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 		

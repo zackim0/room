@@ -34,6 +34,8 @@ public interface FashionBoardMapper {
 
 	FBoardAttach selectBoardAttachByAttachNo(int attachNo);
 
+	void updateBoardReadCount(int boardNo);
+
 	
 	
 }
