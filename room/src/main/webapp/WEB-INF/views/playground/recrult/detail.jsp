@@ -1,7 +1,3 @@
-<%@page import="com.room.dto.GIBoardAttach"%>
-<%@page import="com.room.dto.Member"%>
-<%@page import="com.room.dto.GIBoard"%>
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
 %>
@@ -38,90 +34,84 @@
 
 	<jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
 
-	<div class="container-fluid">
-		<div class="row-fluid">
+	<!-- block -->
 
-			<!--/span-->
-
+								<div class="block">
+		<div class="navbar navbar-inner block-header">
+			<div class="muted pull-left">게시글 상세보기</div>
+		</div>
+		<div class="block-content collapse in">
 			<div class="span12">
-				<div class="row-fluid">
-					<div class="span12" id="content">
-						<div class="row-fluid">
-							<!-- block -->
+				<div class="alert">
+					<strong>제목:</strong>
+					<tr>
+						<td>${board.title}</td>
+					</tr>
+				</div>
+				<div class="alert alert-info">
+					<strong>작성자:</strong>
+					<tr>
+						<td>${requestScope.board.writer}</td>
+					</tr>
+				</div>
+				<div style="word-break: break-all;" class="alert alert-success">
+					<strong>내용:</strong>
+					<tr>
+						<td>${board.content}</td>
+					</tr>
+				</div>
+				<div class="alert alert-error">
+					<strong>작성일:</strong>
+					<tr>
+						<td>${board.regDate}</td>
+					</tr>
+				</div>
+				<div class="external-event ui-draggable" style="position: relative;">
+					<strong>첨부파일:</strong>
+					<tr>
+						<td><c:forEach var="file" items="${board.files}">
+								<a href="download?attachNo=${file.attachNo}">
+									${file.userFileName} </a>
+							</c:forEach></td>
+					</tr>
+				</div>
+				<br>
+				<a href="list">
+						<button class="btn btn-primary"><i class="icon-share-alt icon-white"></i>목록보기</button>
+					</a>
+					<c:if test="${loginuser.memberId eq board.writer}">									
+										<a id='delete-btn' href='javascript:'>
+											<button class="btn btn-danger"><i class="icon-remove icon-white"></i>삭제</button>
+										</a>
+										<a href='edit?boardNo=${board.boardNo}&pageNo=${pageNo}'>
+											<button class="btn btn-inverse"><i class="icon-pencil icon-white"></i>수정</button>
+										</a>
+										</c:if>
+				<br>
+				<br>
 
-							<!-- <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left"></div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="tinymce_basic"></textarea>
-		                            </div>
-		                        </div> -->
-							<table>
-								<tr>
-									<th>제목</th>
-									<td>${ board.title }</td>
-								</tr>
-								<tr>
-									<th>작성자</th>
-									<td>${ requestScope.board.writer}</td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td>
-										<%
-										String enter2 = "r\n";
-										%>
-										<c:set var="enter" value="
-		                  " />
-										${ fn:replace(board.content, enter , '<br>') }
-									</td>
-								</tr>
+				<!-- 댓글 -->
+				<div>
+					<button id="add-comment-btn" type="button"
+						class="btn btn-outline-primary btn-sm"
+					>댓글작성</button>
 
-								<tr>
-									<th>첨부파일</th>
-									<td>
-										<c:forEach var="file" items="${board.files}">
-											<a href="download?attachNo=${file.attachNo}">
-												${file.userFileName} </a>
-											<br>
-										</c:forEach>
-									</td>
-								</tr>
+				</div>
+				<!-- /댓글 -->
 
-								<tr>
-									<th>작성일</th>
-									<td>${board.regDate}</td>
-								</tr>
-								<div class="buttons">
-									[<a href="/room/playground/recrult/list">목록보기</a>]
-								</div>
-								<div class="buttons">
-									<c:if test="${loginuser.memberId eq board.writer }">
-		               	[&nbsp;<a href='delete?boardNo=${board.boardNo}'>삭제</a>&nbsp;]
-		               	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
-		               	[&nbsp;<a
-											href='edit?boardNo=${board.boardNo}&pageNo=${ pageNo }'
-										>수정</a>&nbsp;]
-		               	</c:if>
-								</div>
-								<!-- /block -->
-								</div>
-								</div>
-								<!-- 댓글 -->
-								<div>
-									<button id="add-comment-btn" type="button"
-										class="btn btn-outline-primary btn-sm">댓글작성</button>
-								</div>
-								<!-- /댓글 -->
+				<!-- 댓글 표시 영역 -->
+				<h4>댓글</h4>
+				<div class="alert alert-block">
+					<hr style="width: 800px; margin: 0 auto">
+					<table id="comment-list" style="width: 800px; margin: 0 auto">
+					</table>
+				</div>
+				<!-- /댓글 표시 영역 -->
 
-								<!-- 댓글 표시 영역 -->
-								<br>
-								<hr style="width: 800px; margin: 0 auto">
-								<br>
-								<table id="comment-list" style="width: 800px; margin: 0 auto">
-								</table>
-								<!-- /댓글 표시 영역 -->
+
+			</div>
+		</div>
+								
 
 								<!-- Modal -->
 								<div id="comment-modal" class="modal fade" tabindex="-1"
@@ -202,7 +192,7 @@
            	 event.preventDefault();
             	 var ok = confirm('삭제할까요?');
             	 if(ok){
-            		 location.href = 'delete?boardNo=${board.boardNo}';
+            		 location.href = 'delete?boardNo=${board.boardNo}&pageNo=${pageNo}';
             	 }
    			});
             
