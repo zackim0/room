@@ -33,7 +33,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">만나서 놀 사람</div>
+                                    <div class="muted pull-left">번개 모임</div>
                                 </div>
                                 </div>
                                 <div class="block-content collapse in">
