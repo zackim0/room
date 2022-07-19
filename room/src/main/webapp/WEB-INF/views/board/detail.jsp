@@ -41,85 +41,101 @@
                       <div class="span12">
                           
 
-<div class="alert">
-	<tr>
-		<th>제목:</th>
-		<td>${ board.title }</td>
-		</tr>
-		</div>
-		
-		<div class="alert alert-info">
-		<tr>
-			<th>글쓴이:</th>
-			<td>${ requestScope.board.writer }</td>
-		</tr>
-		</div>
-		
-		<div style="word-break: break-all;" class="alert alert-success">
-		<tr>
-			<th>내용:</th>
-               <td>
-			<% String enter2 = "\r\n"; %>
-			<c:set var="enter" value="
-			" />
-               ${ fn:replace(board.content, enter, '<br>') }
-               </td>
-               </tr>
-               </div>
-               
-               <div class="external-event ui-draggable" style="position: relative;">
-               <tr>
-	           	<th>첨부파일:</th>
-	           	<td>
-	           	<c:forEach var="file" items="${ board.files }">
-	           	<a href="download?attachNo=${ file.attachNo }">
-		                ${ file.userFileName }
-	           	</a>
-	           	<br>
-	           	</c:forEach>
-	           	</td>
-	           </tr>
-	           </div>
-	           <div class="alert alert-error">
-             <tr>
-		<th>작성일:</th>
-		<td>${ board.regDate }</td>
-		</tr>
-		</div>
-	
-	
-
-                </div>
-            </div>
-        </div>
-        <!-- /block -->
-          </div>
-          <div class="buttons">
-          	<c:if test="${ loginuser.memberId eq board.writer }">
-         		 <a id='delete-btn' href='javascript:'>삭제</a>
-         		
-         		<a href='edit?boardNo=${ board.boardNo }&pageNo=${ pageNo }'>수정</a>
-         		 </c:if>
-         		 <a href='cooklist?pageNo=${ pageNo }'>목록보기</a>
-          </div>
-          <div>
-          <button id="add-comment-btn" type="button" 
-					class="btn btn-outline-primary btn-sm">댓글쓰기</button>
-          </div>
-      </div>
-       <!-- comment 표시 영역 -->
-       <div class="alert alert-block">
-        <br>
-        <hr style="width:800px;margin:0 auto">
-        <br>
-        <table id="comment-list" style="width:800px;margin:0 auto">
-        
-        </table>
-		<!-- / comment 표시 영역 -->      
-      </div>
-	</div>
-	<br><br><br><br><br>
-	
+				<div class="alert">
+					<tr>
+						<th>제목:</th>
+						<td>${ board.title }</td>
+						</tr>
+						</div>
+						
+						<div class="alert alert-info">
+						<tr>
+							<th>글쓴이:</th>
+							<td>${ requestScope.board.writer }</td>
+						</tr>
+						</div>
+						
+						<div style="word-break: break-all;" class="alert alert-success">
+						<tr>
+							<th>내용:</th>
+				               <td>
+							<% String enter2 = "\r\n"; %>
+							<c:set var="enter" value="
+							" />
+				               ${ fn:replace(board.content, enter, '<br>') }
+				               </td>
+				               </tr>
+				               </div>
+				               
+				               <div class="external-event ui-draggable" style="position: relative;">
+				               <tr>
+					           	<th>첨부파일:</th>
+					           	<td>
+					           	<c:forEach var="file" items="${ board.files }">
+					           	<a href="download?attachNo=${ file.attachNo }">
+						                ${ file.userFileName }
+					           	</a>
+					           	<br>
+					           	</c:forEach>
+					           	</td>
+					           </tr>
+					           </div>
+					           <div class="alert alert-error">
+				             <tr>
+						<th>작성일:</th>
+						<td>${ board.regDate }</td>
+						</tr>
+						</div>
+					
+					
+				
+				                </div>
+				            </div>
+				        </div>
+				        <!-- /block -->
+				          </div>
+				          
+				          	<c:if test="${ loginuser.memberId eq board.writer }">
+				         		<button class="btn btn-danger" id="delete-btn" onclick="loaction.href='javascript:'">
+				         			<i class="icon-remove icon-white"></i>
+				         			삭제
+				         		</button>&nbsp;&nbsp;
+				         		
+				         		<a href="edit?boardNo=${ board.boardNo }&pageNo=${ pageNo }">
+				         			<button class="btn btn-primary">
+				         				<i class="icon-pencil icon-white"></i>
+				         				수정
+				         			</button>&nbsp;&nbsp;
+				         		</a>
+				         		
+				         		 </c:if>
+				         		 <a href="cooklist?pageNo=${ pageNo }">
+				         		 	<button class="btn btn-inverse">
+				         				<i class="icon-th-list icon-white"></i>
+				         				목록보기
+				         			</button>&nbsp;&nbsp;
+				         		 </a>
+				         		
+				         
+				          <div>
+				          
+				          <button id="add-comment-btn" type="button" 
+									class="btn btn-outline-primary btn-sm" style="float:right;">댓글쓰기</button>
+				          </div>
+				      </div>
+				       <!-- comment 표시 영역 -->
+				       <div class="alert alert-block">
+				        <br>
+				        <hr style="width:800px;margin:0 auto">
+				        <br>
+				        <table id="comment-list" style="width:800px;margin:0 auto">
+				        
+				        </table>
+						<!-- / comment 표시 영역 -->      
+				      </div>
+					</div>
+					<br><br><br><br><br>
+					
 	<!-- Modal -->
 	<div id="comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-modal-label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -158,7 +174,7 @@
   
   <hr>
   <footer>
-      <p>&copy; Vincent Gabriel 2013</p>
+      <p onclick=window.open( "/room/")>&copy; 우리들의 자취방 생활
   </footer>
       
         <!--/.fluid-container-->
