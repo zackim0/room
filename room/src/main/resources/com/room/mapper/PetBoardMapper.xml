@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="selectByRange" parameterType="hashmap" resultType="com.room.dto.PetBoard">
-		SELECT board_no boardNo, title, member_id writer, regdate, deleted
+		SELECT board_no boardNo, title, member_id writer, readcount, regdate, deleted
 		FROM Board WHERE category = 'pet'
 		ORDER BY board_no DESC
 		LIMIT #{from}, #{count}
