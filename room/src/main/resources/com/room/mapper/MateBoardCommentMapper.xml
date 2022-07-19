@@ -26,7 +26,7 @@
 				comment_regdate regDate,comment_deleted deleted, groupno, step, depth
 		FROM BoardComment
 		WHERE board_no = #{boardNo}
-		ORDER BY groupno ASC, step ASC
+		ORDER BY groupno DESC, step ASC
 	</select>
 	
 	<select id="selectByCommentNo" parameterType="int" resultType="com.room.dto.MateBoardComment">
@@ -34,7 +34,7 @@
 				comment_regdate regDate,comment_deleted deleted,groupno, step, depth
 		FROM BoardComment
 		WHERE board_comment_no = #{commentNo}
-		ORDER BY board_comment_no ASC
+		ORDER BY board_comment_no DESC
 	</select>
 	
 	<delete id="delete" parameterType="int">

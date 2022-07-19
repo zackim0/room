@@ -64,9 +64,10 @@
 	</delete>
 	
 	<select id="select3" resultType="com.room.dto.FBoard">
-		SELECT title, member_id writer, regdate, readcount
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
 		FROM Board
-		WHERE category ='fashion' ORDER by board_no DESC LIMIT 3
+		WHERE category ='fashion' and deleted = FALSE
+		ORDER by board_no DESC LIMIT 3
 	</select>
 	
 	<update id="update" parameterType="com.room.dto.FBoard">
@@ -75,6 +76,11 @@
 		WHERE board_no = #{boardNo}
 	</update>
 	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE Board 
+		SET readcount = readcount + 1 
+		WHERE board_no = #{ boardNo }
+	</update>
 	
 
 </mapper>
