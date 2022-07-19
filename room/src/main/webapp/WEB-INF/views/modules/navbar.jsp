@@ -20,6 +20,10 @@
                         		<c:when test="${ empty loginuser}">
                         		</c:when>
                         		<c:otherwise>
+									 <button class="btn btn-info">
+									 <i class="icon-envelope icon-white"></i>
+									 &nbsp;쪽지함
+									 </button>
 		                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 		                        	<i class="icon-pencil icon-white"></i>
 		                        	&nbsp;글쓰기<span class="caret"></span></button>

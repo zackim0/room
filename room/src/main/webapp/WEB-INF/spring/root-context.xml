@@ -10,6 +10,7 @@
 
 	<import resource="root-context-account.xml" />
 	<import resource="root-context-board.xml" />
+	<import resource="root-context-message.xml"/>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />

@@ -86,6 +86,13 @@ public class PetBoardServiceImpl implements PetBoardService {
 		return attach;
 		
 	}
+
+	@Override
+	public List<PetBoard> find3() {
+		List<PetBoard> petBoardRecentList = petBoardMapper.select3();
+		
+		return petBoardRecentList;
+	}
 	
 	
 	

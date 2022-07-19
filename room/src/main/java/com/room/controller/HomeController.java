@@ -63,8 +63,8 @@ public class HomeController {
 		List<GIBoard> gIboardRecentList = gIboardService.find3();
 		model.addAttribute("gIboardRecentList", gIboardRecentList);
 		
-		List<PetBoard> petBoardList = petBoardService.findAll();
-		model.addAttribute("petBoardList", petBoardList);
+		List<PetBoard> petBoardRecentList = petBoardService.find3();
+		model.addAttribute("petBoardRecentList", petBoardRecentList);
 		
 		List<TipBoard> tipBoardRecentList = tipBoardService.find3();		
 		model.addAttribute("tipBoardRecentList", tipBoardRecentList);

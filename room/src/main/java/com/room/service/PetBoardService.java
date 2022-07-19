@@ -9,6 +9,8 @@ import com.room.dto.PetBoardAttach;
 public interface PetBoardService {
 
 	List<PetBoard> findAll();
+	
+	List<PetBoard> find3();
 
 	void writeBoard(PetBoard board);
 
