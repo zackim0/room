@@ -33,37 +33,37 @@
 							<button class="close" data-dismiss="alert"></button>
 						</div>
  							<div class="control-group">
- 								<label class="control-label">MemberId<span class="required">*</span></label>
+ 								<label class="control-label">아이디<span class="required">*</span></label>
  								<div class="controls">
  									<input type="text" id="memberId" name="memberId" data-required="1" class="span6 m-wrap" value="${ loginuser.memberId }" readonly/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">NickName<span class="required">*</span></label>
+ 								<label class="control-label">닉네임<span class="required">*</span></label>
  								<div class="controls">
  									<input type="text" id="nickname" name="nickname" data-required="1" class="span6 m-wrap" value="${ loginuser.nickname }"/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">password<span class="required">*</span></label>
+ 								<label class="control-label">비밀번호<span class="required">*</span></label>
  								<div class="controls">
  									<input name="passwd" id="passwd" type="passwd" class="span6 m-wrap"/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">Email<span class="required"></span></label>
+ 								<label class="control-label">이메일<span class="required"></span></label>
  								<div class="controls">
  									<input name="email" id="email" type="text" class="span6 m-wrap" value="${ loginuser.email }"/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">region<span class="required">*</span></label>
+ 								<label class="control-label">지역<span class="required">*</span></label>
  								<div class="controls">
  									<input name="region" id="region" type="text" class="span6 m-wrap" value="${ loginuser.region }"/>
  								</div>
  							</div>
  							<div class="control-group">
- 								<label class="control-label">pet<span class="required">*</span></label>
+ 								<label class="control-label">반려견<span class="required">*</span></label>
  								<div class="controls">
  									<select class="span6 m-wrap" name="pet" id="pet">
  										<option value="1">yes</option>
