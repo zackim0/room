@@ -73,6 +73,13 @@
 		INSERT BoardAttach (board_no, userfilename, savedfilename)
 		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
 	</insert>
+	
+	<select id="select3" resultType="com.room.dto.PetBoard">
+		SELECT board_no boardNo, title, member_id writer, regdate, readcount
+		FROM Board
+		WHERE category ='pet' and deleted = FALSE
+		ORDER by board_no DESC LIMIT 3
+	</select>
 
 
 	

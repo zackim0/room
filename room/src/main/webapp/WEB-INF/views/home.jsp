@@ -75,7 +75,7 @@
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">패션 정보 게시판</div>
+                                    <div class="muted pull-left">패션 정보 공유</div>
                                     <div class="pull-right">
 	                                    <a class="badge badge-info" href="/room/fashion-board/list">
 	                                    <i class="icon-eye-open icon-white"></i>
@@ -102,7 +102,7 @@
                                                			<a href='/room/fashion-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -112,7 +112,6 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        
                     </div>
                     
                     <div class="row-fluid">
@@ -147,7 +146,7 @@
                                                			<a href='/room/playground/gameintroduce/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -188,7 +187,7 @@
                                                			<a href='/room/board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
@@ -198,7 +197,6 @@
                             </div>
                             <!-- /block -->
                         </div>
-                        
                     </div>
                     
                     <div class="row-fluid">
@@ -274,7 +272,7 @@
                                                			<a href='/room/tip-board/detail?boardNo=${board.boardNo}&pageNo=1'>${board.title}</a>
 	                                                </td>
 	                                                <td>${board.writer}</td>
-	                                                <td>${board.regDate}</td>
+	                                                <td>${board.readCount}</td>
 	                                                <td>${board.regDate}</td>
 	                                            </tr>
 	                                        </tbody>
