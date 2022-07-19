@@ -20,7 +20,7 @@
                         		<c:when test="${ empty loginuser}">
                         		</c:when>
                         		<c:otherwise>
-									 <button class="btn btn-info">
+									 <button type="button" class="btn btn-info" onclick="location.href = '/room/message/list' ">
 									 <i class="icon-envelope icon-white"></i>
 									 &nbsp;쪽지함
 									 </button>
