@@ -32,21 +32,8 @@
                 <div class="span12">
                 	<div class="row-fluid">
 
-
-		                
-		               
-
 		                <div class="span12" id="content">
 		                    <div class="row-fluid">
-		                        <!-- block -->
-		                        <!-- <div class="block">
-		                            <div class="navbar navbar-inner block-header">
-		                                <div class="muted pull-left"></div>
-		                            </div>
-		                            <div class="block-content collapse in">
-		                               <textarea id="tinymce_basic"></textarea>
-		                            </div>
-		                        </div> -->
 		                        <table class="span12">
 		            	<form id="editform"action="edit"method="post">
 		            	<input type="hidden" name="boardNo" value="${board.boardNo}">
@@ -66,7 +53,7 @@
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea name="content" cols="76" rows="15">
+		                    <textarea name="content" cols="76" rows="15" style="width:885px; height: 345px;">
 		                    ${ board.content }
                   			</textarea>
 		            	</td>
@@ -74,9 +61,16 @@
 		            
 		            
 		            	<div class="buttons">
-			    	[<a id="edit-btn" href="javascript:">수정완료</a>]
+		            	
+		            <button class="btn btn-normal btn-success" id="edit" type="submit">
+			    		<i class="icon-pencil icon-white"></i>		    	
+			    		수정완료
+			    	</button>
 			    	&nbsp;&nbsp;
-			    	[<a href='detail?boardNo=${board.boardNo}'>취소하기</a>]
+			    	<button class="btn" id="cancel" type="submit">
+			    		<i class="icon-arrow-left"></i>
+			    	취소&nbsp;&nbsp;
+			    	</button>
 			    	</div>  
 			    	</form>   
 		                        <!-- /block -->
@@ -91,8 +85,6 @@
             	</div>
             <hr>
 
-            
-        </div>
 
         <!--/.fluid-container-->
         <script src="/room/resources/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
@@ -107,50 +99,9 @@
 
         <script src="/room/resources/assets/scripts.js"></script>
         <script>
-        $(function() {
-            // Bootstrap
-            $('#bootstrap-editor').wysihtml5();
-
-            // Ckeditor standard
-            $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-				{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-				[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-			]});
-            $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
-        });
-
-        // Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_basic",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview anchor",
-		        "searchreplace visualblocks code fullscreen",
-		        "insertdatetime media table contextmenu paste"
-		    ],
-		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-		});
-
-		// Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_full",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-		        "searchreplace wordcount visualblocks visualchars code fullscreen",
-		        "insertdatetime media nonbreaking save table contextmenu directionality",
-		        "emoticons template paste textcolor"
-		    ],
-		    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-		    toolbar2: "print preview media | forecolor backcolor emoticons",
-		    image_advtab: true,
-		    templates: [
-		        {title: 'Test template 1', content: 'Test 1'},
-		        {title: 'Test template 2', content: 'Test 2'}
-		    ]
-		});
 		
 		$(function(){
-			$('#edit-btn').on('click',function(event) {
+			$('#edit').on('click',function(event) {
 				event.preventDefault();
 				$('#editform').submit();
 			});

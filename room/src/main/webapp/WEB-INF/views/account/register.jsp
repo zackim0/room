@@ -3,6 +3,7 @@
     
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     
@@ -25,7 +26,7 @@
                         <!-- block -->
                        <div class="block">
                            <div class="navbar navbar-inner block-header">
-                               <div class="muted pull-left">register</div>
+                               <div class="muted pull-left">회원가입</div>
                            </div>
                            <div class="block-content collapse in">
                                <div class="span12">
@@ -43,7 +44,8 @@
  								<spring:message code="register.id" />
  								<div class="controls">										
  									<input type="text" id="memberId" name="memberId" data-required="1" class="span6 m-wrap"/>
- 										<form:errors path="memberId" cssClass="error" /><br />
+ 												<form:errors path="memberId" cssClass="error" /><br />
+
  								</div>
  							</div>
  							<div class="control-group">
