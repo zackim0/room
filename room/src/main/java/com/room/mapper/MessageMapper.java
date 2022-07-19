@@ -11,6 +11,8 @@ import com.room.dto.Message;
 public interface MessageMapper {
 
 	List<Message> selectAll();
+	
+	List<Message> selectAll2();
 
 	List<Member> selectMemberId();
 
@@ -19,5 +21,7 @@ public interface MessageMapper {
 	void receiver(Member member);
 
 	Message selectByMessageNo(int message_No);
+
+	
 
 }

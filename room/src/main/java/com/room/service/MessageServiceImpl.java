@@ -24,10 +24,24 @@ public class MessageServiceImpl implements MessageService {
 		return messageList;
 		
 	}
+	
+	@Override
+	public List<Message> findAll2() {
+		
+		List<Message> messageList2 = messageMapper.selectAll2();
+		
+		return messageList2;
+	}
 
 
 	@Override
 	public int findMessageCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int findMessageCount2() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -58,5 +72,10 @@ public class MessageServiceImpl implements MessageService {
 		Message message = messageMapper.selectByMessageNo(message_No);
 		return message;
 	}
+
+	
+
+
+	
 
 }

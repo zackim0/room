@@ -25,7 +25,8 @@ public class MessageController {
 	@Autowired
 	@Qualifier("messageService")
 	private MessageService messageService;
-
+	
+	// 받은 메세지함
 	@GetMapping(path= {"/list"})
 	public String list(@RequestParam(defaultValue = "1")int pageNo,Model model) {
 		
@@ -43,6 +44,26 @@ public class MessageController {
 		model.addAttribute("messageList",messageList);
 		
 		return "message/list";
+				
+	}
+	// 보낸 메세지함
+	@GetMapping(path= {"/list2"})
+	public String list2(@RequestParam(defaultValue = "1")int pageNo,Model model) {
+		
+		int pageSize = 3;
+		int pagerSize = 4;
+		int count = 0; 
+		
+		List<Message> messageList = messageService.findAll2();
+		count = messageService.findMessageCount2();
+		
+		MessagePager messagePager = new MessagePager(count, pageNo, pageSize, pagerSize, "list2");
+		
+		model.addAttribute("messageList",messageList);
+		model.addAttribute("messagepager",messagePager);
+		model.addAttribute("messageList",messageList);
+		
+		return "message/list2";
 				
 	}
 	

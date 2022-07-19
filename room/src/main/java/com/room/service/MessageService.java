@@ -19,4 +19,8 @@ public interface MessageService {
 
 	Message findByMessageNo(int message_No);
 
+	List<Message> findAll2();
+
+	int findMessageCount2();
+
 }

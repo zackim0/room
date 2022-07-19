@@ -11,6 +11,12 @@
 			ORDER By message_no DESC
 		</select>
 		
+		<select id="selectAll2" resultType="com.room.dto.Message">
+			SELECT message_no,sender,receiver,message_content,sendtime,readtime
+			FROM Message
+			ORDER By message_no DESC
+		</select>
+		
 		<select id="selectMemberId" resultType="com.room.dto.Member">
 			SELECT member_id memberId FROM Member
 		</select>
