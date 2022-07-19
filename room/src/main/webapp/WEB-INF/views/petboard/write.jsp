@@ -15,6 +15,7 @@
         <script src="/room/resources/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
 <body>
+ <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
  	<div class="row-fluid">
                         <!-- block -->
                        <div class="block">

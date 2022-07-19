@@ -97,7 +97,7 @@ public class CKBoardServiceImpl implements CKBoardService {
 	}
 	@Override
 	public List<CKBoard> find3(){
-		List<CKBoard> ckboardRecentList = cookBoardMapper.selcet3();
+		List<CKBoard> ckboardRecentList = cookBoardMapper.select3();
 		return ckboardRecentList;
 	}
 	
