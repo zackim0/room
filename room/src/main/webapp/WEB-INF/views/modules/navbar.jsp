@@ -16,22 +16,28 @@
                     <div class="nav-collapse collapse">                    	
                         <ul class="nav pull-right">
                         	<li>
-                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                        	<i class="icon-pencil icon-white"></i>
-                        	&nbsp;글쓰기<span class="caret"></span></button>
-                        	<ul class="dropdown-menu">
-								<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
-								<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
-								<li class="divider"></li>
-								<li><a href="/room/board/write">레시피 공유</a></li>
-								<li><a href="#">조리도구 거래</a></li>
-								<li class="divider"></li>
-								<li><a href="/room/playground/gameintroduce/write">추천 게임</a></li>
-								<li><a href="/room/playground/recrult/write">번개 모임</a></li>
-								<li class="divider"></li>
-								<li><a href="/room/fashion-board/write">패션 정보</a></li>
-								<li><a href="#">미용실 추천/후기</a></li>
-							 </ul>
+                        		<c:choose>
+                        		<c:when test="${ empty loginuser}">
+                        		</c:when>
+                        		<c:otherwise>
+		                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+		                        	<i class="icon-pencil icon-white"></i>
+		                        	&nbsp;글쓰기<span class="caret"></span></button>
+		                        	<ul class="dropdown-menu">
+										<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
+										<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/board/write">레시피 공유</a></li>
+										<li><a href="/room/tip-board/write">자취생활 꿀Tip</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/playground/gameintroduce/write">추천 게임</a></li>
+										<li><a href="/room/playground/recrult/write">번개 모임</a></li>
+										<li class="divider"></li>
+										<li><a href="/room/fashion-board/write">패션 정보</a></li>
+										<li><a href="#">미용실 추천/후기</a></li>
+									 </ul>
+                        		</c:otherwise>
+                        		</c:choose>
                         	</li>
                             <li class="dropdown">
                                <!--  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i> -->
@@ -119,7 +125,7 @@
                                 </a>
                                 <ul class="dropdown-menu" id="menu5">
                                     <li>
-                                        <a tabindex="-1" href="#">초기 생활 TIP </a>
+                                        <a tabindex="-1" href="/room/tip-board/list">초기 생활 TIP </a>
                                     </li>
                                     <li>
                                         <a tabindex="-1" href="#">부동산 관련 TIP </a>

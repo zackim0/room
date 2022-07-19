@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,20 +20,20 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.room.common.Util;
-import com.room.dto.MateBoard;
-import com.room.dto.MateBoardAttach;
-import com.room.dto.MateBoardComment;
-import com.room.service.MateBoardService;
+import com.room.dto.TipBoard;
+import com.room.dto.TipBoardAttach;
+import com.room.dto.TipBoardComment;
+import com.room.service.TipBoardService;
 import com.room.ui.ThePager;
-import com.room.view.MateDownloadView;
+import com.room.view.TipDownloadView;
 
 @Controller
-@RequestMapping(path= {"/mate-board"})
-public class MateBoardController {
+@RequestMapping(path= {"/tip-board"})
+public class TipBoardController {
 	
 	@Autowired
-	@Qualifier("mateBoardService")
-	private MateBoardService mateBoardService;
+	@Qualifier("tipBoardService")
+	private TipBoardService tipBoardService;
 
 	@GetMapping(path = { "/list" })
 	public String list(@RequestParam(defaultValue = "1")int pageNo,
@@ -44,37 +43,37 @@ public class MateBoardController {
 		int pagerSize = 5;
 		int count = 0;
 		
-		List<MateBoard> mateBoardList = mateBoardService.findByPage(pageNo, pageSize);
-		count = mateBoardService.findBoardCount("roommate");
+		List<TipBoard> tipBoardList = tipBoardService.findByPage(pageNo, pageSize);
+		count = tipBoardService.findBoardCount("tip");
 		
 		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
 		
-		model.addAttribute("mateBoardList", mateBoardList);
+		model.addAttribute("tipBoardList", tipBoardList);
 		model.addAttribute("pager", pager);
 		model.addAttribute("pageNo", pageNo);
 		
 		
-		return "mate-board/list";  // --> /WEB-INF/views/ + board/list + .jsp
+		return "tip-board/list";  // --> /WEB-INF/views/ + board/list + .jsp
 	}
 	
 	@GetMapping(path = { "/write" })
 	public String showWriteForm() {
 		
-		return "mate-board/write"; // --> /WEB-INF/views/ + board/write + .jsp
+		return "tip-board/write"; // --> /WEB-INF/views/ + board/write + .jsp
 	}
 	
 	@PostMapping(path = { "/write" })
-	public String write(MateBoard board,
+	public String write(TipBoard board,
 						MultipartFile[] attach,
 						HttpServletRequest req) {
 		
 		String uploadDir = req.getServletContext().getRealPath("/resources/upload-files");
 		
-		ArrayList<MateBoardAttach> files = new ArrayList<>();
+		ArrayList<TipBoardAttach> files = new ArrayList<>();
 		for (MultipartFile file : attach) {
 			String userFileName = file.getOriginalFilename();
 			if (userFileName != null && userFileName.length() > 0) {
-				MateBoardAttach f = new MateBoardAttach();
+				TipBoardAttach f = new TipBoardAttach();
 				String savedFileName = Util.makeUniqueFileName(userFileName);
 				f.setUserFileName(userFileName);
 				f.setSavedFileName(savedFileName);
@@ -89,7 +88,7 @@ public class MateBoardController {
 		}
 		
 		board.setFiles(files);
-		mateBoardService.writeBoard(board);			
+		tipBoardService.writeBoard(board);			
 		
 		 return "redirect:list";
 	}
@@ -102,7 +101,7 @@ public class MateBoardController {
 			return "redirect:list";
 		}
 		
-		MateBoard board = mateBoardService.findByBoardNo(boardNo);
+		TipBoard board = tipBoardService.findByBoardNo(boardNo);
 		if(board == null) { // 해당 번호의 게시글이 없는 경우
 			return "redirect:list";
 		}
@@ -110,7 +109,7 @@ public class MateBoardController {
 		model.addAttribute("board", board);
 		model.addAttribute("pageNo", pageNo);
 		
-		return "mate-board/detail";
+		return "tip-board/detail";
 	}
 	
 	@GetMapping(path= {"/delete"})
@@ -119,7 +118,7 @@ public class MateBoardController {
 			@RequestParam(defaultValue = "-1")int pageNo) {
 		
 		if (boardNo > 0 && pageNo > 0) {
-			mateBoardService.delete(boardNo);
+			tipBoardService.delete(boardNo);
 			return "redirect:list?pageNo=" + pageNo;
 		}
 		return "redirect:list";
@@ -135,7 +134,7 @@ public class MateBoardController {
 				return "redirect:list";
 			}
 			
-			MateBoard board = mateBoardService.findByBoardNo(boardNo);
+			TipBoard board = tipBoardService.findByBoardNo(boardNo);
 			if(board == null) { // 해당 번호의 게시글이 없는 경우
 				 return "redirect:list";
 			}
@@ -143,18 +142,18 @@ public class MateBoardController {
 			model.addAttribute("board",board);
 			model.addAttribute("pageNo", pageNo);
 			
-			return "mate-board/edit";
+			return "tip-board/edit";
 				
 	}
 	
 	@PostMapping(path = {"/edit"})
-	public String edit(MateBoard board,
+	public String edit(TipBoard board,
 						@RequestParam(defaultValue = "-1")int pageNo) {
 		
 		if (pageNo < 1) {
 			return "redirect:list";
 		}
-		mateBoardService.update(board);
+		tipBoardService.update(board);
 		
 		return String.format("redirect:detail?boardno=%d&pageNo=%d",
 				board.getBoardNo(), pageNo);
@@ -170,20 +169,20 @@ public class MateBoardController {
 			return new RedirectView("list");
 		}
 		
-		MateBoardAttach boardAttach = mateBoardService.findBoardAttachByAttachNo(attachNo);
+		TipBoardAttach boardAttach = tipBoardService.findBoardAttachByAttachNo(attachNo);
 		
 		model.addAttribute("uploadDir", "/resources/upload-files/");
-		model.addAttribute("mateBoardAttach", boardAttach);
+		model.addAttribute("tipBoardAttach", boardAttach);
 		
-		MateDownloadView downloadView = new MateDownloadView();		
+		TipDownloadView downloadView = new TipDownloadView();		
 		return downloadView;
 	}
 	
 	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
 	@ResponseBody
-	public String writeComment(MateBoardComment boardComment) {
+	public String writeComment(TipBoardComment boardComment) {
 		
-		mateBoardService.writeBoardComment(boardComment);
+		tipBoardService.writeBoardComment(boardComment);
 		
 		return "success";
 		
@@ -191,9 +190,9 @@ public class MateBoardController {
 	
 	@PostMapping(path = { "/recomment-write" }, produces = { "text/plain;charset=utf-8" })
 	@ResponseBody
-	public String writeReComment(MateBoardComment boardComment) {
+	public String writeReComment(TipBoardComment boardComment) {
 		
-		mateBoardService.writeBoardReComment(boardComment);
+		tipBoardService.writeBoardReComment(boardComment);
 		
 		return "success";
 		
@@ -202,11 +201,11 @@ public class MateBoardController {
 	@GetMapping(path = { "/comment-list" })
 	public String listComment(@RequestParam(name="boardNo") int boardNo, Model model) {
 		
-		List<MateBoardComment> comments = mateBoardService.findCommentsByBoardNo(boardNo);
+		List<TipBoardComment> comments = tipBoardService.findCommentsByBoardNo(boardNo);
 		
 		model.addAttribute("comments", comments);
 		
-		return "mate-board/comments";
+		return "tip-board/comments";
 		
 	}
 	
@@ -214,16 +213,16 @@ public class MateBoardController {
 	@ResponseBody
 	public String deleteComment(@RequestParam(name = "commentNo") int commentNo) {
 	
-		mateBoardService.deleteComment(commentNo);
+		tipBoardService.deleteComment(commentNo);
 		
 		return "success";
 	}
 	
 	@PostMapping(path = { "/comment-update" }, produces = "text/plain;charset=utf-8")
 	@ResponseBody
-	public String updateComment(MateBoardComment boardComment) {
+	public String updateComment(TipBoardComment boardComment) {
 		
-		mateBoardService.updateBoardComment(boardComment);
+		tipBoardService.updateBoardComment(boardComment);
 		
 		return "success";
 		
