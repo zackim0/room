@@ -68,7 +68,13 @@
 										</tbody>
 									</c:forEach>
 								</table>
-								${ pager }
+								<div class="pagination">
+									<ul>
+										<li>
+											${ pager }
+										</li>
+									</ul>
+								</div>
 	
 
 							</div>
