@@ -19,7 +19,7 @@ public class CKBoard {
 	private int readCount;
 	private boolean deleted;
 	private String category;
-	private List<CKBoardAttach> files;
+	private List<CKBoardAttach> attachments;
 	
 	
 }

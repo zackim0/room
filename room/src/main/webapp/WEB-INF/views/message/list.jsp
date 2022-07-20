@@ -48,7 +48,7 @@
 							          <c:if test="${message.receiver eq loginuser.memberId }">
 							              <tbody>
 							              	<tr>
-							                  <th><a href="detail?message_No=${message.message_No}">${message.message_No}</a></th>
+							                  <th><a href="detail?message_No=${message.message_No}&pageNo=${ pageNo }">${message.message_No}</a></th>
 							                  <th>${message.sender}</th>
 							                  <th>${message.receiver}</th>
 							                  <th>${message.readTime}</th>

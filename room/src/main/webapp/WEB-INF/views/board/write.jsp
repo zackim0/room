@@ -7,6 +7,7 @@
     
     <head>
         <title>레시피 공유 게시판</title>
+        
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/assets/styles.css" rel="stylesheet" media="screen">
@@ -21,7 +22,8 @@
         <link href="/room/resources/vendors/uniform.default.css" rel="stylesheet" media="screen">
         <link href="/room/resources/vendors/chosen.min.css" rel="stylesheet" media="screen">
 
-        <link href="/room/resources/vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <!-- <link href="/room/resources/vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen"> -->
     </head>
     
     <body>
@@ -65,7 +67,7 @@
                                         <div class="control-group">
                                           <label class="control-label" for="content">내용</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" placeholder="내용을 입력하세요 ..." style="width: 810px; height: 200px" id="content" name="content"></textarea>
+                                            <textarea class="input-xlarge textarea" placeholder="내용을 입력하세요 ..." style="width: 810px; height: 200px" id="summernote-content" name="content"></textarea>
                                           </div>
                                         </div>
                                         <div class="form-actions">
@@ -91,26 +93,80 @@
         <script src="/room/resources/vendors/jquery-1.9.1.js"></script>
         <script src="/room/resources/bootstrap/js/bootstrap.min.js"></script>
         <script src="/room/resources/vendors/chosen.jquery.min.js"></script>
-
+<!-- 
         <script src="/room/resources/vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
         <script src="/room/resources/vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
-
         <script src="/room/resources/vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+-->
 
 		<script src="/room/resources/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
 		<script src="/room/resources/assets/form-validation.js"></script>
 	        
 		<script src="/room/resources/assets/scripts.js"></script>
 		
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+		
+		
 		<script>
 
         $(function() {
-            $('.textarea').wysihtml5();
-            
-            $('#write').on('click', function(event){
-        		event.preventDefault();
-        		$('#writeform').submit();
-        	});
+        	
+   			$("#write").on('click', function(event) {			
+   				event.preventDefault();
+   				if(!$('#title').val()) {
+   					alert('제목을 입력하세요');
+   					return;
+   				}									
+   				$('#writeform').submit();							
+   			});
+   			
+            // $('.textarea').wysihtml5();
+   			var summernote = $('#summernote-content').summernote({
+				"callbacks" : {
+					"onImageUpload": function(files, editor) {
+						console.log(editor);
+			            var fileArr = Array.prototype.slice.call(files);
+			            fileArr.forEach(function(f){
+			                if(f.type.match("image/jpg") || f.type.match("image/jpeg" || f.type.match("image/jpeg"))){
+			                    alert("JPG, JPEG, PNG 확장자만 업로드 가능합니다.");
+			                    return;
+			                }
+			            });
+			            for(var xx=0;xx<files.length;xx++){
+			            	var formData = new FormData();
+			            	formData.append("file", files[xx]);
+				            $.ajax({
+				                url : "summernote-upload",
+				                data:  formData,
+				                cache: false,
+				                contentType: false,
+				                processData: false,
+				                // enctype	: 'multipart/form-data',
+				                type: 'POST',
+				                success : function(result) {
+
+				                    //항상 업로드된 파일의 url이 있어야 한다.
+				                    if(result.length == 0) {
+				                        alert('실패');
+				                        return;
+				                    }
+				                    
+				                    for(x=0;x<result.length;x++){
+				                        var img = $("<img>").attr({src: result[x], width: "50%"});   // Default 100% ( 서비스가 앱이어서 이미지 크기를 100% 설정 - But 수정 가능 )
+				                        console.log(img);
+				                        // $(summernote).summernote('pasteHTML', "<img src='"+result[x]+"' style='width:100%;' />");
+				                        $(summernote).summernote('editor.insertImage', result[x]);
+				                        
+				                    }
+				                }
+				            });
+
+			            }   
+
+			            
+					}
+				}
+			});
 
             
         });

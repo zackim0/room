@@ -53,7 +53,7 @@ public class CKBoardServiceImpl implements CKBoardService {
 		
 		
 		List<CKBoardAttach> files = cookBoardMapper.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
-		board.setFiles(files);
+		board.setAttachments(files);
 		
 		// boardDao.updateBoardReadCount(boardNo);
 		cookBoardMapper.updateBoardReadCount(boardNo);
@@ -65,8 +65,8 @@ public class CKBoardServiceImpl implements CKBoardService {
 	public void writeBoard(CKBoard board) {
 		cookBoardMapper.insertBoard(board);
 		
-		if (board.getFiles() != null) {
-			for (CKBoardAttach file : board.getFiles()) {
+		if (board.getAttachments() != null) {
+			for (CKBoardAttach file : board.getAttachments()) {
 				file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
 				// boardDao.insertBoardAttach(file);
 				cookBoardMapper.insertBoardAttach(file);

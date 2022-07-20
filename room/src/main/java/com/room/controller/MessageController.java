@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.room.dto.Member;
 import com.room.dto.Message;
 import com.room.service.MessageService;
-import com.room.ui.MessagePager;
+import com.room.ui.ThePager;
 
 @Controller
 @RequestMapping(path= {"/message"})
@@ -37,11 +37,11 @@ public class MessageController {
 		List<Message> messageList = messageService.findAll();
 		count = messageService.findMessageCount();
 		
-		MessagePager messagePager = new MessagePager(count, pageNo, pageSize, pagerSize, "list");
+		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
 		
 		model.addAttribute("messageList",messageList);
-		model.addAttribute("messagepager",messagePager);
-		model.addAttribute("messageList",messageList);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "message/list";
 				
@@ -57,11 +57,11 @@ public class MessageController {
 		List<Message> messageList = messageService.findAll2();
 		count = messageService.findMessageCount2();
 		
-		MessagePager messagePager = new MessagePager(count, pageNo, pageSize, pagerSize, "list2");
+		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list2");
 		
 		model.addAttribute("messageList",messageList);
-		model.addAttribute("messagepager",messagePager);
-		model.addAttribute("messageList",messageList);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "message/list2";
 				
@@ -95,9 +95,10 @@ public class MessageController {
 	
 	@GetMapping(path= {"/detail"})
 	public String detail(@RequestParam(name="message_No",defaultValue = "-1")int message_No,
-						Model model) {
+			@RequestParam(name="pageNo", defaultValue = "-1")int pageNo,			
+			Model model) {
 		
-		if (message_No == -1) {
+		if (message_No == -1 || pageNo == -1) {
 			return "redirect:list";
 		}
 		Message message = messageService.findByMessageNo(message_No);
@@ -106,6 +107,7 @@ public class MessageController {
 		}
 		
 		model.addAttribute("message",message);
+		model.addAttribute("pageNo", pageNo);
 		
 		return "message/detail";
 	}

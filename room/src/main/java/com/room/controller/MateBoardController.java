@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +24,7 @@ import com.room.dto.MateBoard;
 import com.room.dto.MateBoardAttach;
 import com.room.dto.MateBoardComment;
 import com.room.service.MateBoardService;
-import com.room.ui.ThePager;
+import com.room.ui.ThePager2;
 import com.room.view.MateDownloadView;
 
 @Controller
@@ -47,7 +46,7 @@ public class MateBoardController {
 		List<MateBoard> mateBoardList = mateBoardService.findByPage(pageNo, pageSize);
 		count = mateBoardService.findBoardCount("roommate");
 		
-		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list");
+		ThePager2 pager = new ThePager2(count, pageNo, pageSize, pagerSize, "list");
 		
 		model.addAttribute("mateBoardList", mateBoardList);
 		model.addAttribute("pager", pager);

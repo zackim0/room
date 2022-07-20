@@ -86,7 +86,7 @@ public class CookController {
 				}
 			}
 			
-			board.setFiles(files);
+			board.setAttachments(files);
 		ckBoardService.writeBoard(board);
 		
 		return "redirect:/board/cooklist";
