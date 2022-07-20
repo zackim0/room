@@ -11,6 +11,12 @@
 			ORDER By message_no DESC
 		</select>
 		
+		<select id="selectAll2" resultType="com.room.dto.Message">
+			SELECT message_no,sender,receiver,message_content,sendtime,readtime
+			FROM Message
+			ORDER By message_no DESC
+		</select>
+		
 		<select id="selectMemberId" resultType="com.room.dto.Member">
 			SELECT member_id memberId FROM Member
 		</select>
@@ -20,6 +26,12 @@
 			INSERT INTO Message (sender,receiver,message_content)
 			VALUES (#{sender},#{receiver},#{message_content})			
 		</insert>
+		
+		<select id="selectByMessageNo" parameterType="int" resultType="com.room.dto.Message">
+		SELECT message_No,message_content,sendtime,sender,receiver
+		FROM Message
+		WHERE message_No = #{message_No}
+		</select>
 
 
 </mapper>

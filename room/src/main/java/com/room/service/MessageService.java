@@ -14,5 +14,13 @@ public interface MessageService {
 	List<Member> findMemberList();
 
 	void writeMessage(Message message);
+	
+	void reciver(Member member);
+
+	Message findByMessageNo(int message_No);
+
+	List<Message> findAll2();
+
+	int findMessageCount2();
 
 }

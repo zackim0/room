@@ -17,6 +17,11 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="/room/resources/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+ 		<link href="/room/resources/vendors/datepicker.css" rel="stylesheet" media="screen">
+        <link href="/room/resources/vendors/uniform.default.css" rel="stylesheet" media="screen">
+        <link href="/room/resources/vendors/chosen.min.css" rel="stylesheet" media="screen">
+
+        <link href="/room/resources/vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
     </head>
     
     <body>
@@ -36,30 +41,33 @@
 		            <tr>
 			           <form id="writeform" action="write" method="post" enctype="multipart/form-data">
 		            	<input type="hidden" name="category" value="gameintro">
-		                <th>제목</th>
-		                <td>
-		                    <input type="text" name="title" style="width:550px" />
-		                </td>
-		            </tr>
-		            <tr>
-		                <th>작성자</th>
-						<td>
-							<input type="text" name="writer" value="${loginuser.memberId}" readonly> 
-						</td>
-		            </tr>
-		            <tr>
-		                <th>내용</th>
-		                <td>		                    
-		                    <textarea 
-		                    		  name="content" cols="76" rows="15"></textarea>
-		                </td>
-		            </tr>
+		          	<div class="control-group">
+	                <label class="control-label">제목<span class="required">*</span></label>
+	                      <div class="controls">
+	                        <input type="text" class="span9 m-wrap" id="title" name="title" data-required="1">
+	                      </div>
+		            </div>
+		            <div class="control-group">
+		            <label class="control-label" for="date01">작성자</label>
+						<div class="controls">
+						  <input type="text" class="span3" readonly value="${ loginuser.memberId }">
+						<input type="hidden" name="writer" value="${loginuser.memberId}">
+						</div>
+		            </div>
+		            <div class="control-group">
+                      <label class="control-label" for="content">내용</label>
+                      <div class="controls">
+                        <textarea class="input-xlarge textarea" placeholder="내용을 입력하세요 ..." style="width: 810px; height: 200px" id="content" name="content"></textarea>
+                      </div>
+                    </div>
+                    <div class="control-group">
 		            <tr>
 		            	<th>첨부파일</th>
 		            	<td>
 		            		<input type="file" name="attach">
 		            	</td>
 		            </tr>
+		            </div>
 		            </table>
 			    	<a id="write" href="javascript:">
 			    		<button class="btn btn-primary"><i class="icon-pencil icon-white"></i> 글쓰기</button>
@@ -85,61 +93,20 @@
         </div>
 
         <!--/.fluid-container-->
-        <script src="/room/resources/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
-        <script src="/room/resources/vendors/jquery-1.9.1.min.js"></script>
-        <script src="/room/resources/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
-
-		<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
-		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
-
-		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
-
-        <script src="/room/resources/assets/scripts.js"></script>
-        <script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script type="text/javascript">
         $(function() {
-            // Bootstrap
-            $('#bootstrap-editor').wysihtml5();
-
-            // Ckeditor standard
-            $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-				{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-				[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-			]});
-            $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
-        });
-
-        // Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_basic",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview anchor",
-		        "searchreplace visualblocks code fullscreen",
-		        "insertdatetime media table contextmenu paste"
-		    ],
-		    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-		});
-
-		// Tiny MCE
-        tinymce.init({
-		    selector: "#tinymce_full",
-		    plugins: [
-		        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-		        "searchreplace wordcount visualblocks visualchars code fullscreen",
-		        "insertdatetime media nonbreaking save table contextmenu directionality",
-		        "emoticons template paste textcolor"
-		    ],
-		    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-		    toolbar2: "print preview media | forecolor backcolor emoticons",
-		    image_advtab: true,
-		    templates: [
-		        {title: 'Test template 1', content: 'Test 1'},
-		        {title: 'Test template 2', content: 'Test 2'}
-		    ]
+        	$("#writebtn").on('click', function(event) {			
+				event.preventDefault();
+				if(!$('#title').val()) {
+					alert('제목을 입력하세요');
+					return;
+				}									
+				$('#writeform').submit();
 		});
 		
 		$(function(){
+            $('.textarea').wysihtml5();
 			$('#write').on('click',function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)	
 				event.preventDefault();
 				$('#writeform').submit();
