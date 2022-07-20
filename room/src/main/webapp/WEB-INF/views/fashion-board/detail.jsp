@@ -70,7 +70,7 @@
 				<div class="external-event ui-draggable" style="position: relative;">
 					<strong>첨부파일:</strong>
 					<tr>
-						<td><c:forEach var="file" items="${board.files}">
+						<td><c:forEach var="file" items="${board.attachments}">
 								<a href="download?attachNo=${file.attachNo}">
 									${file.userFileName} </a>
 							</c:forEach></td>

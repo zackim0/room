@@ -26,8 +26,8 @@ public class FBoardServiceImpl implements FBoardService {
 		// c2. 이 위치에서 boardNo : 데이터베이스에 있음 ( 데이터베이스의 boardNo를 조회할 필요 있음 )
 		
 		// 첨부파일 데이터를 DB에 저장
-		if(board.getFiles() != null) {
-			for (FBoardAttach file : board.getFiles()	) {
+		if(board.getAttachments() != null) {
+			for (FBoardAttach file : board.getAttachments()	) {
 				file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
 				fBoardMapper.insertBoardAttach(file);
 			}
@@ -48,7 +48,7 @@ public class FBoardServiceImpl implements FBoardService {
 		
 		List<FBoardAttach> files = fBoardMapper.selectBoardAttachByBoardNo(boardNo); // 첨부 파일 데이터 조회
 		
-		board.setFiles(files);
+		board.setAttachments(files);
 		
 		fBoardMapper.updateBoardReadCount(boardNo);
 		board.setReadCount(board.getReadCount() + 1);

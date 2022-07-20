@@ -9,6 +9,7 @@
     	<meta charset="utf-8"/>
         <title>WYSIWYG Editors</title>
         <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/room/resources/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
         <link href="/room/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/room/resources/assets/styles.css" rel="stylesheet" media="screen">
@@ -69,7 +70,7 @@
 		                <th>내용</th>
 		                <td>		                    
 		                    <textarea 
-		                    		  name="content" cols="76" rows="15"></textarea>
+		                    		id="summernote-content"  name="content" cols="76" rows="15"></textarea>
 		                </td>
 		            </tr>
 		            <tr>
@@ -113,6 +114,8 @@
 		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
 
         <script src="/room/resources/assets/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        
         <script>
         $(function() {
             // Bootstrap
@@ -162,6 +165,53 @@
 				$('#writeform').submit();
 			})
 		})
+		var summernote = $('#summernote-content').summernote({
+				"callbacks" : {
+					"onImageUpload": function(files, editor) {
+						console.log(editor);
+			            var fileArr = Array.prototype.slice.call(files);
+			            fileArr.forEach(function(f){
+			                if(f.type.match("image/jpg") || f.type.match("image/jpeg" || f.type.match("image/jpeg"))){
+			                    alert("JPG, JPEG, PNG 확장자만 업로드 가능합니다.");
+			                    return;
+			                }
+			            });
+			            for(var xx=0;xx<files.length;xx++){
+			            	var formData = new FormData();
+			            	formData.append("file", files[xx]);
+				            $.ajax({
+				                url : "summernote-upload",
+				                data:  formData,
+				                cache: false,
+				                contentType: false,
+				                processData: false,
+				                // enctype	: 'multipart/form-data',
+				                type: 'POST',
+				                success : function(result) {
+
+				                    //항상 업로드된 파일의 url이 있어야 한다.
+				                    if(result.length == 0) {
+				                        alert('실패');
+				                        return;
+				                    }
+				                    
+				                    for(x=0;x<result.length;x++){
+				                        var img = $("<img>").attr({src: result[x], width: "100%"});   // Default 100% ( 서비스가 앱이어서 이미지 크기를 100% 설정 - But 수정 가능 )
+				                        console.log(img);
+				                        // $(summernote).summernote('pasteHTML', "<img src='"+result[x]+"' style='width:100%;' />");
+				                        $(summernote).summernote('editor.insertImage', result[x]);
+				                        
+				                    }
+				                }
+				            });
+
+			            }   
+
+			            
+			            
+					}
+				}
+			});
 
         </script>
     </body>

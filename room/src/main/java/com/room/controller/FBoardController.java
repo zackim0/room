@@ -92,7 +92,7 @@ public class FBoardController {
 			}
 		}
 			 
-		board.setFiles(files);
+		board.setAttachments(files);
 		fBoardService.writeBoard(board);			
 //		
 		// return "redirect:/fashion-board/list";

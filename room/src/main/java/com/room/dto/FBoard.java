@@ -10,7 +10,7 @@ import lombok.Data;
 public class FBoard {
 	// Board 테이블과 BoardAttach 테이블 사이의 1 : Many 관계를 구현한 필드 
 	
-	private List<FBoardAttach> files;
+	private List<FBoardAttach> attachments;
 	
 	private int boardNo;
 	private String title;
