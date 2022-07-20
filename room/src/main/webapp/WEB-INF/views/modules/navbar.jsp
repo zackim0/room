@@ -20,14 +20,23 @@
                         		<c:when test="${ empty loginuser}">
                         		</c:when>
                         		<c:otherwise>
-									 <button type="button" class="btn btn-info" onclick="location.href = '/room/message/list' ">
-									 <i class="icon-envelope icon-white"></i>
-									 &nbsp;쪽지함
-									 </button>
-		                        	<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-		                        	<i class="icon-pencil icon-white"></i>
-		                        	&nbsp;글쓰기<span class="caret"></span></button>
-		                        	<ul class="dropdown-menu">
+                        		
+									 <div class="btn-group">
+									  <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">
+									  <i class="icon-envelope icon-white"></i>
+									  &nbsp;메세지<span class="caret"></span></button>&nbsp;
+									  <ul class="dropdown-menu">
+										<li><a href="/room/message/list">받은 메세지</a></li>
+										<li><a href="/room/message/list2">보낸 메세지</a></li>
+										<li class="divider"></li>
+									  </ul>
+									</div>
+										
+									<div class="btn-group">
+									  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+									  <i class="icon-pencil icon-white"></i>
+	                        			&nbsp;글쓰기<span class="caret"></span></button>
+									  <ul class="dropdown-menu">
 										<li><a href="/room/mate-board/write">룸메이트 구하기</a></li>
 										<li><a href="/room/petboard/write">산책메이트 구하기</a></li>
 										<li class="divider"></li>
@@ -39,7 +48,9 @@
 										<li class="divider"></li>
 										<li><a href="/room/fashion-board/write">패션 정보</a></li>
 										<li><a href="#">미용실 추천/후기</a></li>
-									 </ul>
+									  </ul>
+									</div>
+										
                         		</c:otherwise>
                         		</c:choose>
                         	</li>
