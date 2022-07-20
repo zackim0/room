@@ -30,9 +30,9 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                              <button class="btn btn-success" onclick="location.href=('write');" style="float:right">메세지 작성<i class="icon-plus icon-white"></i></button>
-                                <div class="muted pull-left">메세지함</div>
-                            </div>
+                            	<button class="btn btn-success" onclick="location.href=('write');" style="float:right">메세지 작성<i class="icon-plus icon-white"></i></button>
+                            <div class="muted pull-left">받은 메세지</div>
+                        </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table class="table">

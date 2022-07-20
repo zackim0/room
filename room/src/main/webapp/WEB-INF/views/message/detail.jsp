@@ -31,7 +31,13 @@
 						</tr>
 					</div>
 					<div class="alert alert-info">
-						<strong>작성자:</strong>
+						<strong>받는 사람 : </strong>
+						<tr>
+							<td>${message.receiver}</td>
+						</tr>
+					</div>
+					<div class="alert alert-info">
+						<strong>보낸 사람 : </strong>
 						<tr>
 							<td>${message.sender}</td>
 						</tr>
