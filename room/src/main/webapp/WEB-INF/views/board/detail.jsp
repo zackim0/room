@@ -204,6 +204,7 @@
     		
     		$('#add-comment-btn').on('click', function(event) {
     			$('#modal-content').val("");
+    			
     			$('#comment-form input[name=commentNo]').val(0);
     			$('#comment-form').attr('action', "comment-write");
     			$('#comment-modal').modal('show'); // show modal
