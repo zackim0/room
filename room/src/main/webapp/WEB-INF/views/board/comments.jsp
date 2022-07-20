@@ -20,7 +20,7 @@
 	                    </span>
 	                    <br /><br />
 	                    <span style='display:${ loginuser.memberId eq comment.writer ? "" : "none" }'>
-	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
+	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">수정</a>
 	                    	&nbsp;
 	                    	<a class="deletecomment"
 	                    	   href="javascript:"

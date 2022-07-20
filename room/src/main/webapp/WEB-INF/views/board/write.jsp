@@ -105,12 +105,17 @@
 		<script>
 
         $(function() {
+    			$("#write").on('click', function(event) {			
+    				event.preventDefault();
+    				if(!$('#title').val()) {
+    					alert('제목을 입력하세요');
+    					return;
+    				}									
+    				$('#writeform').submit();							
+    			});		
             $('.textarea').wysihtml5();
             
-            $('#write').on('click', function(event){
-        		event.preventDefault();
-        		$('#writeform').submit();
-        	});
+           
 
             
         });

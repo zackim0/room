@@ -43,6 +43,7 @@
 		SET comment_deleted = TRUE
 		WHERE board_comment_no = #{commentNo}
 	</delete>
+	
 	<update id="update" parameterType="com.room.dto.CKBoardComment">
 		UPDATE BoardComment
 		SET comment_content = #{content}
