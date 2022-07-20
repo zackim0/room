@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,10 @@
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         
+</head>
+<body>
 <jsp:include page="/WEB-INF/views/modules/navbar.jsp" />
+
 <div class="container-fluid">
 	<div class="row-fluid"></div>
 	<div class="row-fluid">
@@ -54,9 +61,14 @@
 							<td>${message.sendTime}</td>
 						</tr>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 				
-</head>
-<body>
+
+
 
 </body>
 </html>
