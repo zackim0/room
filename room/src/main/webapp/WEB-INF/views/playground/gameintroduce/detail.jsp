@@ -37,7 +37,7 @@
 
 							<!-- block -->
 
-								<div class="block">
+	<div class="block">
 		<div class="navbar navbar-inner block-header">
 			<div class="muted pull-left">게시글 상세보기</div>
 		</div>

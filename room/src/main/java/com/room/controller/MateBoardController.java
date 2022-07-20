@@ -156,7 +156,7 @@ public class MateBoardController {
 		}
 		mateBoardService.update(board);
 		
-		return String.format("redirect:detail?boardno=%d&pageNo=%d",
+		return String.format("redirect:detail?boardNo=%d&pageNo=%d",
 				board.getBoardNo(), pageNo);
 		
 	}
