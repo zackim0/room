@@ -33,6 +33,7 @@
                             <div class="block-content collapse in">
                                 <div class="span12">
                                     <form id="editform" action="edit" method="post">
+                                    <input type="hidden" name="pageNo" value="${pageNo}">
                                       <fieldset>
                                         <legend>글 수정</legend>
                                         <div class="control-group">
@@ -98,7 +99,6 @@
 		<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
 		<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
 		
-		<script src="/room/resources/js/jquery-3.6.0.js"></script>
 		
 		<script type="text/javascript" src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
 

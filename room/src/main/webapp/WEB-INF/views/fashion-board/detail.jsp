@@ -81,7 +81,7 @@
 					[<a href="/room/fashion-board/list">목록보기</a>]
 					<c:if test="${loginuser.memberId eq board.writer}">									
 										[&nbsp;<a id='delete-btn' href='javascript:'>삭제</a>&nbsp;]
-										[&nbsp;<a href='edit?boardNo=${board.boardNo}'>수정</a>&nbsp;]
+										[&nbsp;<a href='edit?boardNo=${board.boardNo}&pageNo=${ pageNo }'>수정</a>&nbsp;]
 										</c:if>
 				</div>
 				<br>
@@ -165,7 +165,6 @@
 
 	<script src="/room/resources/vendors/ckeditor/ckeditor.js"></script>
 	<script src="/room/resources/vendors/ckeditor/adapters/jquery.js"></script>
-
 	<script type="text/javascript"
 		src="/room/resources/vendors/tinymce/js/tinymce/tinymce.min.js"
 	></script>
@@ -181,7 +180,7 @@
            	 event.preventDefault();
             	 var ok = confirm('삭제할까요?');
             	 if(ok){
-            		 location.href = 'delete?boardNo=${board.boardNo}';
+            		 location.href = 'delete?boardNo=${board.boardNo}&pageNo=${ pageNo }';
             	 }
    			});
             

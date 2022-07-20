@@ -14,7 +14,7 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://3.34.197.123:3306/room" />
+		<property name="url" value="jdbc:mysql://3.39.193.11:3306/room" />
 		<property name="username" value="room" />
 		<property name="password" value="mysql" />
 		<property name="maxTotal" value="20" />
